@@ -5,6 +5,7 @@ import styles from "./Create.module.css";
 import Select from "react-select";
 import Swal from "sweetalert2";
 import "tailwindcss/tailwind.css";
+import axios from "axios"
 
 function validate(input) {
   const errors = {};
@@ -28,12 +29,12 @@ function validate(input) {
   if (input.description.length > 256) {
     errors.description = "La descripción no debe exceder los 256 caracteres.";
   }
-  if (input.images.length > 5 || input.images.length < 1) {
-    errors.images = "Puedes seleccionar un máximo de 5 imágenes y un mínimo de 1";
-  }
-  if (input.marca.length === 0) {
-    errors.marca = "Debes seleccionar al menos una marca";
-  }
+  // if (input.image.length > 5 || input.image.length < 1) {
+  //   errors.image = "Puedes seleccionar un máximo de 5 imágenes y un mínimo de 1";
+  // }
+  // if (input.marca.length === 0) {
+  //   errors.marca = "Debes seleccionar al menos una marca";
+  // }
 
   return errors;
 }
@@ -45,19 +46,22 @@ export default function FormCreateProduct() {
 //   const marca = useSelector((state) => state.marca);
   const navigate = useNavigate();
 
+  const [file, setFile] = useState(null)
+
   const [input, setInput] = useState({
     name: "",
     //category: "",
     //color: "",
     description: "",
-    images: [],
-    available: true,
+    image: null,
+    isAvailable: true,
     price: "",
     stock: "",
-    isTrending: false, //averageRaiting
+    category: "Monitors"
+    // isTrending: false, //averageRaiting
     //discount: "",
     //deleted: ???
-    marca: [], //falta realacion / modelo
+    // marca: [], //falta realacion / modelo
   });
 
   const [errors, setErrors] = useState({});
@@ -94,19 +98,22 @@ export default function FormCreateProduct() {
   }
 
   async function handlePhotoChange(event) {
-    const files = event.target.files;
-    const updatedPhotos = [...input.images];
+    const files = event.target.files[0];
 
-    for (let i = 0; i < files.length; i++) {
-      try {
-        const base64 = await convertBase64(files[i]);
-        updatedPhotos.push(base64);
-      } catch (error) {
-        console.error("Error loading image:", error);
-      }
-    }
+    // const updatedPhotos = [...input.images];
 
-    setInput({ ...input, images: updatedPhotos });
+    // for (let i = 0; i < files.length; i++) {
+    //   try {
+    //     const base64 = await convertBase64(files[i]);
+    //     updatedPhotos.push(base64);
+    //   } catch (error) {
+    //     console.error("Error loading image:", error);
+    //   }
+    // }
+
+    //setInput({ ...input, images: updatedPhotos });
+
+    setFile(files);
   }
 
   const convertBase64 = (file) => {
@@ -125,15 +132,28 @@ export default function FormCreateProduct() {
   };
 
   function handleImageDelete(index) {
-    const updatedImages = [...input.images];
+    const updatedImages = [...input.image];
     updatedImages.splice(index, 1);
-    setInput({ ...input, images: updatedImages });
+    setInput({ ...input, image: updatedImages });
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
       try {
+        console.log(input)
+
+        const formData = new FormData();
+            formData.append('image', file);
+            formData.append('name', input.name);
+            formData.append('isAvailable', input.isAvailable);
+            formData.append('description', input.description);
+            formData.append('price', input.price);
+            formData.append('stock', input.stock);
+            formData.append('category', input.category);
+
+
+        await axios.post("http://localhost:3001/api/products/create", formData);
         //dispatch(addProduct(input));
         Swal.fire({
           position: "top-end",
@@ -150,7 +170,7 @@ export default function FormCreateProduct() {
             available: true,
             isTrending: false,
             Marca: [],
-            images: [],
+            image: [],
           });
         });
       } catch (error) {
@@ -314,17 +334,17 @@ export default function FormCreateProduct() {
                   <div>Images:</div>
                   <input
                     type="file"
-                    name="photo"
-                    onChange={(e) => handlePhotoChange(e)}
-                    multiple
-                    className="pt-4"
+                    //name="photo"
+                    onChange={handlePhotoChange}
+                    //multiple
+                    //className="pt-4"
                   />
-                  {errors.images && (
-                    <div className={styles.error}>{errors.images}</div>
+                  {errors.image && (
+                    <div className={styles.error}>{errors.image}</div>
                   )}
                 </div>
                 <div className={styles.imagePreview}>
-                  {input.images.map((image, index) => (
+                  {/* {input.image.map((image, index) => (
                     <div key={index} className={styles.imageContainer}>
                       <img
                         src={image}
@@ -333,7 +353,7 @@ export default function FormCreateProduct() {
                         onClick={() => handleImageDelete(index)}
                       />
                     </div>
-                  ))}
+                  ))} */}
                 </div>
 
                 <button
