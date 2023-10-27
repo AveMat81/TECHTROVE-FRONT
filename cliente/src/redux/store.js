@@ -1,15 +1,25 @@
-import {createStore, applyMiddleware, compose} from 'redux';
-import rootReducer from './reducer';
-import thunkMiddleware from 'redux-thunk'
+import rootReducer from "./reducer";
+import { configureStore } from "@reduxjs/toolkit";
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
 
-const composeEnhacer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+let persistor = persistStore(store);
 
-const store = createStore(
-    rootReducer,
-    composeEnhacer(applyMiddleware(thunkMiddleware)));
-
-  
-
-
-export default store;
+export { store, persistor };

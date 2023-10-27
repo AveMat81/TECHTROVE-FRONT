@@ -170,7 +170,7 @@ export default function FormCreateProduct() {
       <div className="mt-5 sm:mt-28">
         <div className={styles.card_create}>
           <div className="mb-4">
-            <h1 className="text-4xl sm:text-5xl font-semibold text-red-900">
+            <h1 className="text-4xl sm:text-5xl font-semibold text-gray-900">
               Create a new Product
             </h1>
           </div>
