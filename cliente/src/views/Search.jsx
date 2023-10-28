@@ -1,25 +1,40 @@
-import React from "react";
+import React, { useEffect, useState }from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LuSettings2 } from "react-icons/lu";
 import SearchCard from "../components/Cards/SearchcCard";
+import FilterCombined  from "../components/Filters/FilterCategoriesCombined"
+import Modal from "../components/Modal/Modal";
+
 
 
 const Search = () => {
     
-  const productFiltered = useSelector((state) => state.filter);
-console.log("productFiltered",productFiltered);
+const productFiltered = useSelector((state) => state.filter);
+const allProducts = useSelector((state)=>state.product)
+//const [showFilters, setShowFilters] = useState(false);
+const [showSortFilters, setShowSortFilters] = useState(false);
+
+
+
   return (
     <div className="h-full pb-32">
+    <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6" >
+        
+         barra de search </div>
       <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
          Category
+      
         </h1>
-        <button >
-          <LuSettings2 className="text-black-500 text-[30px] font-semibold" />
-        </button>
       </div>
+
+      
+      <FilterCombined showSortFilters={showSortFilters} />
+
+      <button onClick={() => setShowSortFilters(true)}>
+      <LuSettings2 className="text-black-500 text-[30px] font-semibold" />
+      </button>
       <div className="w-auto h-auto m-6">
-        <h1>categories</h1>
       </div>
       <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
