@@ -6,7 +6,7 @@ import createAsyncThunk from '@reduxjs/toolkit';
 const fetchProducts = () => {
   return async function (dispatch) {
     try {
-      const json = await axios.get("/api/products");
+      const json = await axios.get("http://localhost:3001/api/products");
       const products = json.data;
       return dispatch(getProducts(products));
     } catch (error) {

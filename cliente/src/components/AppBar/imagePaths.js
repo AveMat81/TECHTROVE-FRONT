@@ -13,6 +13,7 @@ import DarkProfile from "../../utils/images/AppbarIcons/DarkProfile.png"
 import ActiveSearch from "../../utils/images/AppbarIcons/ActiveSearch.png"
 import InactiveSearch from "../../utils/images/AppbarIcons/InactiveSearch.png"
 import DarkSearch from "../../utils/images/AppbarIcons/DarkSearch.png"
+import AddInactive from "../../utils/images/AppbarIcons/AddBotom.png"
 
 const imagePaths = {
     Home: {
@@ -39,6 +40,11 @@ const imagePaths = {
       inactive: InactiveProfile,
       active: ActiveProfile,
       dark: DarkProfile,
+    },
+    Add:{
+      inactive: AddInactive,
+      //  active: ActiveProfile,
+      //  dark: DarkProfile,
     },
 }
 
