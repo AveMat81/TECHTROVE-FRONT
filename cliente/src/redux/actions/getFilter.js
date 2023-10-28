@@ -4,7 +4,7 @@ import { setFilter } from "../slices/filterSlice";
 const getFilter = (filterParams) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`/api/products/filter`, {
+      const response = await axios.get(`http://localhost:3001/api/products/filter`, {
 
         params: filterParams,
       });
