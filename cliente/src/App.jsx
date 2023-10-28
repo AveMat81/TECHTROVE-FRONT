@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 //  import { useDispatch } from "react-redux";
 //  import { useSelector } from "react-redux";
 import Home from './views/Home';
-import Detail from './views/Detail';
+import Detail from './views/Detail/Detail';
 import NavBar from "./components/NavBar/NavBar";
 import FormCreateProduct from "./components/Create/FormCreateProduct";
 import AppBar from './components/AppBar/AppBar'
