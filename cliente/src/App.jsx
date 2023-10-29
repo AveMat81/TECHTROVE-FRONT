@@ -22,7 +22,12 @@ function App() {
         <Route path= "/detail/:id" element={<Detail/>}/>
         <Route path="/create" element={<FormCreateProduct/>}/>
       </Routes>
+      <div
+          className={` fixed bottom-0 left-0 w-full z-[1000]`}
+        >
+
       <AppBar/>
+        </div>
       {/* <div
           className={` fixed bottom-0 left-0 w-full z-[1000] ${
             Desktop ? "hidden" : ""

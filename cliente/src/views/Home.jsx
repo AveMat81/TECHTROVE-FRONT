@@ -14,7 +14,6 @@ function Home() {
   let productFiltered = useSelector((state) => state.filter);
   //products = products.filter((product) => product.category === "Microphones")
   products = products.slice(0, 4);
-  console.log(productFiltered)
   let filtradolo = productFiltered.filterResult ? productFiltered.filterResult.slice(0, 4) : [];
 
   // const productF = products.filter(products.category === "Earbuds")
@@ -38,7 +37,7 @@ function Home() {
 
     return (
       <>
-      <div className="h-full pb-8 pl-4">
+      <div className="h-full pb-32 pl-4 pr-4">
 
       <div className="h-auto mx-10 mt-10 w-auto">
         <Slider />

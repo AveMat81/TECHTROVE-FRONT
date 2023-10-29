@@ -9,7 +9,7 @@ const AppBar = ({ theme }) => {
   const stateLogin = useSelector ((state)=>state.login)
   return (
     <div
-      className={`font-general-sans w-full h-[80px] justify-around items-center inline-flex ${
+      className={`bg-neutral-800 absolute bottom-0 left-0 font-general-sans w-full h-[80px] justify-around items-center inline-flex ${
         theme === "dark"
           ? "dark:bg-neutral-950 border-t border-white border-opacity-20"
           : "bg-white border-t border-black border-opacity-20"
@@ -38,44 +38,15 @@ const AppBar = ({ theme }) => {
                   : theme === "dark"
                   ? "text-gray-300"
                   : theme !== "dark" && currentPath === "/"
-                  ? "text-red-500"
-                  : "text-gray-500"
+                  ? "text-white opacity-80"
+                  : "text-white opacity-80"
               }`}
             >
               Home
             </div>
           </div>
         </Link>
-        <Link to="/Cart">
-          <div className="flex-col justify-start items-center inline-flex">
-            <img
-              alt="MyCart"
-              src={
-                theme === "dark" && currentPath === "/Cart"
-                  ? imagePaths.Cart.inactive
-                  : theme === "dark"
-                  ? imagePaths.Cart.dark
-                  : theme !== "dark" && currentPath === "/Cart"
-                  ? imagePaths.Cart.active
-                  : imagePaths.Cart.inactive
-              }
-              className="w-6 h-6"
-            />
-            <div
-              className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Cart"
-                  ? "text-red-500"
-                  : theme === "dark"
-                  ? "text-gray-400"
-                  : theme !== "dark" && currentPath === "/Cart"
-                  ? "text-red-500"
-                  : "text-gray-500"
-              }`}
-            >
-              Cart
-            </div>
-          </div>
-        </Link>
+
         <Link to="/Search">
           <div className="flex-col justify-start items-center inline-flex">
             <img
@@ -98,14 +69,46 @@ const AppBar = ({ theme }) => {
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Search"
-                  ? "text-red-500"
-                  : "text-gray-500"
+                  ? "text-white opacity-80"
+                  : "text-white opacity-80"
               }`}
             >
               Search
             </div>
           </div>
         </Link>
+
+        <Link to="/Cart">
+          <div className="flex-col justify-start items-center inline-flex">
+            <img
+              alt="MyCart"
+              src={
+                theme === "dark" && currentPath === "/Cart"
+                  ? imagePaths.Cart.inactive
+                  : theme === "dark"
+                  ? imagePaths.Cart.dark
+                  : theme !== "dark" && currentPath === "/Cart"
+                  ? imagePaths.Cart.active
+                  : imagePaths.Cart.inactive
+              }
+              className="w-16 h-16 mb-16"
+            />
+            {/* <div
+              className={`text-xs font-medium ${
+                theme === "dark" && currentPath === "/Cart"
+                  ? "text-red-500"
+                  : theme === "dark"
+                  ? "text-gray-400"
+                  : theme !== "dark" && currentPath === "/Cart"
+                  ? "text-white opacity-80"
+                  : "text-white opacity-80"
+              }`}
+            >
+              Cart
+            </div> */}
+          </div>
+        </Link>
+      
       { <Link to="/Wishlist">
           <div className="flex-col justify-start items-center inline-flex">
             <img
@@ -128,8 +131,8 @@ const AppBar = ({ theme }) => {
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Wishlist"
-                  ? "text-red-500"
-                  : "text-gray-500"
+                  ? "text-white opacity-80"
+                  : "text-white opacity-80"
               }`}
             >
               Wishlist
@@ -160,8 +163,8 @@ const AppBar = ({ theme }) => {
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Account"
-                  ? "text-red-500"
-                  : "text-gray-500"
+                  ? "text-white opacity-80"
+                  : "text-white opacity-80"
               }`}
             >
               Account
