@@ -1,6 +1,8 @@
 import React from "react";
 import {  useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import Heart from "../../utils/images/AppbarIcons/DarkHeart.png";
+import activeHeart from '../../utils/images/AppbarIcons/ActiveHeart.png'
 
 const SearchCard = ({ id, name, image, price, description,  }) => {
   const dispatch = useDispatch();
@@ -25,7 +27,6 @@ const SearchCard = ({ id, name, image, price, description,  }) => {
               className={`w-5 h-5 md:w-auto md:h-36 object-cover rounded-lg cursor-pointer ${
                 isAdded ? "text-red-500" : "text-gray-700"
               }`}
-              onClick={handleToggleWishlist}
             />
           </div>
           <div className="text-gray-600 text-xs mb-2 text-center" style={{ fontFamily: "Roboto" }}>{descriptionText}</div>
