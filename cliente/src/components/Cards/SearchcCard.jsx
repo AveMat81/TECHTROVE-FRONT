@@ -1,53 +1,64 @@
-import React from "react";
-import {  useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import Heart from "../../utils/images/AppbarIcons/DarkHeart.png";
-import activeHeart from '../../utils/images/AppbarIcons/ActiveHeart.png'
+import {Link} from "react-router-dom"
+import imagePaths from "../AppBar/imagePaths";
 
-const SearchCard = ({ id, name, image, price, description,  }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
+const HomeCard = ({ image,id, name, price  }) => {
 
+  const prueba = (e) =>{
+    alert("prueba carrito de compras")
+  }
+
+  const favorite = (e) =>{
+    alert("prueba facorito")
+  }
+
+  
   return (
-    <div className="bg-red p-3 rounded-lg shadow-lg mb-4 rounded-md md:rounded-lg mx-1 md:mx-0 border border-red max-w-screen-xl">
-      <div className="flex flex-row md:flex-row ">
-        <Link to={`/${id}`} className="md:w-1/3">
+    <div className="inline-flex flex-col items-start gap-[8px] relative my-4">
+        {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
+        <div className="relative bg-blue-200 rounded-3xl flex justify-center items-center">
+          <Link to={`/${id}`}>
           <img
+            className="relative w-auto h-auto object-cover bg-black-500"
+            alt="Rectangle"
             src={image}
-            alt={name}
-            className="w-full h-auto object-cover rounded-lg text-center"
-            style={{ maxHeight: "140px", background: "#fceaea", padding: "4px" }}
           />
+        {/* <button class="absolute top-0 right-0 bg-blue-500 text-white px-2 py-1">Botón</button> */}
         </Link>
-        <div className="md:w-2/3 md:pl-2 flex flex-col">
-          <div className="flex justify-between items-start mb-4">
-            <div className="text-gray-800 text-lg font-semibold" style={{ marginLeft: "22px" }}>{name}</div>
-            <img
-              src={ isAdded ? activeHeart: Heart}
-              className={`w-5 h-5 md:w-auto md:h-36 object-cover rounded-lg cursor-pointer ${
-                isAdded ? "text-red-500" : "text-gray-700"
-              }`}
-            />
-          </div>
-          <div className="text-gray-600 text-xs mb-2 text-center" style={{ fontFamily: "Roboto" }}>{descriptionText}</div>
-          {description.length > 31 && (
-            <div className="flex items-center justify-center">
-              <Link to={`/${id}`} className="text-red-600 text-xs cursor-pointer hover:underline hover:bg-transparent mr-2">
-                
-              </Link>
-            </div>
-          )}
-          <div className="flex items-center justify-between mt-auto">
-            <div className="text-red-600 text-lg font-semibold" style={{ marginLeft: "12px" }}>${price}</div>
-            <button   onClick={handleAddToCart}
-             className="button bg-red-500 text-white text-sm px-3 py-1 rounded-md">
-              Buy
-            </button>
-          </div>
+        <img onClick={favorite}
+              alt="Home"
+              src={
+                imagePaths.Favorite.inactive
+              }
+              className="w-8 h-8 opacity-80 absolute top-1 right-1"
+              />
         </div>
+      
+
+      <div className="flex flex-col items-start relative self-stretch w-full flex-[0_0_auto]">
+        <div className="text-left text-stone-900 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal">
+        {name}</div>
       </div>
+
+      <div className="w-full justify-around items-center">
+        <div className="justify-between flex text-red-600 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal text-[20px]">
+        $ {price}
+        
+        <div className="flex pb-30">
+            <img onClick={prueba}
+              alt="Home"
+              src={
+                imagePaths.Add.inactive
+              }
+              className="w-8 h-8 opacity-40"
+              />
+        </div>
+        </div>
+
+      </div>
+
+      
     </div>
   );
 };
 
-export default SearchCard;
+export default HomeCard;

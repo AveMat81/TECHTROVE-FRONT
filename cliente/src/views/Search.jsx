@@ -6,14 +6,16 @@ import SearchCard from "../components/Cards/SearchcCard";
 import getFilter from "../redux/actions/getFilter";
 import FilterSortRange from "../components/Filters/FilterSort";
 import CategoriesFilter from "../components/Filters/FilterCategories";
+import fetchProducts from "../redux/actions/getProducts";
 import Modal from "../components/Modal/Modal";
 
 
 
 const Search = () => {
     
+const dispatch = useDispatch();
 const productFiltered = useSelector((state) => state.filter);
-const allProducts = useSelector((state)=>state.product)
+const allProducts = useSelector((state)=>state.products)
 const [showFilters, setShowFilters] = useState(false);
 //const [showSortFilters, setShowSortFilters] = useState(false);
 
@@ -21,35 +23,34 @@ const [showFilters, setShowFilters] = useState(false);
     setShowFilters(!showFilters);
   };
 
-    const applyFilter = () => {
-    dispatch(
-      getFilter({
-        category: categoryState.category,
-        min: minPrice,
-        max: maxPrice,
-        order: sortOrder,
-      })
-    );
-  };
+  useEffect(() => {
+  
+    const fetchData = async () => {
+      await dispatch(fetchProducts());
+      await dispatch(getFilter());
+    };
+
+    fetchData();
+  }, [dispatch]);
+
+
 
   return (
-    <div className="h-full pb-32 items-center mx-10 my-6">
+    <div className="h-full pb-32 items-center mx-2">
         Barra search 
-      <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
+      <div className="font-jakarta-sans w-auto  flex justify-between items-center mx-10 my-6">
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
          Category
         </h1>
       </div>
       {showFilters && 
-       <div className="popup-container">
-       <div className="popup">
       
       <FilterSortRange         
         showFilters={showFilters}
         setShowFilters={setShowFilters}
-        applyFilter={applyFilter}/>
-          </div>
-        </div>
+        
+        />
+        
       }
       <div className="w-auto h-auto m-6">
         <CategoriesFilter />
@@ -66,18 +67,17 @@ const [showFilters, setShowFilters] = useState(false);
 
       </div>
       <div className="w-full flex justify-center items-center">
-        <div className="w-auto h-0 grid grid-cols-1 gap-1 justify-center mx-3 border font-bold">
-          {Array.isArray(productFiltered.filterResult.results) ? (
-            productFiltered.filterResult.results.map((product) => (
+        <div className="w-auto h-0 grid grid-cols-2 gap-1 justify-center">
+          {Array.isArray(productFiltered.filterResult) ? (
+            productFiltered.filterResult.map((product) => (
               <SearchCard
                 key={product.id}
                 id={product.id}
                 name={product.name}
                 price={product.price}
-                image={product.image_url}
+                image={product.image}
                 description={product.description}
                 smallCard={true}
-                toggleWishlist={toggleWishlist}
               />
             ))
           ) : (

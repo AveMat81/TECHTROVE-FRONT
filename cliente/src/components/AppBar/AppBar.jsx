@@ -135,7 +135,7 @@ const AppBar = ({ theme }) => {
                   : "text-white opacity-80"
               }`}
             >
-              Wishlist
+              Favorite
             </div>
           </div>
         </Link>
