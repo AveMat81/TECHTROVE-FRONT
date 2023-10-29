@@ -39,7 +39,7 @@ function Home() {
       <>
       <div className="h-full pb-32 pl-4 pr-4">
 
-      <div className="h-auto mx-10 mt-10 w-auto">
+      <div className="h-auto mx-2 mt-10 w-auto">
         <Slider />
       </div>
       <div className="font-jakarta-sans w-auto flex justify-between items-center mt-10 my-6">
@@ -52,12 +52,12 @@ function Home() {
             <HomeCard key={i} image={product.image} id={product.id} price={product.price} name={product.name} />
             ))}
       </div>
-      <div className="font-jakarta-sans w-auto flex justify-between items-center mt-10 mr-10 my-6">
+      <div className="font-jakarta-sans w-auto flex justify-between items-center mt-10 mr-4 my-6">
       <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
         On Sale
       </h1>
       <Link to="/Search">
-        <p className="text-red-500 text-[14px] font-semibold">SEE ALL</p>
+        <p className="text-red-500 text-[12px] font-semibold border-b border-red-500">SEE ALL</p>
       </Link>
       </div>
       <div className="w-auto h-auto grid grid-cols-2 gap-4 ">

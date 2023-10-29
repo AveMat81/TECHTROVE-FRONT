@@ -1,20 +1,28 @@
 import {Link} from "react-router-dom"
 import imagePaths from "../AppBar/imagePaths";
+import { useState } from "react";
 
 const HomeCard = ({ image,id, name, price  }) => {
+
+  const [favorito, setFavorito] = useState(0)
 
   const prueba = (e) =>{
     alert("prueba carrito de compras")
   }
 
   const favorite = (e) =>{
-    alert("prueba facorito")
+    if(favorito === 1){
+      const favorito2 = favorito - 1;
+      return setFavorito(favorito2)
+    }
+    setFavorito(1)
+    //alert("prueba facorito")
   }
 
   
   return (
-    <div className="inline-flex flex-col items-start gap-[8px] relative">
-        {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
+    <div className="inline-flex flex-col gap-[8px] relative">
+        {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl items-start"> */}
         <div className="relative bg-violet-50 rounded-3xl flex justify-center items-center">
           <Link to={`/${id}`}>
           <img
@@ -27,7 +35,10 @@ const HomeCard = ({ image,id, name, price  }) => {
         <img onClick={favorite}
               alt="Home"
               src={
-                imagePaths.Favorite.inactive
+                favorito === 0 
+                ? imagePaths.Favorite.inactive
+                : imagePaths.Favorite.active
+                // imagePaths.Favorite.inactive
               }
               className="w-8 h-8 opacity-80 absolute top-1 right-1"
               />

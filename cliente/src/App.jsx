@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-//  import { useEffect } from "react";
+import { useEffect, useState } from "react";
 //  import { useDispatch } from "react-redux";
 //  import { useSelector } from "react-redux";
 import Home from './views/Home';
@@ -12,7 +12,19 @@ import "tailwindcss/tailwind.css";
 //import { AppBar } from "@mui/material";
 
 function App() {
- 
+  const [Desktop, setDesktop] = useState(window.innerWidth > 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDesktop(window.innerWidth > 1024);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div>
@@ -23,11 +35,11 @@ function App() {
         <Route path="/create" element={<FormCreateProduct/>}/>
       </Routes>
       <div
-          className={` fixed bottom-0 left-0 w-full z-[1000]`}
+          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : " "}`}
         >
 
-      <AppBar/>
-        </div>
+        <AppBar/>
+      </div>
       {/* <div
           className={` fixed bottom-0 left-0 w-full z-[1000] ${
             Desktop ? "hidden" : ""
