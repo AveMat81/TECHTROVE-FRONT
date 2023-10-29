@@ -1,16 +1,10 @@
+import { combineReducers } from "redux";
+import productsReducer from "./slices/productsSlice";
+import filterReducer from "./slices/filterSlice";
 
-const initialState = {
-    
-};
-
-const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
-        
-        
-
-        default:
-            return { ...state };
-    }
-};
-                
-                export default rootReducer; 
+  const rootReducer = combineReducers({
+    products: productsReducer,
+    filter: filterReducer,
+  });
+  
+  export default rootReducer;
