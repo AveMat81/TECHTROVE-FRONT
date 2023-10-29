@@ -14,7 +14,8 @@ import ActiveSearch from "../../utils/images/AppbarIcons/ActiveSearch.png"
 import InactiveSearch from "../../utils/images/AppbarIcons/InactiveSearch.png"
 import DarkSearch from "../../utils/images/AppbarIcons/DarkSearch.png"
 import AddInactive from "../../utils/images/AppbarIcons/AddBotom.png"
-import FavoriteInactive from "../../utils/images/AppbarIcons/Favorite.png"
+import FavoriteActive from "../../utils/images/AppbarIcons/Favorite.png"
+import FavoriteInactive from "../../utils/images/AppbarIcons/FavoritoInactivo2.png"
 
 const imagePaths = {
     Home: {
@@ -49,6 +50,7 @@ const imagePaths = {
     },
     Favorite:{
       inactive: FavoriteInactive,
+      active: FavoriteActive,
     }
 }
 
