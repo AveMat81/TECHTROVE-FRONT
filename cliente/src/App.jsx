@@ -24,7 +24,7 @@ function App() {
       {/* <Route path= "/home" element={<landing/>}/> */}
 
         <Route path= "/" element={<Home/>}/>
-        <Route path= "/detail/:id" element={<Detail/>}/>
+        <Route path= "/:id" element={<Detail/>}/>
         <Route path="/create" element={<FormCreateProduct/>}/>
         <Route path="/search" element={<Search/>}/>
 
