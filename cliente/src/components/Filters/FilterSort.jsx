@@ -2,7 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getFilter from "../../redux/actions/getFilter"
-export const FilterSortRange = ({ showFilters, setShowFilters, applyFilter }) => {
+
+export const FilterSortRange = ({ showFilters, setShowFilters }) => {
+    
   const dispatch = useDispatch();
   const categoryState = useSelector((state) => state.category);
   const [sortOrder, setSortOrder] = useState("");
@@ -23,7 +25,17 @@ export const FilterSortRange = ({ showFilters, setShowFilters, applyFilter }) =>
     setShowFilters(false);
   };
 
-
+  const applyFilter = () => {
+    dispatch(
+      getFilter({
+        //esto hay que cambiarlo mas adelante
+        category: categoryState.category,
+        min: minPrice,
+        max: maxPrice,
+        order: sortOrder,
+      })
+    );
+  };
 
   return (
 
@@ -115,7 +127,9 @@ export const FilterSortRange = ({ showFilters, setShowFilters, applyFilter }) =>
       <button
         className="flex w-[273px] h-[50px] px-[10px] py-[20px] flex-col items-center justify-center gap-[10px] relative bg-[#e54660] rounded-[10px]"
       >
-        <div className="mt-[-6.00px] mb-[-4.00px] font-bold text-[16px] relative w-fit text-white tracking-[0.20px] leading-[20px] whitespace-nowrap">
+        <div  onClick={applyFilter} 
+        
+        className="mt-[-6.00px] mb-[-4.00px] font-bold text-[16px] relative w-fit text-white tracking-[0.20px] leading-[20px] whitespace-nowrap">
           Apply Filter
         </div>
       </button>

@@ -1,14 +1,15 @@
-import getFilter from "../Filters/FilterCategoriesCombined";
+import getFilter from "../../redux/actions/getFilter";
 import {useDispatch} from "react-redux"
 import {useState} from "react"
 import { setCategory } from "../../redux/slices/categorySlice";
 import Loading from "../../views/Loading";
 
 const CategoriesFilter = () => {
-  const dispatch = useDispatch();
-  const [selectCategory, setSelectCategory] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
+    const dispatch = useDispatch();
+    const [selectCategory, setSelectCategory] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+  
   const handleSelection = async (category) => {
     setIsLoading(true);
     setSelectCategory(category);
