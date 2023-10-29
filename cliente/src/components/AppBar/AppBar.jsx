@@ -3,27 +3,16 @@ import { useLocation } from "react-router-dom";
 import {  useSelector } from "react-redux/es/hooks/useSelector";
 import imagePaths from "./imagePaths";
 
-<<<<<<< HEAD
 const AppBar = ({ theme }) => {
-=======
-const AppBar = (theme) => {
->>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
   const location = useLocation();
   const currentPath = location.pathname;
   const stateLogin = useSelector ((state)=>state.login)
   return (
     <div
-<<<<<<< HEAD
       className={`bg-neutral-800 absolute bottom-0 left-0 font-general-sans w-full h-[80px] justify-around items-center inline-flex ${
         theme === "dark"
           ? "dark:bg-neutral-950 border-t border-white border-opacity-20"
           : "bg-neutral-800 border-t border-black border-opacity-20"
-=======
-      className={`font-general-sans w-full h-[80px] justify-around items-center inline-flex ${
-        theme === "dark"
-          ? "dark:bg-neutral-950 border-t border-white border-opacity-20"
-          : "bg-white border-t border-black border-opacity-20"
->>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
       }`}
     >
       <div className="w-full h-[80px] border-t border-black border-opacity-20 justify-around items-center inline-flex">
@@ -49,53 +38,15 @@ const AppBar = (theme) => {
                   : theme === "dark"
                   ? "text-gray-300"
                   : theme !== "dark" && currentPath === "/"
-<<<<<<< HEAD
                   ? "text-white opacity-80"
                   : "text-white opacity-80"
-=======
-                  ? "text-red-500"
-                  : "text-gray-500"
->>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
               }`}
             >
               Home
             </div>
           </div>
         </Link>
-<<<<<<< HEAD
 
-=======
-        <Link to="/Cart">
-          <div className="flex-col justify-start items-center inline-flex">
-            <img
-              alt="MyCart"
-              src={
-                theme === "dark" && currentPath === "/Cart"
-                  ? imagePaths.Cart.inactive
-                  : theme === "dark"
-                  ? imagePaths.Cart.dark
-                  : theme !== "dark" && currentPath === "/Cart"
-                  ? imagePaths.Cart.active
-                  : imagePaths.Cart.inactive
-              }
-              className="w-6 h-6"
-            />
-            <div
-              className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Cart"
-                  ? "text-red-500"
-                  : theme === "dark"
-                  ? "text-gray-400"
-                  : theme !== "dark" && currentPath === "/Cart"
-                  ? "text-red-500"
-                  : "text-gray-500"
-              }`}
-            >
-              Cart
-            </div>
-          </div>
-        </Link>
->>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
         <Link to="/Search">
           <div className="flex-col justify-start items-center inline-flex">
             <img
@@ -118,20 +69,14 @@ const AppBar = (theme) => {
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Search"
-<<<<<<< HEAD
                   ? "text-white opacity-80"
                   : "text-white opacity-80"
-=======
-                  ? "text-red-500"
-                  : "text-gray-500"
->>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
               }`}
             >
               Search
             </div>
           </div>
         </Link>
-<<<<<<< HEAD
 
         <Link to="/Cart">
           <div className="flex-col justify-start items-center inline-flex">
@@ -164,8 +109,6 @@ const AppBar = (theme) => {
           </div>
         </Link>
       
-=======
->>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
       { <Link to="/Wishlist">
           <div className="flex-col justify-start items-center inline-flex">
             <img
@@ -188,19 +131,11 @@ const AppBar = (theme) => {
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Wishlist"
-<<<<<<< HEAD
                   ? "text-white opacity-80"
                   : "text-white opacity-80"
               }`}
             >
               Favorite
-=======
-                  ? "text-red-500"
-                  : "text-gray-500"
-              }`}
-            >
-              Wishlist
->>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
             </div>
           </div>
         </Link>
@@ -228,13 +163,8 @@ const AppBar = (theme) => {
                   : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Account"
-<<<<<<< HEAD
                   ? "text-white opacity-80"
                   : "text-white opacity-80"
-=======
-                  ? "text-red-500"
-                  : "text-gray-500"
->>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
               }`}
             >
               Account
