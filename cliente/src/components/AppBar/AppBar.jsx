@@ -12,7 +12,7 @@ const AppBar = ({ theme }) => {
       className={`bg-neutral-800 absolute bottom-0 left-0 font-general-sans w-full h-[80px] justify-around items-center inline-flex ${
         theme === "dark"
           ? "dark:bg-neutral-950 border-t border-white border-opacity-20"
-          : "bg-white border-t border-black border-opacity-20"
+          : "bg-neutral-800 border-t border-black border-opacity-20"
       }`}
     >
       <div className="w-full h-[80px] border-t border-black border-opacity-20 justify-around items-center inline-flex">
