@@ -14,6 +14,10 @@ function Home() {
   let productFiltered = useSelector((state) => state.filter);
   //products = products.filter((product) => product.category === "Microphones")
   products = products.slice(0, 4);
+<<<<<<< HEAD
+=======
+  console.log(productFiltered)
+>>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
   let filtradolo = productFiltered.filterResult ? productFiltered.filterResult.slice(0, 4) : [];
 
   // const productF = products.filter(products.category === "Earbuds")
@@ -37,7 +41,11 @@ function Home() {
 
     return (
       <>
+<<<<<<< HEAD
       <div className="h-full pb-32 pl-4 pr-4">
+=======
+      <div className="h-full pb-8 pl-4">
+>>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
 
       <div className="h-auto mx-10 mt-10 w-auto">
         <Slider />
@@ -76,4 +84,4 @@ function Home() {
     // )
   }
   
-  export default Home;
+export default Home;

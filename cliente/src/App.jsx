@@ -7,6 +7,7 @@ import Detail from './views/Detail';
 import NavBar from "./components/NavBar/NavBar";
 import FormCreateProduct from "./components/Create/FormCreateProduct";
 import Search from "./views/Search";
+import TopBar from "./components/TopBar/TopBar";
 import AppBar from './components/AppBar/AppBar'
 import './App.css';
 import "tailwindcss/tailwind.css";
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <div>
+      <TopBar />
       <NavBar/>
       <Routes>
       {/* <Route path= "/home" element={<landing/>}/> */}
@@ -34,6 +36,13 @@ function App() {
 
       <AppBar/>
         </div>
+      {/* <div
+          className={` fixed bottom-0 left-0 w-full z-[1000] ${
+            Desktop ? "hidden" : ""
+          }`}
+        >
+          <AppBar theme={theme} />
+        </div> */}
       {/* <div
           className={` fixed bottom-0 left-0 w-full z-[1000] ${
             Desktop ? "hidden" : ""

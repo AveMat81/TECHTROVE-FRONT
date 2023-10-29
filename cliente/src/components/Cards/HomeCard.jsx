@@ -4,24 +4,34 @@ import imagePaths from "../AppBar/imagePaths";
 const HomeCard = ({ image,id, name, price  }) => {
 
   const prueba = (e) =>{
+<<<<<<< HEAD
     alert("prueba carrito de compras")
   }
 
   const favorite = (e) =>{
     alert("prueba facorito")
+=======
+    console.log("holaaaa")
+>>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
   }
 
   
   return (
     <div className="inline-flex flex-col items-start gap-[8px] relative">
+<<<<<<< HEAD
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
         <div className="relative bg-violet-50 rounded-3xl flex justify-center items-center">
           <Link to={`/${id}`}>
+=======
+      <Link to={`/${id}`}>
+        <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl">
+>>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
           <img
             className="relative w-auto h-auto object-cover"
             alt="Rectangle"
             src={image}
           />
+<<<<<<< HEAD
         {/* <button class="absolute top-0 right-0 bg-blue-500 text-white px-2 py-1">Botón</button> */}
         </Link>
         <img onClick={favorite}
@@ -41,6 +51,18 @@ const HomeCard = ({ image,id, name, price  }) => {
 
       <div className="w-full justify-around items-center">
         <div className="justify-between flex text-red-600 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal text-[20px]">
+=======
+        </div>
+      </Link>
+
+      <div className="flex flex-col items-start relative self-stretch w-full flex-[0_0_auto]">
+        <div className="text-stone-900 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal">
+        {name}</div>
+      </div>
+
+      <div className="flex justify-between">
+        <div className="flex justify-between text-red-600 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal">
+>>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
         $ {price}
         
         <div className="flex pb-30">
@@ -49,7 +71,11 @@ const HomeCard = ({ image,id, name, price  }) => {
               src={
                 imagePaths.Add.inactive
               }
+<<<<<<< HEAD
               className="w-8 h-8 opacity-40"
+=======
+              className="w-6 h-6"
+>>>>>>> 2b27c1646072dd4f06d62986c206f216eb3d3bf6
               />
         </div>
         </div>
