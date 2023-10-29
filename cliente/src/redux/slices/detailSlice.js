@@ -16,5 +16,4 @@ const detailSlice = createSlice({
 });
 
 export const { clearDetail, setProductDetail } = detailSlice.actions;
-
 export default detailSlice.reducer;

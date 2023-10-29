@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import productsReducer from "./slices/productsSlice";
 import filterReducer from "./slices/filterSlice";
 import categoryReducer from "./slices/categorySlice";
+import detailReducer from "./slices/detailSlice";
 
 
 
@@ -11,6 +12,7 @@ import categoryReducer from "./slices/categorySlice";
     category: categoryReducer,
 
 
+    detail: detailReducer,
   });
   
   export default rootReducer;

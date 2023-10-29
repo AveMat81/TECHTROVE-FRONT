@@ -2,6 +2,7 @@ import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+//import TopBar from '../TopBar/TopBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
@@ -135,11 +136,10 @@ export default function PrimarySearchAppBar() {
       </MenuItem>
     </Menu>
   );
-
   return (
     <Box  sx={{ flexGrow: 1 }}  >
       <AppBar position="static">
-        <Toolbar className={style.nav} >
+        {/* <Toolbar className={style.nav} >
           <IconButton
             size="large"
             edge="start"
@@ -194,7 +194,7 @@ export default function PrimarySearchAppBar() {
               <MoreIcon />
             </IconButton>
           </Box>
-        </Toolbar>
+        </Toolbar> */}
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
