@@ -6,6 +6,7 @@ import Home from './views/Home';
 import Detail from './views/Detail';
 import NavBar from "./components/NavBar/NavBar";
 import FormCreateProduct from "./components/Create/FormCreateProduct";
+import Search from "./views/Search";
 import AppBar from './components/AppBar/AppBar'
 import './App.css';
 import "tailwindcss/tailwind.css";
@@ -18,9 +19,14 @@ function App() {
     <div>
       <NavBar/>
       <Routes>
+      {/* <Route path= "/home" element={<landing/>}/> */}
+
         <Route path= "/" element={<Home/>}/>
         <Route path= "/detail/:id" element={<Detail/>}/>
         <Route path="/create" element={<FormCreateProduct/>}/>
+        <Route path="/search" element={<Search/>}/>
+
+
       </Routes>
       <div
           className={` fixed bottom-0 left-0 w-full z-[1000]`}
