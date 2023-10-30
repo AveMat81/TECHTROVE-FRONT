@@ -29,6 +29,10 @@ const Search = () => {
     fetchData();
   }, [dispatch]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [productFiltered, showFilters]);
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = productFiltered.filterResult.slice(indexOfFirstItem, indexOfLastItem);
