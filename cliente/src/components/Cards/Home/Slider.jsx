@@ -19,9 +19,9 @@ const Slider = () => {
   };
 
   const slides = [
-    "https://i.postimg.cc/8pJwJ91R/Black-Friday-Web-Banner-03.jpg",
-    "https://i.postimg.cc/PTGVZXvP/Eh-Kcg-O2-Xs-AAu-4-Y-jpglarge.jpg",
-    "https://i.postimg.cc/yscbXsxp/MAG271cqr-new-Banner.jpg",
+    "https://cdn.uc.assets.prezly.com/16cf446e-8883-4821-beff-595ca9340f39/-/format/auto/Low_Resolution_JPG-G915TKL%20Social%20KeyVisual%20Twitter%201200x675.jpg",
+    "https://carlosvassan.com/wp-content/uploads/2021/08/Mejores-ofertas-semana-gamer-2021.jpg",
+    "https://i.ytimg.com/vi/E6Ax-xuOBzI/maxresdefault.jpg",
     "https://i.postimg.cc/7xLKDbdQ/Hyper-X-Product-Banner-desktop-1920x1080-1.jpg",
   ];
 
