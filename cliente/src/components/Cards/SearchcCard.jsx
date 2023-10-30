@@ -1,19 +1,21 @@
 import {Link} from "react-router-dom"
 import imagePaths from "../AppBar/imagePaths";
+import toast, { Toaster } from "react-hot-toast";
 
-const HomeCard = ({ image,id, name, price  }) => {
+
+const SearchCard = ({ image,id, name, price  }) => {
 
   const prueba = (e) =>{
-    alert("prueba carrito de compras")
+    toast.success("Added to cart successfully ");
   }
 
   const favorite = (e) =>{
-    alert("prueba facorito")
+    toast.success("Added to favotire successfully ");
   }
 
   
   return (
-    <div className="inline-flex flex-col items-start gap-[8px] relative my-4">
+    <div className="inline-flex flex-col items-start gap-[10px] relative my-5">
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
         <div className="relative bg-blue-200 rounded-3xl flex justify-center items-center">
           <Link to={`/${id}`}>
@@ -35,12 +37,12 @@ const HomeCard = ({ image,id, name, price  }) => {
       
 
       <div className="flex flex-col items-start relative self-stretch w-full flex-[0_0_auto]">
-        <div className="text-left text-stone-900 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal">
+        <div className="text-black-800 text-lg font-semibold">
         {name}</div>
       </div>
 
       <div className="w-full justify-around items-center">
-        <div className="justify-between flex text-red-600 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal text-[20px]">
+        <div className="justify-between flex text-red-600 text-sm font-semibold font-jakarta-sans leading-[24px] tracking-normal">
         $ {price}
         
         <div className="flex pb-30">
@@ -61,4 +63,4 @@ const HomeCard = ({ image,id, name, price  }) => {
   );
 };
 
-export default HomeCard;
+export default SearchCard;

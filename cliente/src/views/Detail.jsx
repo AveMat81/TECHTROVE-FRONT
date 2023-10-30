@@ -4,6 +4,9 @@ import  fetchProductById  from '../redux/actions/fetchProductById';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { clearDetail } from "../redux/slices/detailSlice";
+import backIcon from "../utils/images/BasicIcons/backIcon.png"
+
 const Detail = () => {
 
   const productDetail = useSelector(state => state.detail.detail);
@@ -20,17 +23,28 @@ const Detail = () => {
     }
   }, [dispatch, id]);
 
+  const goBackHandler = () => {
+    navigate(-1);
+  };
 
 
   return (
     <div className="container mx-auto mt-4 p-4 rounded-lg shadow light:bg-white-800 light:border-white-700">
       {productDetail.loading ? (
-        <p className="text-center text-2xl font-semibold">Cargando...</p>
+        <p className="text-center text-2xl font-semibold">Loading...</p>
       ) : productDetail.error ? (
         <p className="text-center text-2xl font-semibold text-red-500 font-color:black ">Error: {productDetail.error}</p>
       ) : (
-        <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow light:bg-gray-800 light:border-gray-700">
+        <div class="w-full max-w-sm bg-blue border border-blue-200 rounded-lg shadow light:bg-gray-800 light:border-gray-700">
         <a href="#">
+        <button className="header flex  flex-row gap-5 w-full pl-4 pb-3  md:pl-15 lg:pl-20">
+          <img
+            src={backIcon}
+            alt="Arrow"
+            className="w-[24px] h-[24px]"
+            onClick={goBackHandler}
+          />
+        </button>
             <img class="p-3 rounded-t-lg" src={productDetail.image} alt="product image" />
         </a>
         <div class="px-5 pb-5">

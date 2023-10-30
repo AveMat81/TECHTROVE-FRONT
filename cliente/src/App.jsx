@@ -7,6 +7,9 @@ import Detail from './views/Detail';
 import NavBar from "./components/NavBar/NavBar";
 import FormCreateProduct from "./components/Create/FormCreateProduct";
 import Search from "./views/Search";
+import Cart from "./views/Cart";
+import Favorite from "./views/Favorite";
+import Account from "./views/Account";
 import TopBar from "./components/TopBar/TopBar";
 import AppBar from './components/AppBar/AppBar'
 import './App.css';
@@ -25,10 +28,11 @@ function App() {
 
         <Route path= "/" element={<Home/>}/>
         <Route path= "/:id" element={<Detail/>}/>
-        <Route path="/create" element={<FormCreateProduct/>}/>
-        <Route path="/search" element={<Search/>}/>
-
-
+        <Route path="/Create" element={<FormCreateProduct/>}/>
+        <Route path="/Search" element={<Search/>}/>
+        <Route path="/Cart" element={<Cart/>}/>
+        <Route path="/Favorite" element={<Favorite/>}/>
+        <Route path="/Account" element={<Account/>}/>
       </Routes>
       <div
           className={` fixed bottom-0 left-0 w-full z-[1000]`}

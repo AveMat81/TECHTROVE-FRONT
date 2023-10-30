@@ -12,22 +12,15 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true); 
   let products = useSelector((state) => state.products.products);
   let productFiltered = useSelector((state) => state.filter);
-  //products = products.filter((product) => product.category === "Microphones")
   products = products.slice(0, 4);
-  console.log(productFiltered)
   let filtradolo = productFiltered.filterResult ? productFiltered.filterResult.slice(0, 4) : [];
 
-  // const productF = products.filter(products.category === "Earbuds")
-  // console.log(productF)
-  //productF = productF.slice(0, 4);
-  //console.log(filtradolo)
 
   useEffect(() => {
   
     const fetchData = async () => {
       await dispatch(fetchProducts());
-      //await dispatch(getFilter({ category: 'Monitors' }));
-      //await dispatch(getFilter({ order: 'A-Z' }));
+    
       await dispatch(getFilter({ min: '70' , max: '100'}));
       setIsLoading(false); 
     };
@@ -58,7 +51,7 @@ function Home() {
         On Sale
       </h1>
       <Link to="/Search">
-        <p className="text-red-500 text-[14px] font-semibold">SEE ALL</p>
+        <p className="text-violet-900 text-[14px] font-semibold">SEE ALL</p>
       </Link>
       </div>
       <div className="w-auto h-auto grid grid-cols-2 gap-4 ">
@@ -72,9 +65,7 @@ function Home() {
       </>
     )
 
-    // return (
-    //   <div>holaaa</div>
-    // )
+  
   }
   
 export default Home;

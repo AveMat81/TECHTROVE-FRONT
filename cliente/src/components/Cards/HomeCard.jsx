@@ -1,14 +1,16 @@
 import {Link} from "react-router-dom"
 import imagePaths from "../AppBar/imagePaths";
+import toast, { Toaster } from "react-hot-toast";
+
 
 const HomeCard = ({ image,id, name, price  }) => {
 
   const prueba = (e) =>{
-    alert("prueba carrito de compras")
+    toast.success("Added to cart successfully ");
   }
 
   const favorite = (e) =>{
-    alert("prueba facorito")
+    toast.success("Added to favorite successfully ");
   }
 
   
