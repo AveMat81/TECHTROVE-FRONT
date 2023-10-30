@@ -45,8 +45,8 @@ export const FilterSortRange = ({ showFilters, setShowFilters }) => {
     <div className="filterConatiner flex flex-col h-[420px] max-w-[400px] items-center justify-center gap-[35px] pl-0 pr-[8px] pt-[13px] pb-[15px] relative rounded-md ">
     <div className="bg-white p-6 rounded shadow-lg">
       <div className="titleContainer flex w-[297px] items-center gap-[35px] relative flex-[0_0_auto]">
-        <div className="relative flex-1 mt-[-1.00px] font-bold text-black text-[24px] tracking-[0.20px] leading-[36px]">
-          Filter
+        <div className="relative items-center flex-1 mt-[-1.00px] font-bold text-black text-[24px] tracking-[0.20px] leading-[36px]">
+          Filters
         </div>
         <div className="relative w-[24px] h-[24px]" />
       </div>
@@ -54,29 +54,31 @@ export const FilterSortRange = ({ showFilters, setShowFilters }) => {
         <div className="relative w-fit mt-[-1.00px] font-normal text-black text-[16px] tracking-[0.20px] leading-[20px] whitespace-nowrap">
           Sort By
         </div>
+        <div className="mt-4" />
+
         <div className="inline-flex flex-col items-start gap-[32px] relative flex-[0_0_auto]">
           <div className="inline-flex items-start gap-[12px] relative flex-[0_0_auto] ">
             <button
               onClick={() => handleSortOrderChange("A-Z")}
-              className="border-colors-grey-dark-1 h-[39px] border border-solid px-[15px] py-[20px]  inline-flex  w-[unset] mt-[-11.50px] text-[14px] mb-[-9.50px] font-normal rounded-md items-center justify-center focus:bg-[#e54660]"
+              className="border-colors-grey-dark-1 h-[39px] border border-solid px-[15px] py-[20px]  inline-flex  w-[unset] mt-[-11.50px] text-[14px] mb-[-9.50px] font-normal rounded-md items-center justify-center focus:bg-blue-500"
             >
               A-Z
             </button>
             <button
               onClick={() => handleSortOrderChange("Z-A")}
-              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-[#e54660]"
+              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-blue-500"
             >
               Z-A
             </button>
             <button
               onClick={() => handleSortOrderChange("Newest")}
-              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-[#e54660]"
+              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-blue-500"
             >
               Newest
             </button>
             <button
               onClick={() => handleSortOrderChange("Oldest")}
-              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-[#e54660]"
+              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-blue-500"
             >
               Oldest
             </button>
@@ -84,19 +86,19 @@ export const FilterSortRange = ({ showFilters, setShowFilters }) => {
           <div className="inline-flex items-start gap-[12px] relative flex-[0_0_auto]">
             <button
               onClick={() => handleSortOrderChange("price-high")}
-              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-[#e54660]"
+              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-blue-500"
             >
               High Price
             </button>
             <button
               onClick={() => handleSortOrderChange("price-low")}
-              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-[#e54660]"
+              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-blue-500"
             >
               Low Price
             </button>
             <button
               onClick={() => handleSortOrderChange("rating")}
-              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-[#e54660]"
+              className="border-colors-grey-dark-1 h-[39px] flex-[0_0_auto] border border-solid px-[15px] py-[20px] inline-flex bg-white w-[unset] mt-[-11.50px] text-black text-[14px] mb-[-9.50px] font-normal rounded-md  items-center justify-center focus:bg-blue-500"
             >
               Rating
             </button>
@@ -104,8 +106,9 @@ export const FilterSortRange = ({ showFilters, setShowFilters }) => {
         </div>
       </div>
       <div className="flex flex-col w-[297px] items-start gap-[10px] relative flex-[0_0_auto]">
+      <div className="mt-4" />
         <div className="relative w-fit mt-[-1.00px] font-normal text-black text-[16px] tracking-[0.20px] leading-[20px] whitespace-nowrap">
-          Price Range
+          Price Range ( Ex. 100 - 150 ) 
         </div>
         <div className="priceContainer flex w-[297px] items-start gap-[17px] relative flex-[0_0_auto]">
           <input
@@ -124,8 +127,10 @@ export const FilterSortRange = ({ showFilters, setShowFilters }) => {
           />
         </div>
       </div>
+            <div className="mt-4" />
+
       <button
-        className="flex w-[273px] h-[50px] px-[10px] py-[20px] flex-col items-center justify-center gap-[10px] relative bg-[#e54660] rounded-[10px]"
+        className="flex w-[273px] h-[50px] px-[10px] py-[20px] flex-col items-center justify-center gap-[10px] relative bg-blue-500 rounded-[10px]"
       >
         <div  onClick={applyFilter} 
         
@@ -133,11 +138,15 @@ export const FilterSortRange = ({ showFilters, setShowFilters }) => {
           Apply Filter
         </div>
       </button>
+      <div className="mt-4" />
 
-    </div>
+      <div className="flex flex-col w-[297px] items-center  gap-[10px] relative flex-[0_0_auto]">
+
       <button  onClick={handleHideFilters} className="bg-red-500 text-white px-4 py-2 rounded">
-          Cerrar Filtros
+          Close Filter
         </button>
+    </div>
+    </div>
     </div>
     </div>
   );
