@@ -1,8 +1,12 @@
+import { LoginButton } from "../components/Auth0/LoginButton"
+
 const Account = () => {
 
     return (
 
-        <div>Account</div>
+        <div>
+            <LoginButton/>
+        </div>
     )
 }
 
