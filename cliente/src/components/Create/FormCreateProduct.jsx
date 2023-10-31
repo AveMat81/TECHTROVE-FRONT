@@ -10,24 +10,24 @@ import axios from "axios"
 function validate(input) {
   const errors = {};
   if (!input.name || input.name.length < 2 || input.name.length > 25) {
-    errors.name = "El Nombre debe tener entre 2 y 25 caracteres";
+    errors.name = "The name must be between 2 and 25 characters";
   }
   if (
     isNaN(input.price) ||
     input.price <= 0 ||
     input.price.toString().length > 256
   ) {
-    errors.price = "El precio debe ser un número válido mayor que 0";
+    errors.price = "Price must be a valid number greater than 0";
   }
   if (
     isNaN(input.stock) ||
     input.stock <= 0 ||
     input.price.toString().length > 256
   ) {
-    errors.stock = "El stock debe ser un número válido mayor o igual a 0";
+    errors.stock = "Stock must be a valid number greater than or equal to 0";
   }
   if (input.description.length > 256) {
-    errors.description = "La descripción no debe exceder los 256 caracteres.";
+    errors.description = "Description must not exceed 256 characters";
   }
   // if (input.image.length > 5 || input.image.length < 1) {
   //   errors.image = "Puedes seleccionar un máximo de 5 imágenes y un mínimo de 1";
@@ -229,7 +229,7 @@ export default function FormCreateProduct() {
                 </div>
 
                 <div>
-                  <div>Marca:</div>
+                  <div>Brand:</div>
                   <Select
                     // options={marca.map((cate) => ({
                     //   value: cate.id,
@@ -297,7 +297,7 @@ export default function FormCreateProduct() {
                   <div className="flex items-center mb-4">
                     {" "}
                     {/* Repetimos el mismo patrón para el segundo checkbox */}
-                    <div className="mr-2">
+                    {/* <div className="mr-2">
                       <input
                         type="checkbox"
                         name="isTrending"
@@ -306,7 +306,7 @@ export default function FormCreateProduct() {
                         className="mr-1"
                       />
                     </div>
-                    <div>Is Trending</div>
+                    <div>Is Trending</div> */}
                   </div>
                 </div>
 
