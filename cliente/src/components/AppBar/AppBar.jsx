@@ -1,12 +1,30 @@
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import {  useSelector } from "react-redux/es/hooks/useSelector";
+import { Link, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import imagePaths from "./imagePaths";
+import { useAuth0 } from "@auth0/auth0-react";
+import postUser from "../../redux/actions/postUser";
+import { useEffect } from "react";
 
 const AppBar = ({ theme }) => {
   const location = useLocation();
   const currentPath = location.pathname;
-  const stateLogin = useSelector ((state)=>state.login)
+  const currentUser = useSelector((state) => state.user);
+  const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
+  const dispatch = useDispatch();
+
+  console.log(currentUser.user);
+
+  const handleLogin = () => {
+    console.log("en el handle login");
+    loginWithRedirect();
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(postUser(user));
+    }
+  }, [isAuthenticated]);
+
   return (
     <div
       className={`bg-neutral-800 absolute bottom-0 left-0 font-general-sans w-full h-[80px] justify-around items-center inline-flex ${
@@ -108,69 +126,103 @@ const AppBar = ({ theme }) => {
             </div> */}
           </div>
         </Link>
-      
-      { <Link to="/Favorite">
-          <div className="flex-col justify-start items-center inline-flex">
-            <img
-              alt="Favorite"
-              src={
-                theme === "dark" && currentPath === "/Favorite"
-                  ? imagePaths.Wishlist.inactive
-                  : theme === "dark"
-                  ? imagePaths.Wishlist.dark
-                  : theme !== "dark" && currentPath === "/Favorite"
-                  ? imagePaths.Wishlist.active
-                  : imagePaths.Wishlist.inactive
-              }
-              className="w-6 h-6"
-            />
-            <div
-              className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Favorite"
-                  ? "text-red-500"
-                  : theme === "dark"
-                  ? "text-gray-400"
-                  : theme !== "dark" && currentPath === "/Favorite"
-                  ? "text-white opacity-80"
-                  : "text-white opacity-80"
-              }`}
-            >
-              Favorite
+
+        {
+          <Link to="/Favorite">
+            <div className="flex-col justify-start items-center inline-flex">
+              <img
+                alt="Favorite"
+                src={
+                  theme === "dark" && currentPath === "/Favorite"
+                    ? imagePaths.Wishlist.inactive
+                    : theme === "dark"
+                    ? imagePaths.Wishlist.dark
+                    : theme !== "dark" && currentPath === "/Favorite"
+                    ? imagePaths.Wishlist.active
+                    : imagePaths.Wishlist.inactive
+                }
+                className="w-6 h-6"
+              />
+              <div
+                className={`text-xs font-medium ${
+                  theme === "dark" && currentPath === "/Favorite"
+                    ? "text-red-500"
+                    : theme === "dark"
+                    ? "text-gray-400"
+                    : theme !== "dark" && currentPath === "/Favorite"
+                    ? "text-white opacity-80"
+                    : "text-white opacity-80"
+                }`}
+              >
+                Favorite
+              </div>
             </div>
-          </div>
-        </Link>
+          </Link>
         }
 
-        <Link to="/Account">
-          <div className="flex-col justify-start items-center inline-flex">
-            <img
-              alt="Account"
-              src={
-                theme === "dark" && currentPath === "/Account"
-                  ? imagePaths.Account.inactive
-                  : theme === "dark"
-                  ? imagePaths.Account.dark
-                  : theme !== "dark" && currentPath === "/Account"
-                  ? imagePaths.Account.active
-                  : imagePaths.Account.inactive
-              }
-              className="w-6 h-6"
-            />
-            <div
-              className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Account"
-                  ? "text-red-500"
-                  : theme === "dark"
-                  ? "text-gray-400"
-                  : theme !== "dark" && currentPath === "/Account"
-                  ? "text-white opacity-80"
-                  : "text-white opacity-80"
-              }`}
-            >
-              Account
+        {!isAuthenticated ? (
+          <button onClick={handleLogin}>
+            <div className="flex-col justify-start items-center inline-flex">
+              <img
+                alt="Account"
+                src={
+                  theme === "dark" && currentPath === "/Account"
+                    ? imagePaths.Account.inactive
+                    : theme === "dark"
+                    ? imagePaths.Account.dark
+                    : theme !== "dark" && currentPath === "/Account"
+                    ? imagePaths.Account.active
+                    : imagePaths.Account.inactive
+                }
+                className="w-6 h-6"
+              />
+              <div
+                className={`text-xs font-medium ${
+                  theme === "dark" && currentPath === "/Account"
+                    ? "text-red-500"
+                    : theme === "dark"
+                    ? "text-gray-400"
+                    : theme !== "dark" && currentPath === "/Account"
+                    ? "text-white opacity-80"
+                    : "text-white opacity-80"
+                }`}
+              >
+                Account
+              </div>
             </div>
-          </div>
-        </Link>
+          </button>
+        ) : (
+          <Link to="/Account">
+            <div className="flex-col justify-start items-center inline-flex">
+              <img
+                alt="Account"
+                src={
+                  theme === "dark" && currentPath === "/Account"
+                    ? imagePaths.Account.inactive
+                    : theme === "dark"
+                    ? imagePaths.Account.dark
+                    : theme !== "dark" && currentPath === "/Account"
+                    ? imagePaths.Account.active
+                    : imagePaths.Account.inactive
+                }
+                className="w-6 h-6"
+              />
+              <div
+                className={`text-xs font-medium ${
+                  theme === "dark" && currentPath === "/Account"
+                    ? "text-red-500"
+                    : theme === "dark"
+                    ? "text-gray-400"
+                    : theme !== "dark" && currentPath === "/Account"
+                    ? "text-white opacity-80"
+                    : "text-white opacity-80"
+                }`}
+              >
+                Account
+              </div>
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );
