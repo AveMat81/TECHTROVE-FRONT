@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {BiLeftIndent} from 'react-icons/bi';
 import SearchCard from "../components/Cards/SearchcCard";
+import SearchCardName from "../components/Cards/SearchCardName";
 import getFilter from "../redux/actions/getFilter";
 import FilterSortRange from "../components/Filters/FilterSort";
 import CategoriesFilter from "../components/Filters/FilterCategories";
 import fetchProducts from "../redux/actions/getProducts";
 import Pagination from "@mui/material/Pagination";
+import Searchbar from "../components/TopBar/SearchBar";
+import Productnofound from "../utils/images/BasicIcons/Productnofound.png";
+
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -22,7 +26,13 @@ const Search = () => {
   const wishlist = useSelector((state) => state.wishlist);
   // console.log("whishlist:")
   // console.log(producWishFilter)
+  const [showCategories, setShowCategories] = useState(true);
 
+  //resultado de toda la busqueda
+  const productSearch = useSelector((state)=>state.filterName)
+  console.log(showCategories);
+
+  //setea el estado showFilters de true a false o de false a true 
   const toFilter = () => {
     setShowFilters(!showFilters);
   };
@@ -97,14 +107,33 @@ const Search = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [productSearch.filterbyname]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [productSearch.filterbyname]);
+
+  useEffect(() => {
     funcion();
     funcionFilter();
     setCurrentPage(1);
   }, [productFiltered, showFilters]);
 
+
+  const handlerSearch = ()=>{
+    setShowCategories(false)
+  } 
+
+  const handlerSearch2 = ()=>{
+    setShowCategories(true)
+  }
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = productFiltered.filterResult.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItemsName = productSearch.filterbyname.slice(indexOfFirstItem, indexOfLastItem);
+
   // console.log(currentItems) 
 
 
@@ -113,7 +142,9 @@ const Search = () => {
   return (
     <div>
     <div className="h-full pb-32 items-center mx-2 "> 
-      Barra search 
+      <Searchbar handlerSearch2={handlerSearch2}/>
+
+
       <div className="font-jakarta-sans w-auto  flex justify-between items-center mx-10 my-6">
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
          Category
@@ -126,7 +157,7 @@ const Search = () => {
         />
       }
       <div className="w-auto h-auto m-6">
-        <CategoriesFilter />
+       <CategoriesFilter handlerSearch={handlerSearch}/>
       </div>
       <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide  mr-8">
@@ -137,9 +168,44 @@ const Search = () => {
         </button>
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide"></h1>
       </div>
+
       <div className="w-full flex justify-center items-center mt-10 mb-10">
         <div className="w-auto grid grid-cols-2 gap-6 justify-center">
-          {Array.isArray(currentItems) ? (
+          {
+          productSearch.filterbyname==="Product no found"? <div><img className=" h-[240px] w-[240px] top-[340px] absolute left-[84px]" src={Productnofound} alt="Productnofound" /></div> 
+          // && setCurrentPage(1)
+          :  showCategories===false?
+           (
+            currentItems.map((product) => (
+              <SearchCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                description={product.description}
+                smallCard={true}
+              />
+            ))
+          ) : 
+          productSearch.filterbyname.length>0 ?(
+            
+          
+          currentItemsName.length > 0 ? (
+          
+            currentItemsName.map((product) => (
+              <SearchCardName
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                description={product.description}
+                smallCard={true} />))
+          )
+          : (<div>No se encontraron productos</div>) ) :
+
+          Array.isArray(currentItems) ? (
             currentItems?.map((product) => (
               <SearchCard
                 key={product.id}
@@ -157,7 +223,7 @@ const Search = () => {
                 favoriteDesFilter={product.favoriteFilterDesactivado}
               />
             ))
-          ) : (
+          ) :(
             <>
               <div
                 className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
@@ -172,9 +238,11 @@ const Search = () => {
         </div>
       </div>
       {/* Paginado */}
-    <div className="mt-2 flex flex-col justify-center items-center relative">
-     <Pagination
-       count={Math.ceil(productFiltered.filterResult.length / itemsPerPage)}
+    <div className={`mt-2 flex flex-col justify-center items-center relative
+     ${productSearch.filterbyname==="Product no found" ? " hidden" : ""}`}>
+    <Pagination 
+       count={showCategories===false ? Math.ceil(productFiltered.filterResult.length / itemsPerPage) : productSearch.filterbyname.length> 0 ? Math.ceil(productSearch.filterbyname.length/itemsPerPage) 
+       : Math.ceil(productFiltered.filterResult.length / itemsPerPage)}
        page={currentPage}
        onChange={(event, page) => setCurrentPage(page)}
        size="large"       

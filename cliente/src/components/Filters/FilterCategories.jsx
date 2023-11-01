@@ -11,7 +11,7 @@ import Loading from "../../views/Loading";
 
 
 
-const CategoriesFilter = () => {
+const CategoriesFilter = ({handlerSearch}) => {
     const dispatch = useDispatch();
     const [selectCategory, setSelectCategory] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +19,7 @@ const CategoriesFilter = () => {
   const handleSelection = async (category) => {
     setIsLoading(true);
     setSelectCategory(category);
+    handlerSearch()
     try {
       await dispatch(setCategory({ category: category }));
       await dispatch(getFilter({ category: category }));

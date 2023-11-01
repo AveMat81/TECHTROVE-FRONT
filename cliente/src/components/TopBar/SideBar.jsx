@@ -33,7 +33,7 @@ function Sidebar() {
       }`}
     >
       <div ref={sidebarRef}>
-        <nav className="bg-white p-4 ">
+        <nav className="bg-black p-4 ">
           <div className="flex items-center justify-between">
             <button
               onClick={toggleSidebar}
@@ -53,13 +53,13 @@ function Sidebar() {
                 </svg>
               ) : (
                 <svg
-                  className="w-8 h-8"
+                  className="w-8 h-8 bg-black"
                   fill="none"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth="2"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
+                  stroke="white"
                 >
                   <path d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
