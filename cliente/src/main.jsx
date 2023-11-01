@@ -21,12 +21,12 @@ axios.defaults.baseURL = import.meta.env.VITE_URL_PRODUCTION;
 // persistor.purge();
 
 //matias
-// const domain = "dev-ftdh6r8izgfiol2k.us.auth0.com"
-// const clientId = "wnZ1dIV37DOWzcdFeSeTOGTm120oghuv"
+const domain = "dev-ftdh6r8izgfiol2k.us.auth0.com"
+const clientId = "wnZ1dIV37DOWzcdFeSeTOGTm120oghuv"
 
 //flor
-const domain = "dev-epkzfmjzmxk7h61a.us.auth0.com"
-const clientId = "vkjYbZITl7gqlIpj9FCHff7AYoaXdF6i"
+// const domain = "dev-epkzfmjzmxk7h61a.us.auth0.com"
+// const clientId = "vkjYbZITl7gqlIpj9FCHff7AYoaXdF6i"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
