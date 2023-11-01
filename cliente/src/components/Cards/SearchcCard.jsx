@@ -7,15 +7,22 @@ import {
 } from "../../redux/slices/WishlistSlice";
 import {favoriteFilterActivo, favoriteFilterDesactivo, noFavoriteFilterActivo, noFavoriteFilterDesactivo} from "../../redux/slices/filterSlice"
 import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../redux/slices/cartSlice";
+
 
 const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos  }) => {
   const dispatch = useDispatch();
 
+
   const [favorito, setFavorito] = useState(0)
 
-  const prueba = (e) =>{
+  
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, name, price, image }));
     toast.success("Added to cart successfully ");
-  }
+    
+  };
 
   const favoritesFilter = (e) =>{
     if( favoriteNumFilter === 1 || favoriteDesFilter === 2){
@@ -122,8 +129,7 @@ const getFavoriteIcon = () => {
         $ {price}
         
         <div className="flex pb-30">
-            <img 
-            onClick={prueba}
+            <img onClick={handleAddToCart}
               alt="Home"
               src={
                 imagePaths.Add.inactive
