@@ -3,6 +3,7 @@ import productsReducer from "./slices/productsSlice";
 import filterReducer from "./slices/filterSlice";
 import categoryReducer from "./slices/categorySlice";
 import detailReducer from "./slices/detailSlice";
+import userReducer from "./slices/userSlice";
 
 
 
@@ -10,9 +11,8 @@ import detailReducer from "./slices/detailSlice";
     products: productsReducer,
     filter: filterReducer,
     category: categoryReducer,
-
-
     detail: detailReducer,
+    user: userReducer,
   });
   
   export default rootReducer;

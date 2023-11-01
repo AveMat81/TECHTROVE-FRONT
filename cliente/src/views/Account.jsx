@@ -1,25 +1,16 @@
-import { LoginButton } from "../components/Auth0/LoginButton";
-import { LogoutButton } from "../components/Auth0/LogoutButton";
-import { Profile } from "../components/Profile/Profile"
-import { useAuth0 } from "@auth0/auth0-react";
-
-
 const Account = () => {
+    const user = useSelector(state => state.user);
 
-    const { isAuthenticated } = useAuth0();
-
-    
     return (
-
         <div>
-            {isAuthenticated ? <>
-                <Profile/>
-                <LogoutButton/>            
-            </>          
-           : <LoginButton/>
-           }
-            </div>
-            )
-}
+            <h3>{user.name}</h3>
+            <button>Edit profile</button>
+            <button>My orders</button>
+            {user.isAdmin &&
+            <button>Dasboard Admin</button>
+            }
+        </div>
+    )
+};
 
-export default  Account
+export default Account;

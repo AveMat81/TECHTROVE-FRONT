@@ -1,19 +1,24 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import {  useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import imagePaths from "./imagePaths";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 const AppBar = ({ theme }) => {
   const location = useLocation();
   const currentPath = location.pathname;
-  const stateLogin = useSelector ((state)=>state.login)
+  const stateLogin = useSelector(state => state.login);
+  const user = useSelector(state => state.user);
+  const { loginWithRedirect } = useAuth0();
+
+
   return (
     <div
-      className={`bg-neutral-800 absolute bottom-0 left-0 font-general-sans w-full h-[80px] justify-around items-center inline-flex ${
-        theme === "dark"
-          ? "dark:bg-neutral-950 border-t border-white border-opacity-20"
-          : "bg-neutral-800 border-t border-black border-opacity-20"
-      }`}
+      className={`bg-neutral-800 absolute bottom-0 left-0 font-general-sans w-full h-[80px] justify-around items-center inline-flex ${theme === "dark"
+        ? "dark:bg-neutral-950 border-t border-white border-opacity-20"
+        : "bg-neutral-800 border-t border-black border-opacity-20"
+        }`}
     >
       <div className="w-full h-[80px] border-t border-black border-opacity-20 justify-around items-center inline-flex">
         <Link to={currentPath === "/" ? "/" : "/"}>
@@ -24,23 +29,22 @@ const AppBar = ({ theme }) => {
                 theme === "dark" && currentPath === "/"
                   ? imagePaths.Home.inactive
                   : theme === "dark"
-                  ? imagePaths.Home.dark
-                  : theme !== "dark" && currentPath === "/"
-                  ? imagePaths.Home.active
-                  : imagePaths.Home.inactive
+                    ? imagePaths.Home.dark
+                    : theme !== "dark" && currentPath === "/"
+                      ? imagePaths.Home.active
+                      : imagePaths.Home.inactive
               }
               className="w-6 h-6"
             />
             <div
-              className={` text-xs font-medium ${
-                theme === "dark" && currentPath === "/"
-                  ? "text-red-500"
-                  : theme === "dark"
+              className={` text-xs font-medium ${theme === "dark" && currentPath === "/"
+                ? "text-red-500"
+                : theme === "dark"
                   ? "text-gray-300"
                   : theme !== "dark" && currentPath === "/"
-                  ? "text-white opacity-80"
-                  : "text-white opacity-80"
-              }`}
+                    ? "text-white opacity-80"
+                    : "text-white opacity-80"
+                }`}
             >
               Home
             </div>
@@ -55,23 +59,22 @@ const AppBar = ({ theme }) => {
                 theme === "dark" && currentPath === "/Search"
                   ? imagePaths.Search.inactive
                   : theme === "dark"
-                  ? imagePaths.Search.dark
-                  : theme !== "dark" && currentPath === "/Search"
-                  ? imagePaths.Search.active
-                  : imagePaths.Search.inactive
+                    ? imagePaths.Search.dark
+                    : theme !== "dark" && currentPath === "/Search"
+                      ? imagePaths.Search.active
+                      : imagePaths.Search.inactive
               }
               className="w-6 h-6"
             />
             <div
-              className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Search"
-                  ? "text-red-500"
-                  : theme === "dark"
+              className={`text-xs font-medium ${theme === "dark" && currentPath === "/Search"
+                ? "text-red-500"
+                : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Search"
-                  ? "text-white opacity-80"
-                  : "text-white opacity-80"
-              }`}
+                    ? "text-white opacity-80"
+                    : "text-white opacity-80"
+                }`}
             >
               Search
             </div>
@@ -86,10 +89,10 @@ const AppBar = ({ theme }) => {
                 theme === "dark" && currentPath === "/Cart"
                   ? imagePaths.Cart.inactive
                   : theme === "dark"
-                  ? imagePaths.Cart.dark
-                  : theme !== "dark" && currentPath === "/Cart"
-                  ? imagePaths.Cart.active
-                  : imagePaths.Cart.inactive
+                    ? imagePaths.Cart.dark
+                    : theme !== "dark" && currentPath === "/Cart"
+                      ? imagePaths.Cart.active
+                      : imagePaths.Cart.inactive
               }
               className="w-16 h-16 mb-16"
             />
@@ -108,8 +111,8 @@ const AppBar = ({ theme }) => {
             </div> */}
           </div>
         </Link>
-      
-      { <Link to="/Favorite">
+
+        {<Link to="/Favorite">
           <div className="flex-col justify-start items-center inline-flex">
             <img
               alt="Favorite"
@@ -117,23 +120,22 @@ const AppBar = ({ theme }) => {
                 theme === "dark" && currentPath === "/Favorite"
                   ? imagePaths.Wishlist.inactive
                   : theme === "dark"
-                  ? imagePaths.Wishlist.dark
-                  : theme !== "dark" && currentPath === "/Favorite"
-                  ? imagePaths.Wishlist.active
-                  : imagePaths.Wishlist.inactive
+                    ? imagePaths.Wishlist.dark
+                    : theme !== "dark" && currentPath === "/Favorite"
+                      ? imagePaths.Wishlist.active
+                      : imagePaths.Wishlist.inactive
               }
               className="w-6 h-6"
             />
             <div
-              className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Favorite"
-                  ? "text-red-500"
-                  : theme === "dark"
+              className={`text-xs font-medium ${theme === "dark" && currentPath === "/Favorite"
+                ? "text-red-500"
+                : theme === "dark"
                   ? "text-gray-400"
                   : theme !== "dark" && currentPath === "/Favorite"
-                  ? "text-white opacity-80"
-                  : "text-white opacity-80"
-              }`}
+                    ? "text-white opacity-80"
+                    : "text-white opacity-80"
+                }`}
             >
               Favorite
             </div>
@@ -141,36 +143,67 @@ const AppBar = ({ theme }) => {
         </Link>
         }
 
-        <Link to="/Account">
-          <div className="flex-col justify-start items-center inline-flex">
-            <img
-              alt="Account"
-              src={
-                theme === "dark" && currentPath === "/Account"
-                  ? imagePaths.Account.inactive
-                  : theme === "dark"
-                  ? imagePaths.Account.dark
-                  : theme !== "dark" && currentPath === "/Account"
-                  ? imagePaths.Account.active
-                  : imagePaths.Account.inactive
-              }
-              className="w-6 h-6"
-            />
-            <div
-              className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Account"
+        {user ?
+          <button onClick={() => loginWithRedirect()}>
+            <div className="flex-col justify-start items-center inline-flex">
+              <img
+                alt="Account"
+                src={
+                  theme === "dark" && currentPath === "/Account"
+                    ? imagePaths.Account.inactive
+                    : theme === "dark"
+                      ? imagePaths.Account.dark
+                      : theme !== "dark" && currentPath === "/Account"
+                        ? imagePaths.Account.active
+                        : imagePaths.Account.inactive
+                }
+                className="w-6 h-6"
+              />
+              <div
+                className={`text-xs font-medium ${theme === "dark" && currentPath === "/Account"
                   ? "text-red-500"
                   : theme === "dark"
-                  ? "text-gray-400"
-                  : theme !== "dark" && currentPath === "/Account"
-                  ? "text-white opacity-80"
-                  : "text-white opacity-80"
-              }`}
-            >
-              Account
+                    ? "text-gray-400"
+                    : theme !== "dark" && currentPath === "/Account"
+                      ? "text-white opacity-80"
+                      : "text-white opacity-80"
+                  }`}
+              >
+                Account
+              </div>
             </div>
-          </div>
-        </Link>
+          </button>
+          :
+          <Link to="/Account">
+            <div className="flex-col justify-start items-center inline-flex">
+              <img
+                alt="Account"
+                src={
+                  theme === "dark" && currentPath === "/Account"
+                    ? imagePaths.Account.inactive
+                    : theme === "dark"
+                      ? imagePaths.Account.dark
+                      : theme !== "dark" && currentPath === "/Account"
+                        ? imagePaths.Account.active
+                        : imagePaths.Account.inactive
+                }
+                className="w-6 h-6"
+              />
+              <div
+                className={`text-xs font-medium ${theme === "dark" && currentPath === "/Account"
+                  ? "text-red-500"
+                  : theme === "dark"
+                    ? "text-gray-400"
+                    : theme !== "dark" && currentPath === "/Account"
+                      ? "text-white opacity-80"
+                      : "text-white opacity-80"
+                  }`}
+              >
+                Account
+              </div>
+            </div>
+          </Link>
+        }
       </div>
     </div>
   );
