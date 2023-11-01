@@ -1,13 +1,18 @@
 import {Link} from "react-router-dom"
 import imagePaths from "../AppBar/imagePaths";
 import toast, { Toaster } from "react-hot-toast";
-
+import { addToCart } from "../../redux/slices/cartSlice";
+import { useDispatch } from "react-redux";
 
 const SearchCard = ({ image,id, name, price  }) => {
 
-  const prueba = (e) =>{
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, name, price, image }));
     toast.success("Added to cart successfully ");
-  }
+    
+  };
 
   const favorite = (e) =>{
     toast.success("Added to favotire successfully ");
@@ -46,7 +51,7 @@ const SearchCard = ({ image,id, name, price  }) => {
         $ {price}
         
         <div className="flex pb-30">
-            <img onClick={prueba}
+            <img onClick={handleAddToCart}
               alt="Home"
               src={
                 imagePaths.Add.inactive
