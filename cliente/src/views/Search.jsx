@@ -140,7 +140,7 @@ const Search = () => {
       <div className="w-full flex justify-center items-center mt-10 mb-10">
         <div className="w-auto grid grid-cols-2 gap-6 justify-center">
           {Array.isArray(currentItems) ? (
-            currentItems.map((product) => (
+            currentItems?.map((product) => (
               <SearchCard
                 key={product.id}
                 id={product.id}
