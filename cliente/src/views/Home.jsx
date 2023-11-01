@@ -8,28 +8,96 @@ import Slider from "../components/Cards/Home/Slider"
 
 function Home() {
  
+  const wishlist = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true); 
+  const productsNormales = useSelector((state) => state.products.products);
   let products = useSelector((state) => state.products.products);
+
   let productFiltered = useSelector((state) => state.filter);
-  //products = products.filter((product) => product.category === "Microphones")
   products = products.slice(0, 4);
-  console.log(productFiltered)
+
   let filtradolo = productFiltered.filterResult ? productFiltered.filterResult.slice(0, 4) : [];
 
-  // const productF = products.filter(products.category === "Earbuds")
-  // console.log(productF)
-  //productF = productF.slice(0, 4);
-  //console.log(filtradolo)
 
+  const [producWish, setproducWish] = useState([])
+  const [producWishFilter, setproducWishFilter] = useState([])
+
+  console.log("wishlist HOME")
+  console.log(producWishFilter)
+
+  const favoritolo = useSelector((state) => state.favorite)
+
+
+  const finallaDos = (id) =>{
+    const ojala = producWishFilter.some((p) => p.id === id)
+    // const ojala = producWish.map((p) => p.id).includes(id);
+    if (ojala === false){
+      return false
+    }else if(ojala === true){
+      return true
+    }
+  }
+
+
+  const finalla = (id) =>{
+    const ojala = producWish.some((p) => p.id === id)
+    // const ojala = producWish.map((p) => p.id).includes(id);
+    if (ojala === false){
+      return false
+    }else if(ojala === true){
+      return true
+    }
+  }
+
+  const funcion = () =>{
+    const updatedArray = [];
+    for (const obj1 of products) {
+      for (const obj2 of wishlist) {
+        if (obj1.id === obj2.id) {
+          updatedArray.push(obj1);
+        }
+      }
+    }
+    return setproducWish(updatedArray)
+  }
+
+  const funcionFilter = () =>{
+    const updatedArray = [];
+    for (const obj1 of productFiltered.filterResult) {
+      for (const obj2 of wishlist) {
+        if (obj1.id === obj2.id) {
+          console.log("soy la funcion DE HOME filteereeeeer")
+          updatedArray.push(obj1);
+        }
+      }
+    }
+    return setproducWishFilter(updatedArray)
+  }
+
+  const funcionFilterTercero = () =>{
+    const updatedArray = [];
+    for (const obj1 of productsNormales) {
+      for (const obj2 of wishlist) {
+        if (obj1.id === obj2.id) {
+          console.log("soy la funcion TERCEEEEEERAAAA")
+          updatedArray.push(obj1);
+        }
+      }
+    }
+    return setproducWishFilter(updatedArray)
+  }
+
+  
   useEffect(() => {
   
     const fetchData = async () => {
       await dispatch(fetchProducts());
-      //await dispatch(getFilter({ category: 'Monitors' }));
-      //await dispatch(getFilter({ order: 'A-Z' }));
       await dispatch(getFilter({ min: '70' , max: '100'}));
       setIsLoading(false); 
+      funcion();
+      funcionFilter();
+      funcionFilterTercero();
     };
 
     fetchData();
@@ -50,7 +118,7 @@ function Home() {
       </div>
       <div className="w-auto h-auto grid grid-cols-2 gap-4 ">
           {filtradolo.map((product, i) => (
-            <HomeCard key={i} image={product.image} id={product.id} price={product.price} name={product.name} />
+            <HomeCard key={i} image={product.image} id={product.id} price={product.price} name={product.name} product={product} favorite={finallaDos(product.id)} funcion={funcion} finalla={finalla} favoriteNumFilter={product.favoriteFilter} favoriteDesFilter={product.favoriteFilterDesactivado} filtrosProps={product.filtrosProps} />
             ))}
       </div>
       <div className="font-jakarta-sans w-auto flex justify-between items-center mt-10 mr-4 my-6">
@@ -58,13 +126,13 @@ function Home() {
         On Sale
       </h1>
       <Link to="/Search">
-        <p className="text-red-500 text-[12px] font-semibold border-b border-red-500">SEE ALL</p>
+        <p className="text-violet-900 text-[14px] font-semibold">SEE ALL</p>
       </Link>
       </div>
       <div className="w-auto h-auto grid grid-cols-2 gap-4 ">
           {
             products.map((product, i) => (
-            <HomeCard key={i} image={product.image} id={product.id} price={product.price} name={product.name} category={product.category} />
+            <HomeCard key={i} image={product.image} id={product.id} price={product.price} name={product.name} category={product.category} product={product} favorite={finalla(product.id)} funcion={funcion} finalla={finalla} favoriteNum={product.favorite} favoriteDes={product.favoriteDesactivado} />
             ))}
       </div>
 
@@ -72,9 +140,7 @@ function Home() {
       </>
     )
 
-    // return (
-    //   <div>holaaa</div>
-    // )
+  
   }
   
 export default Home;

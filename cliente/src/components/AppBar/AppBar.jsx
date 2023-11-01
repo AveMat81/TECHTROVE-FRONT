@@ -109,16 +109,16 @@ const AppBar = ({ theme }) => {
           </div>
         </Link>
       
-      { <Link to="/Wishlist">
+      { <Link to="/Favorite">
           <div className="flex-col justify-start items-center inline-flex">
             <img
-              alt="Wishlist"
+              alt="Favorite"
               src={
-                theme === "dark" && currentPath === "/Wishlist"
+                theme === "dark" && currentPath === "/Favorite"
                   ? imagePaths.Wishlist.inactive
                   : theme === "dark"
                   ? imagePaths.Wishlist.dark
-                  : theme !== "dark" && currentPath === "/Wishlist"
+                  : theme !== "dark" && currentPath === "/Favorite"
                   ? imagePaths.Wishlist.active
                   : imagePaths.Wishlist.inactive
               }
@@ -126,11 +126,11 @@ const AppBar = ({ theme }) => {
             />
             <div
               className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Wishlist"
+                theme === "dark" && currentPath === "/Favorite"
                   ? "text-red-500"
                   : theme === "dark"
                   ? "text-gray-400"
-                  : theme !== "dark" && currentPath === "/Wishlist"
+                  : theme !== "dark" && currentPath === "/Favorite"
                   ? "text-white opacity-80"
                   : "text-white opacity-80"
               }`}
