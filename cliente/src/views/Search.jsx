@@ -30,7 +30,8 @@ const Search = () => {
 
   //resultado de toda la busqueda
   const productSearch = useSelector((state)=>state.filterName)
-  console.log(showCategories);
+  console.log("productSearch",productSearch);
+
 
   //setea el estado showFilters de true a false o de false a true 
   const toFilter = () => {
