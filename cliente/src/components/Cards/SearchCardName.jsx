@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import imagePaths from "../AppBar/imagePaths";
 import toast, { Toaster } from "react-hot-toast";
+import {favoriteSearchActivo, favoriteSearchDesactivo, noFavoriteSearchActivo,noFavoriteSearchDesactivo} from "../../redux/slices/filterbynameSlice"
 
 
 const SearchCardName = ({ image,id, name, price  }) => {

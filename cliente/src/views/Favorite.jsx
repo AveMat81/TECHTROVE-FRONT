@@ -4,7 +4,7 @@ import Back from "../utils/images/BasicIcons/backIcon.png";
 import { Link } from "react-router-dom";
 import { removeFromWishlist } from "../redux/slices/WishlistSlice";
 import WishlistCard from "../components/Cards/WishlistCard";
-import wishIconPrev from "../../src/utils/images/Logo/WishIconPrev.png"
+import wishIconPrev from "../../src/utils/images/Logo/IMAGEN WISHLISTROJO.png"
 
 const Favorite = () => {
         const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const Favorite = () => {
               <p className="font-general-sans">Wishlist</p>
             </div>
             <div className="w-auto flex justify-center items-center pb-32">
-              <div className="grid grid-cols-1 gap-1 justify-center mx-3 border font-bold">
+              <div className="grid grid-cols-1 gap-1 justify-center mx-3 font-bold">
                 {wishlist.length > 0 ? (
                   wishlist.map((product) => (
                     <WishlistCard
@@ -48,7 +48,7 @@ const Favorite = () => {
       
                   <div >
                   <img className="flex items-center justify-center" src={wishIconPrev} alt="No products" />
-                  <p className="text-red-600 text-lg font-semibold" style={{ marginLeft: "12px" }}> You still do not have products on Wishlist. </p>
+                  <p className="text-red-400 text-lg font-semibold" style={{ marginLeft: "12px" }}> You still do not have products on Wishlist. </p>
                 </div>       
                 
                 )}
