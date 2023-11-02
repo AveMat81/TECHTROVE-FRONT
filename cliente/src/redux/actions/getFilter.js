@@ -8,7 +8,17 @@ const getFilter = (filterParams) => {
 
         params: filterParams,
       });
-      dispatch(setFilter(response.data));
+      //Codigo nuevo
+
+      const products = response.data.map((product) => ({
+        ...product,
+        favoriteFilter: 0, // Añade la propiedad istru con el valor false
+        favoriteFilterDesactivado: 0,
+        filtrosProps: 1,
+      }));
+
+      ////////
+      dispatch(setFilter(products));
     } catch (error) {
       console.error(error);
     }

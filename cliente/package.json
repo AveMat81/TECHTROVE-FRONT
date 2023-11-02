@@ -10,12 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.2.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.15",
     "@mui/material": "^5.14.15",
     "@reduxjs/toolkit": "^1.9.7",
     "aos": "^2.3.4",
+    "auth0": "^4.1.0",
     "axios": "^1.5.1",
     "cloudinary": "^1.41.0",
     "dotenv": "^16.3.1",
