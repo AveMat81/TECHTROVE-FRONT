@@ -27,7 +27,7 @@ const Favorite = () => {
               <Link to={"/"}>
                 <img src={Back} className="w-[30px] h-[30px]" alt="Back" />
               </Link>
-              <p className="font-general-sans">Wishlist</p>
+              <p className="font-general-sans">Favorites</p>
             </div>
             <div className="w-auto flex justify-center items-center pb-32">
               <div className="grid grid-cols-1 gap-1 justify-center mx-3 font-bold">
