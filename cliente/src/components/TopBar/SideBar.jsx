@@ -114,7 +114,7 @@ function Sidebar() {
             </li>
             <li>
               <Link
-                to="/categories"
+                to="/Categories"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
               >

@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {BiLeftIndent} from 'react-icons/bi';
-import SearchCard from "../components/Cards/SearchcCard";
+
+import { useLocation } from "react-router-dom";
+
 import getFilter from "../redux/actions/getFilter";
+import fetchProducts from "../redux/actions/getProducts";
+
+import SearchCard from "../components/Cards/SearchcCard";
 import FilterSortRange from "../components/Filters/FilterSort";
 import CategoriesFilter from "../components/Filters/FilterCategories";
-import fetchProducts from "../redux/actions/getProducts";
+
 import Pagination from "@mui/material/Pagination";
+import {BiLeftIndent} from 'react-icons/bi';
 
 const Search = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  
+  const searchParams = new URLSearchParams(location.search);
+  const category = searchParams.get("category");
+
   const productFiltered = useSelector((state) => state.filter);
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -41,7 +51,7 @@ const Search = () => {
       Barra search 
       <div className="font-jakarta-sans w-auto  flex justify-between items-center mx-10 my-6">
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide">
-         Category
+         {category || "Category"}
         </h1>
       </div>
       {showFilters && 
