@@ -6,13 +6,30 @@ import { useNavigate } from "react-router-dom";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { clearDetail } from "../redux/slices/detailSlice";
 import backIcon from "../utils/images/BasicIcons/backIcon.png"
-
+import { addToCart } from '../redux/slices/cartSlice';
+import toast, { Toaster } from "react-hot-toast";
 const Detail = () => {
+  
+ 
+  const product = useSelector((state) => state.detail.detail);
+  const dispatch = useDispatch();
 
+  const handleAddToCart = () => {
+    const productData = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      description: product.description,
+    };
+    toast.success("Added to cart successfully ");
+  console.log(productData);
+    dispatch(addToCart(productData));
+  };
   const productDetail = useSelector(state => state.detail.detail);
 
+
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   
   const { id } = useParams();
 
@@ -72,10 +89,10 @@ const Detail = () => {
                     <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
                 </svg>
                </div>
-               <span className="text-1px font-bold text-gray-900 dark:text-black">{productDetail.description} </span>
-            <div className="flex items-center justify-between">
-                <span className="text-3xl font-bold text-gray-900 dark:text-black">{productDetail.price} </span>
-                <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
+               <span class="text-1px font-bold text-gray-900 dark:text-black">{productDetail.description} </span>
+            <div class="flex items-center justify-between">
+                <span class="text-3xl font-bold text-gray-900 dark:text-black">{productDetail.price} </span>
+                <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={handleAddToCart}>Add to cart</a>
                 
             </div>
         </div>
