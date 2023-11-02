@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import getProductByName from "../../redux/actions/getProductByName";
 
 // eslint-disable-next-line react/prop-types
-const Searchbar = ({ onFocusChange, onClose, handlerSearch2 }) => {
+const Searchbar = ({ onFocusChange, onClose, handlerSearch2, showCategories }) => {
   const name = useSelector((state)=>state.filterName)
   const [search, setSearch] = useState("");
   // const [isFocused, setIsFocused] = useState(false);
@@ -12,16 +12,19 @@ const Searchbar = ({ onFocusChange, onClose, handlerSearch2 }) => {
   const products = useSelector((state) => state.products.products);
 
   const dispatch = useDispatch()
-
+  
   const searcher = (e) => {
+    if (borrado===true) {
+      
+    }
     const searchTerm = e.target.value;
     handlerSearch2()
-    console.log(name);
     dispatch(getProductByName(searchTerm))
     // console.log(searchTerm);
     // setSearch(searchTerm);
     // setShowSearch(searchTerm !== "")
   };
+  
 
   const filteredProducts = products.filter((product) => {
     const productName = product.name.toLowerCase();

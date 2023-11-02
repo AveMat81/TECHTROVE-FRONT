@@ -27,6 +27,7 @@ const Search = () => {
   //setea el estado showFilters de true a false o de false a true 
   const toFilter = () => {
     setShowFilters(!showFilters);
+    
   };
 
   useEffect(() => {
@@ -48,10 +49,11 @@ const Search = () => {
 
   const handlerSearch = ()=>{
     setShowCategories(false)
-  } 
 
+  } 
+  
   const handlerSearch2 = ()=>{
-    setShowCategories(true)
+    setShowCategories(true);
   }
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -63,7 +65,7 @@ const Search = () => {
   return (
     <div>
     <div className="h-full pb-32 items-center mx-2 "> 
-      <Searchbar handlerSearch2={handlerSearch2}/>
+      <Searchbar showCategories={showCategories} handlerSearch2={handlerSearch2}/>
 
 
       <div className="font-jakarta-sans w-auto  flex justify-between items-center mx-10 my-6">
