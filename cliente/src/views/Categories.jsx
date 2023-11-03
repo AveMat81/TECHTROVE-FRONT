@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
+import getFilter from "../redux/actions/getFilter";
+import fetchProducts from "../redux/actions/getProducts";
 
 import Monitors from "../utils/images/CategoriesIcons/Monitors.png";
 import Headsets from "../utils/images/CategoriesIcons/Headsets.png";
@@ -27,6 +29,8 @@ const Categories = () => {
     { name: "Earbuds", image: Earbuds },
     { name: "Microphones", image: Microphones },
   ]
+
+  
 
   return (
     <>

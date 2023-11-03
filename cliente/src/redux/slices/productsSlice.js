@@ -27,10 +27,46 @@ const productSlice = createSlice({
         state.products[index] = { ...state.products[index], ...updatedProduct };
       }
     },
+    favoriteActivo(state,action){
+      const productId = action.payload;
+      state.products = state.products.map((product) => {
+        if (product.id === productId) {
+          return { ...product, favorite: 1 };
+        }
+        return product; // Mantén los demás productos sin cambios
+      });
+    },
+    favoriteDesactivo(state,action){
+      const productId = action.payload;
+      state.products = state.products.map((product) => {
+        if (product.id === productId) {
+          return { ...product, favorite: 0 };
+        }
+        return product; // Mantén los demás productos sin cambios
+      });
+    },
+    noFavoriteActivo(state,action){
+      const productId = action.payload;
+      state.products = state.products.map((product) => {
+        if (product.id === productId) {
+          return { ...product, favoriteDesactivado: 1 };
+        }
+        return product; // Mantén los demás productos sin cambios
+      });
+    },
+    noFavoriteDesactivo(state,action){
+      const productId = action.payload;
+      state.products = state.products.map((product) => {
+        if (product.id === productId) {
+          return { ...product, favoriteDesactivado: 2 };
+        }
+        return product; // Mantén los demás productos sin cambios
+      });
+    },
   },
 });
 
-export const { getProducts, addProduct, filterProducts, removeProduct, updateProduct } =
+export const { getProducts, addProduct, filterProducts, removeProduct, updateProduct, favoriteActivo, favoriteDesactivo, noFavoriteActivo, noFavoriteDesactivo } =
   productSlice.actions;
 
 export default productSlice.reducer;
