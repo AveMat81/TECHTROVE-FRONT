@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos  }) => {
   const dispatch = useDispatch();
+  
 
   const [favorito, setFavorito] = useState(0)
 
@@ -18,43 +19,35 @@ const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilte
   }
 
   const favoritesFilter = (e) =>{
+
     if( favoriteNumFilter === 1 || favoriteDesFilter === 2){
-      console.log("filter")
-      // const favorito2 = favoritoo - 1;
-      // setFavorito(favorito2)
-      // dispatch(iconDesactive())
-      // dispatch(favoriteActivo(id))
+      // console.log("filter")
+      toast.success("Delete to favorite succesfully");
       dispatch(noFavoriteFilterActivo(id))
       dispatch(favoriteFilterDesactivo(id))
       return dispatch(removeFromWishlist(product));
     }
     if (favoriteDesFilter === 1){
-      console.log("filter")
+      // console.log("filter")
       dispatch(favoriteFilterActivo(id))
       dispatch(noFavoriteFilterDesactivo(id))
-    // dispatch(activeIcon())
+
       dispatch(addToWishlist(product));
       toast.success("Added to favorite successfully ");
       return setFavorito(1)
     }
     if(favorite === true || favoriteDos=== true){
-      console.log("filter")
+      // console.log("filter")
       dispatch(noFavoriteFilterActivo(id))
       dispatch(favoriteFilterDesactivo(id))
 
 
-      // const favorito2 = favoritoo - 1;
-      // setFavorito(favorito2)
-      // dispatch(iconDesactive())
-      // dispatch(favoriteActivo(id))
+      toast.success("Delete to favorite succesfully");
       return dispatch(removeFromWishlist(product));
     }
-    console.log("filter")
-    //await
-    // funcion()
-    // finalla(id)
-    dispatch(favoriteFilterActivo(id))
-    // dispatch(activeIcon())
+    // console.log(product)
+    dispatch(favoriteFilterActivo(product))
+
     dispatch(addToWishlist(product));
     toast.success("Added to favorite successfully ");
     return setFavorito(1)
@@ -66,7 +59,8 @@ const getFavoriteIcon = () => {
   }
   if(favoriteDesFilter === 1){
     return imagePaths.Favorite.inactive;
-  }if (favorite === false) {
+  }
+  if (favorite === false) {
     return imagePaths.Favorite.inactive;
   } 
   else {
@@ -90,7 +84,7 @@ const getFavoriteIcon = () => {
   return (
     <div className="inline-flex flex-col items-start gap-[10px] relative my-5">
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
-        <div className="relative bg-blue-200 rounded-3xl flex justify-center items-center">
+        <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center">
           <Link to={`/${id}`}>
           <img
             className="relative w-auto h-auto object-cover bg-black-500"
@@ -118,7 +112,7 @@ const getFavoriteIcon = () => {
       </div>
 
       <div className="w-full justify-around items-center">
-        <div className="justify-between flex text-red-600 text-sm font-semibold font-jakarta-sans leading-[24px] tracking-normal">
+        <div className="justify-between flex text-blue-600 text-lg font-semibold font-jakarta-sans leading-[28px] tracking-normal">
         $ {price}
         
         <div className="flex pb-30">

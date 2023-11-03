@@ -23,15 +23,12 @@ function Home() {
   const [producWish, setproducWish] = useState([])
   const [producWishFilter, setproducWishFilter] = useState([])
 
-  console.log("wishlist HOME")
-  console.log(producWishFilter)
 
   const favoritolo = useSelector((state) => state.favorite)
 
 
   const finallaDos = (id) =>{
     const ojala = producWishFilter.some((p) => p.id === id)
-    // const ojala = producWish.map((p) => p.id).includes(id);
     if (ojala === false){
       return false
     }else if(ojala === true){
@@ -42,7 +39,6 @@ function Home() {
 
   const finalla = (id) =>{
     const ojala = producWish.some((p) => p.id === id)
-    // const ojala = producWish.map((p) => p.id).includes(id);
     if (ojala === false){
       return false
     }else if(ojala === true){
@@ -67,7 +63,6 @@ function Home() {
     for (const obj1 of productFiltered.filterResult) {
       for (const obj2 of wishlist) {
         if (obj1.id === obj2.id) {
-          console.log("soy la funcion DE HOME filteereeeeer")
           updatedArray.push(obj1);
         }
       }
@@ -80,7 +75,6 @@ function Home() {
     for (const obj1 of productsNormales) {
       for (const obj2 of wishlist) {
         if (obj1.id === obj2.id) {
-          console.log("soy la funcion TERCEEEEEERAAAA")
           updatedArray.push(obj1);
         }
       }
