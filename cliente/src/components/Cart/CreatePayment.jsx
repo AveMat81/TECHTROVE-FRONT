@@ -1,6 +1,6 @@
 import { initMercadoPago } from "@mercadopago/sdk-react";
 
-const publicKey = 'TEST-dc97b69f-7789-424f-8254-81f321f3d7ab'; // Reemplaza con tu clave pública
+const publicKey = 'TEST-dc97b69f-7789-424f-8254-81f321f3d7ab'; 
 
 initMercadoPago(publicKey); // Inicializa Mercado Pago con tu clave pública
 

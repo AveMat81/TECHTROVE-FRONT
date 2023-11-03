@@ -106,12 +106,14 @@
 // }
 
 // export default  Cart
+
+
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setQuantity, removeItem } from "../redux/slices/cartSlice";
 import { toast } from "react-hot-toast";
-import CreatePayment  from "../components/Cart/CreatePayment"
+//import CreatePayment  from "../components/Cart/CreatePayment"
 
 const publicKey = 'TEST-dc97b69f-7789-424f-8254-81f321f3d7ab'; 
 
@@ -142,72 +144,65 @@ const Cart = () => {
   };
 
   const handleCheckout = async () => {
-    const items = cart.items.map((item) => ({
-      id: item.id,
-      title: item.name,
-      description:  item.description ? item.description.slice(0, 240) + "..." : "",
-      picture_url: item.image[0],
-      quantity: item.quantity,
-      unit_price: item.price,
-    }));
 
-    const amount = cart.totalPrice;
+   try {
+     const { data } = await axios.post(
+       "https://localhost:3001/api/cart/create-preference", 
+       { cart, email: "asda@gmail.com" }
+       );
+       console.log("data de front 2", data);
+   } catch (error) {
+    
+   }
 
-    const preference = {
-      items,
-      userId: user.id, 
-      transaction_amount: amount,
-      back_urls: {
-        success: 'http://localhost:3000/success',
-        failure: 'http://localhost:3000/failure',
-        pending: 'http://localhost:3000/pending',
-      },
+    window.alert("accion de handle")
     };
 
-    try {
-      const paymentData = await CreatePayment(preference, publicKey);
-      window.location.href = paymentData.init_point; // Redirige a la URL de Mercado Pago para el pago
-    } catch (error) {
-      console.error('Error en el proceso de pago:', error);
-    }
-  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Aquí generas la preferencia en el front (simulando un carrito de compras, por ejemplo)
-        const preference = {
-          items: [
-            {
-              id: '1',
-              title: 'Producto 1',
-              description: 'Descripción del producto 1',
-              quantity: 1,
-              unit_price: 1000,
-            },
-            {
-              id: '2',
-              title: 'Producto 2',
-              description: 'Descripción del producto 2',
-              quantity: 1,
-              unit_price: 1500,
-            },
-          ],
-          transaction_amount: 2500,
-          userId: 'ID_DEL_USUARIO', // Reemplaza con el ID del usuario real
-        };
+    // try {
+    //   const paymentData = await CreatePayment(preference, publicKey);
+    //   window.location.href = paymentData.init_point; // Redirige a la URL de Mercado Pago para el pago
+    // } catch (error) {
+    //   console.error('Error en el proceso de pago:', error);
+    // }
+  
 
-        // Llamas a la función CreatePayment para obtener la preferencia desde el backend
-        const preferenceResponse = await CreatePayment(preference);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       // Aquí generas la preferencia en el front (simulando un carrito de compras, por ejemplo)
+  //       const preference = {
+  //         items: [
+  //           {
+  //             id: '1',
+  //             title: 'Producto 1',
+  //             description: 'Descripción del producto 1',
+  //             quantity: 1,
+  //             unit_price: 1000,
+  //           },
+  //           {
+  //             id: '2',
+  //             title: 'Producto 2',
+  //             description: 'Descripción del producto 2',
+  //             quantity: 1,
+  //             unit_price: 1500,
+  //           },
+  //         ],
+  //         transaction_amount: 2500,
+  //         userId: 'ID_DEL_USUARIO', // Reemplaza con el ID del usuario real
+  //       };
 
-        setPreferenceData(preferenceResponse); // Actualiza el estado con la preferencia generada
-      } catch (error) {
-        console.error('Error al obtener la preferencia de pago:', error);
-      }
-    };
+  //       // Llamas a la función CreatePayment para obtener la preferencia desde el backend
+  //       //const preferenceResponse = await CreatePayment(preference);
 
-    fetchData();
-  }, []);
+  //       //setPreferenceData(preferenceResponse); // Actualiza el estado con la preferencia generada
+  //     } catch (error) {
+  //       console.error('Error al obtener la preferencia de pago:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   return (
     <div>
@@ -229,7 +224,6 @@ const Cart = () => {
       <div>
         <p>Total: ${cart.totalPrice}</p>
         <h1>Preferencia de Pago:</h1>
-      <pre>{JSON.stringify(preferenceData, null, 2)}</pre>
         <button onClick={handleCheckout}>Checkout with Mercado Pago</button>
       </div>
     </div>
