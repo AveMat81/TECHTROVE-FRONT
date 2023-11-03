@@ -4,8 +4,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 export const Account = () => {
   const currentUser = useSelector((state) => state.user);
   const { logout } = useAuth0();
-
-  console.log(currentUser);
+  console.log("currentUser en account",currentUser);
+  
 
   return (
     <div>
@@ -39,11 +39,11 @@ export const Account = () => {
         <button onClick={() => logout ({ returnTo: window.location.origin})} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
           Logout
         </button>
-        {currentUser.user.isAdmin && (
+        
           <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
             Dashboard Admin
           </button>
-        )}
+      
 </div>  
   
 
