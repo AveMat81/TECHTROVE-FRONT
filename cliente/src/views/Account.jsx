@@ -25,7 +25,7 @@ export const Account = () => {
         <div className="text-left mb-2">
           <h3 className="text-center text-sm">{currentUser.user.email}</h3>
           <h3 className="text-sm">Name: {currentUser.user.name}</h3>
-          <h3 className="text-sm">Username: {currentUser.user.nickname}</h3>
+          <h3 className="text-sm">Username: {currentUser.user.username}</h3>
         </div>        
       </div>
     )}
@@ -39,18 +39,18 @@ export const Account = () => {
         <button onClick={() => logout ({ returnTo: window.location.origin})} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
           Logout
         </button>
-        
+        {currentUser?.user?.isAdmin && (
           <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
             Dashboard Admin
           </button>
-      
+        )}
 </div>  
-  
 
 
 
 
-  );
+
+);
 };
 
 export default Account;
