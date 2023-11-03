@@ -81,6 +81,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
       // setFavorito(favorito2)
       // dispatch(iconDesactive())
       // dispatch(favoriteActivo(id))
+      toast.success("Delete to favorite succesfully");
       dispatch(noFavoriteActivo(id))
       dispatch(favoriteDesactivo(id))
       return dispatch(removeFromWishlist(product));
@@ -96,7 +97,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
     }
     if(favorite === true){
       console.log("normal")
-
+      toast.success("Delete to favorite succesfully");
 
       // const favorito2 = favoritoo - 1;
       // setFavorito(favorito2)
@@ -124,6 +125,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
         // setFavorito(favorito2)
         // dispatch(iconDesactive())
         // dispatch(favoriteActivo(id))
+        toast.success("Delete to favorite succesfully");
         dispatch(noFavoriteFilterActivo(id))
         dispatch(favoriteFilterDesactivo(id))
         return dispatch(removeFromWishlist(product));
@@ -142,7 +144,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
         dispatch(noFavoriteFilterActivo(id))
         dispatch(favoriteFilterDesactivo(id))
   
-  
+        toast.success("Delete to favorite succesfully");
         // const favorito2 = favoritoo - 1;
         // setFavorito(favorito2)
         // dispatch(iconDesactive())
@@ -164,7 +166,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
   return (
     <div className="inline-flex flex-col gap-[8px] relative">
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl items-start"> */}
-        <div className="relative bg-violet-50 rounded-3xl flex justify-center items-center">
+        <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center">
           <Link to={`/${id}`}>
           <img
             className="relative w-auto h-auto object-cover"
@@ -189,7 +191,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
       </div>
 
       <div className="w-full justify-around items-center">
-        <div className="justify-between flex text-red-600 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal text-[20px]">
+        <div className="justify-between flex text-blue-600 text-lg font-semibold font-jakarta-sans leading-[28px] tracking-normal text-[20px]">
         $ {price}
         
         <div className="flex pb-30">
