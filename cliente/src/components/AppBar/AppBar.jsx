@@ -34,16 +34,16 @@ const AppBar = ({ theme }) => {
       }`}
     >
       <div className="w-full h-[80px] border-t border-black border-opacity-20 justify-around items-center inline-flex">
-        <Link to={currentPath === "/" ? "/" : "/"}>
+        <Link to={currentPath === "/home" ? "/home" : "/home"}>
           <div className="flex-col justify-start items-center inline-flex">
             <img
               alt="Home"
               src={
-                theme === "dark" && currentPath === "/"
+                theme === "dark" && currentPath === "/home"
                   ? imagePaths.Home.inactive
                   : theme === "dark"
                   ? imagePaths.Home.dark
-                  : theme !== "dark" && currentPath === "/"
+                  : theme !== "dark" && currentPath === "/home"
                   ? imagePaths.Home.active
                   : imagePaths.Home.inactive
               }
@@ -51,11 +51,11 @@ const AppBar = ({ theme }) => {
             />
             <div
               className={` text-xs font-medium ${
-                theme === "dark" && currentPath === "/"
+                theme === "dark" && currentPath === "/home"
                   ? "text-red-500"
                   : theme === "dark"
                   ? "text-gray-300"
-                  : theme !== "dark" && currentPath === "/"
+                  : theme !== "dark" && currentPath === "/home"
                   ? "text-white opacity-80"
                   : "text-white opacity-80"
               }`}

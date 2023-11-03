@@ -24,7 +24,7 @@ const Favorite = () => {
         return (
           <div>
             <div className="flex flex-row gap-3 px-4 mb-8 mt-8 font-general-sans">
-              <Link to={"/"}>
+              <Link to={"/home"}>
                 <img src={Back} className="w-[30px] h-[30px]" alt="Back" />
               </Link>
               <p className="font-general-sans">Favorites</p>

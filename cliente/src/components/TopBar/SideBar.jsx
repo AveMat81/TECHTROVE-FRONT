@@ -95,7 +95,7 @@ function Sidebar() {
           <ul className="py-6 px-6 space-y-2 ml-8">
             <li>
               <Link
-                to="/"
+                to="/home"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
               >

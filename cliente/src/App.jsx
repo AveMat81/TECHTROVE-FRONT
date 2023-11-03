@@ -15,11 +15,14 @@ import About from "./views/About";
 import Account from "./views/Account";
 import TopBar from "./components/TopBar/TopBar";
 import AppBar from './components/AppBar/AppBar'
+import Landing from './views/Landing'
 import './App.css';
 import "tailwindcss/tailwind.css";
 //import { AppBar } from "@mui/material";
 
 function App() {
+  const [showTopBar, setShowTopBar] = useState(false);
+  const [showAppBar, setShowAppBar] = useState(false);
   const [Desktop, setDesktop] = useState(window.innerWidth > 1024);
 
   useEffect(() => {
@@ -31,18 +34,23 @@ function App() {
 
     return () => {
       window.removeEventListener("resize", handleResize);
+      };
+    }, []);
+
+    const handleStoreImageClick = () => {
+      setShowTopBar(true);
+      setShowAppBar(true);
     };
-  }, []);
 
   return (
     <div>
-      <TopBar />
+      {showTopBar && <TopBar />}
+      {/* <TopBar /> */}
       {/* <NavBar/> */}
       <Routes>
-      {/* <Route path= "/home" element={<landing/>}/> */}
-
-        <Route path= "/" element={<Home/>}/>
-        <Route path= "/:id" element={<Detail/>}/>
+        <Route path="/" element={<Landing onStoreImageClick={handleStoreImageClick}/>}/>
+        <Route path="/home" element={<Home/>}/>
+        <Route path="/:id" element={<Detail/>}/>
         <Route path="/Create" element={<FormCreateProduct/>}/>
         <Route path="/Search" element={<Search/>}/>
         <Route path="/Cart" element={<Cart/>}/>
@@ -51,28 +59,15 @@ function App() {
         <Route path="/Categories" element={<Categories/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/About" element={<About/>}/>
-
       </Routes>
-      <div
-          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : " "}`}
+      {showAppBar && (
+        <div
+           className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : " "}`}
         >
-
         <AppBar/>
-      </div>
-      {/* <div
-          className={` fixed bottom-0 left-0 w-full z-[1000] ${
-            Desktop ? "hidden" : ""
-          }`}
-        >
-          <AppBar theme={theme} />
-        </div> */}
-      {/* <div
-          className={` fixed bottom-0 left-0 w-full z-[1000] ${
-            Desktop ? "hidden" : ""
-          }`}
-        >
-          <AppBar theme={theme} />
-        </div> */}
+        </div>
+      )}
+      
     </div>
   )
 }
