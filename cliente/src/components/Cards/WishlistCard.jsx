@@ -4,7 +4,7 @@ import Heart from "../../utils/images/AppbarIcons/IconoDelete.gif";
 
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromWishlist } from "../../redux/slices/WishlistSlice";
-//import { addToCart } from "../../redux/slices/CartSlice";
+import { addToCart } from "../../redux/slices/cartSlice";
 import toast, { Toaster } from "react-hot-toast";
 
 
@@ -13,7 +13,11 @@ const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggl
   const dispatch = useDispatch();
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, name, price, image }));
+    toast.success("Added to cart successfully ");
+  };
+  
 
   const removeCard = () => {
     if (isInWishlist) {
@@ -83,10 +87,12 @@ const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggl
           </Link>
           <div className="flex items-center justify-between mt-auto">
           <div className="text-blue-600 text-lg font-semibold" style={{ marginLeft: "22px" }}>$ {price}</div>
-            <button 
+          
+            <button  onClick={handleAddToCart}
               className="button bg-blue-700 text-white text-lg px-5 py-2 rounded-full ">
               Buy
             </button>
+            
           </div>
         </div>
       </div>
