@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 //  import { useDispatch } from "react-redux";
 //  import { useSelector } from "react-redux";
+import PrivateRoute from "./PrivateRoute";
 import Home from './views/Home';
 import Detail from './views/Detail';
 import NavBar from "./components/NavBar/NavBar";
@@ -14,9 +15,11 @@ import TopBar from "./components/TopBar/TopBar";
 import AppBar from './components/AppBar/AppBar'
 import './App.css';
 import "tailwindcss/tailwind.css";
+import { useAuth0 } from "@auth0/auth0-react";
 //import { AppBar } from "@mui/material";
 
 function App() {
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const [Desktop, setDesktop] = useState(window.innerWidth > 1024);
 
   useEffect(() => {
@@ -43,7 +46,15 @@ function App() {
         <Route path="/Create" element={<FormCreateProduct/>}/>
         <Route path="/Search" element={<Search/>}/>
         <Route path="/Cart" element={<Cart/>}/>
-        <Route path="/Favorite" element={<Favorite/>}/>
+        <Route path="/Favorite" element={<Favorite />}/>
+        
+        {/* Activa linea de abajo para que cuando no esta el email autenticado y quiera air a favorito lo redirija al Home (MATIAS)
+        <Route path="/Favorite" element={<PrivateRoute
+                  element={<Favorite />}
+                  isAuthenticated={isAuthenticated}
+                  isLoading={isLoading}
+                />}/> */}
+
         <Route path="/Account" element={<Account/>}/>
       </Routes>
       <div

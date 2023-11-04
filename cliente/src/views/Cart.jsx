@@ -147,16 +147,15 @@ const Cart = () => {
   const handleCheckout = async () => {
 
    try {
-     const { data } = await axios.post(
-       "https://localhost:3001/api/payment/create-order", 
-       { cart, email: "asda@gmail.com" }
-       );
-       console.log("data de front 2", data);
+    console.log("este es el cart ", cart)
+    const { data } = await axios.post("http://localhost:3001/api/payment/create-order", { cart: cart.items, email: "userdeprueba@gmail" });
+
+    console.log(data)
+    location.href = data.result;
+    
    } catch (error) {
     console.log(error.message)
    }
-
-    window.alert("accion de handle")
     };
 
 
