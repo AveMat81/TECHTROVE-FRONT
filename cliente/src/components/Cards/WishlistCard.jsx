@@ -1,13 +1,11 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Heart from "../../utils/images/AppbarIcons/IconoDelete.gif";
 
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromWishlist } from "../../redux/slices/WishlistSlice";
-//import { addToCart } from "../../redux/slices/CartSlice";
-import  toast  from "react-hot-toast";
-
+import { addToCart } from "../../redux/slices/cartSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggleWishlist  }) => {
@@ -15,11 +13,16 @@ const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggl
   const dispatch = useDispatch();
   const [showFullDescription, setShowFullDescription] = useState(false);
 
-
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, name, price, image }));
+    toast.success("Added to cart successfully ");
+  };
+  
 
   const removeCard = () => {
     if (isInWishlist) {
       dispatch(removeFromWishlist({ id }));
+      toast.success("This product has been deleted ");
 
     } else {
       dispatch(addToWishlist({ id, name, image, price, description }));
@@ -45,37 +48,37 @@ const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggl
   //   dispatch(addToCart(productData));
   // };
 
-  const descriptionText = description.length > 31 ? (
-    showFullDescription ? description : `${description.slice(0, 31)} ...`
+  const descriptionText = description.length > 86 ? (
+    showFullDescription ? description : `${description.slice(0, 86)} ...`
   ) : description;
 
 
   return (
     <div className="bg-red p-3 rounded-lg shadow-lg mb-4 rounded-md md:rounded-lg mx-1 md:mx-0 border border-red max-w-screen-xl">
-      <div className="flex flex-row md:flex-row">
-        <Link to={`/${id}`} className="md:w-1/3" >
+      <div className="inline-flex flex-col gap-[8px] relative">
+        <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center " >
+          <img
+            src={Heart}
+            className={`w-6 h-6 md:w-auto md:h-auto object-cover rounded-lg cursor-pointer ml-4 absolute top-2 right-2 ${
+              isInWishlist ? "text-red-500" : "text-gray-500"
+            }`}
+            onClick={() => removeCard(id)}
+          />
             <img
               src={image}
               alt={name}
-              className="w-full h-auto object-cover rounded-lg text-center"
-              style={{ maxHeight: "140px", background: "#fceaea", padding: "4px" }}
+              className="relative w-1/2 h-1/2 object-cover"
+              style={{  padding: "4px" }}
             />
           
-        </Link>
+        </div>
         
-        <div className="md:w-2/3 md:pl-2 flex flex-col">
-          <div className="flex justify-between items-start  mb-4">
-            <div className="text-gray-800 text-lg font-semibold" style={{ marginLeft: "22px" }} >{name}</div>
-            <img
-              src={Heart}
-              className={`w-5 h-5 md:w-auto md:h-auto object-cover rounded-lg cursor-pointer ${
-                isInWishlist ? "text-red-500" : "text-gray-500"
-              }`}
-              onClick={() => removeCard(id)}
-            />
+        <div className="md:w-2/2 md:pl-2 flex flex-col">
+          <div className="flex justify-between items-start mb-2">
+            <div className="text-gray-800 text-lg font-semibold text-left" style={{ marginLeft: "22px" }} >{name}</div>
           </div>
           <Link to={`/${id}`} >
-          <div className="text-gray-600 text-sm mt-2" style={{ fontFamily: "Roboto" }}>{descriptionText}</div>
+          <div className="text-gray-600 text-sm mt-2 text-left mb-4" style={{ fontFamily: "Roboto", marginLeft: "22px" }}>{descriptionText}</div>
           {description.length > 31 && (
             <div className="flex items-center justify-center">
               
@@ -83,11 +86,13 @@ const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggl
           )}
           </Link>
           <div className="flex items-center justify-between mt-auto">
-          <div className="text-red-600 text-lg font-semibold" style={{ marginLeft: "12px" }}>$ {price}</div>
-            <button 
-              className="button bg-red-500 text-white text-lg px-3 py-1 rounded-md">
+          <div className="text-blue-600 text-lg font-semibold" style={{ marginLeft: "22px" }}>$ {price}</div>
+          
+            <button  onClick={handleAddToCart}
+              className="button bg-blue-700 text-white text-lg px-5 py-2 rounded-full ">
               Buy
             </button>
+            
           </div>
         </div>
       </div>

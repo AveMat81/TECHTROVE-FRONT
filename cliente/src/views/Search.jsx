@@ -30,8 +30,18 @@ const Search = () => {
 
   //resultado de toda la busqueda
   const productSearch = useSelector((state)=>state.filterName)
-  console.log("productSearch",productSearch);
+  // console.log("productSearch",productSearch);
+  // console.log(productSearch)
 
+  const category = useSelector((state) => state.category)
+
+  const [error, setError] = useState("")
+  const [newSearch, setNewSearch] = useState([])
+  const [searchGlobal, setSearchGlobal] = useState([])
+  const [input, setInput] = useState("");
+  //console.log(input)
+
+  //console.log("categorias: ", )
 
   //setea el estado showFilters de true a false o de false a true 
   const toFilter = () => {
@@ -43,10 +53,10 @@ const Search = () => {
     const ojala = producWishFilter.some((p) => p.id === id)
     // const ojala = producWish.map((p) => p.id).includes(id);
     if (ojala === false){
-      // console.log("no se muestra")
+
       return false
     }else if(ojala === true){
-      // console.log("ssiiii se muestra")
+
       return true
     }
   }
@@ -55,10 +65,10 @@ const Search = () => {
     const ojala = producWish.some((p) => p.id === id)
     // const ojala = producWish.map((p) => p.id).includes(id);
     if (ojala === false){
-      // console.log("no se muestra")
+      
       return false
     }else if(ojala === true){
-      // console.log("ssiiii se muestra")
+
       return true
     }
   }
@@ -68,7 +78,6 @@ const Search = () => {
     for (const obj1 of productFiltered.filterResult) {
       for (const obj2 of wishlist) {
         if (obj1.id === obj2.id) {
-          // console.log("soy la funcion")
           updatedArray.push(obj1);
           // break;
         }
@@ -84,7 +93,6 @@ const Search = () => {
     for (const obj1 of productsNormales) {
       for (const obj2 of wishlist) {
         if (obj1.id === obj2.id) {
-          // console.log("soy la funcion NORMAL")
           updatedArray.push(obj1);
           // break;
         }
@@ -95,31 +103,105 @@ const Search = () => {
     return setproducWishFilter(updatedArray)
   }
 
+  ///FUNCION SEARCHBAR///////
+  //console.log(error)
+  //console.log(searchGlobal)
+
+  // const restFilter = () =>{
+  //   if(input === "Vacio"){
+  //     // return dispatch(getFilter());
+  //   }
+  // }
+
+
+
+  const setCurrentSearch = () =>{
+    setCurrentPage(1);
+  }
+
+  const setCurrentCategory = () =>{
+    setCurrentPage(1);
+  }
+
+  //console.log("products normales:", productsNormales)
+
+  const newSearchBar = (value, category) =>{
+    //console.log(value.length)
+    // setInput(value);
+
+    if(value.length === 0){
+          //dispatch(getFilter({ category: category }));
+ 
+    
+
+      setInput("Vacio")
+    }
+    if(value.length > 0){
+      setInput("Lleno")
+    }
+
+
+    const minMayusculaProduct = productsNormales.map(p =>({
+      id: p.id,
+      name: p.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+      category: p.category,
+      color: p.color,
+      description: p.description,
+      image: p.image,
+      isAvailible: p.isAvailible,
+      price: p.price,
+      stock: p.stock,
+      rating: p.rating,
+      averageRating: p.averageRating,
+      discount: p.discount,
+      favoriteFilter: p.favorite,
+      favoriteFilterDesactivado: p.favoriteDesactivado,
+      filtrosProps: 1,
+    }))
+
+    const productName = minMayusculaProduct.filter(objeto => 
+      objeto.name.toLowerCase().includes(value.toLowerCase()))
+
+      if (productName.length===0) {
+        //console.log("algoooo");
+        return setError("Product no found");
+      }
+      setError("")
+      //console.log(productName)
+      return setNewSearch(productName);
+  }
+
 
   /////
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(fetchProducts());
       await dispatch(getFilter());
+      // restFilter()
       funcionFilter();
       funcion();
     };
     fetchData();
   }, [dispatch]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [productSearch.filterbyname]);
+  // useEffect(() => {
+    
+  //   setCurrentPage(1);
+  // }, [productSearch.filterbyname]);
+
+ 
 
   useEffect(() => {
+    
     setCurrentPage(1);
-  }, [productSearch.filterbyname]);
+  }, [productsNormales]);
 
   useEffect(() => {
     funcion();
     funcionFilter();
-    setCurrentPage(1);
+    //setCurrentPage(1);
   }, [productFiltered, showFilters]);
+
 
 
   const handlerSearch = ()=>{
@@ -134,16 +216,13 @@ const Search = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = productFiltered.filterResult.slice(indexOfFirstItem, indexOfLastItem);
   const currentItemsName = productSearch.filterbyname.slice(indexOfFirstItem, indexOfLastItem);
-
-  // console.log(currentItems) 
-
-
+  const currentNewSearch = newSearch.slice(indexOfFirstItem, indexOfLastItem);
 
 
   return (
     <div>
     <div className="h-full pb-32 items-center mx-2 "> 
-      <Searchbar handlerSearch2={handlerSearch2}/>
+      <Searchbar handlerSearch2={handlerSearch2} newSearchBar={newSearchBar} funcion={funcion} funcionFilter={funcionFilter} setCurrentSearch={setCurrentSearch} />
 
 
       <div className="font-jakarta-sans w-auto  flex justify-between items-center mx-10 my-6">
@@ -158,7 +237,7 @@ const Search = () => {
         />
       }
       <div className="w-auto h-auto m-6">
-       <CategoriesFilter handlerSearch={handlerSearch}/>
+       <CategoriesFilter handlerSearch={handlerSearch} setCurrentCategory={setCurrentCategory} funcion={funcion} funcionFilter={funcionFilter}/>
       </div>
       <div className="font-jakarta-sans w-auto flex justify-between items-center mx-10 my-6">
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide  mr-8">
@@ -173,38 +252,54 @@ const Search = () => {
       <div className="w-full flex justify-center items-center mt-10 mb-10">
         <div className="w-auto grid grid-cols-2 gap-6 justify-center">
           {
-          productSearch.filterbyname==="Product no found"? <div><img className=" h-[240px] w-[240px] top-[340px] absolute left-[84px]" src={Productnofound} alt="Productnofound" /></div> 
-          // && setCurrentPage(1)
-          :  showCategories===false?
-           (
+            // error==="Product no found"? <div><img className=" h-[240px] w-[240px] top-[340px] absolute left-[84px]" src={Productnofound} alt="Productnofound" /></div> :
+          // // && setCurrentPage(1)
+          showCategories===false || input === "Vacio" ?
+          (
             currentItems.map((product) => (
-              <SearchCard
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={product.image}
-                description={product.description}
-                smallCard={true}
-              />
-            ))
-          ) : 
-          productSearch.filterbyname.length>0 ?(
+               <SearchCard
+                 key={product.id}
+                 id={product.id}
+                 name={product.name}
+                 price={product.price}
+                 image={product.image}
+                 description={product.description}
+                 smallCard={true}
+
+                 product={product}
+                 favoriteDos={finalla(product.id)}
+                 favorite={finallaDos(product.id)}
+                 favoriteNumFilter={product.favoriteFilter} 
+                 favoriteDesFilter={product.favoriteFilterDesactivado}
+               />
+             ))
+           ) : error==="Product no found"? <div><img className=" h-[240px] w-[240px] top-[340px] absolute left-[84px]" src={Productnofound} alt="Productnofound" /></div> :
+          // productSearch.filterbyname.length>0 ?(
             
           
-          currentItemsName.length > 0 ? (
+          newSearch.length > 0 ? (
           
-            currentItemsName.map((product) => (
-              <SearchCardName
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={product.image}
-                description={product.description}
-                smallCard={true} />))
-          )
-          : (<div>No se encontraron productos</div>) ) :
+            currentNewSearch.map((product) => (
+              <SearchCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              image={product.image.url ? product.image.url : product.image}
+              description={product.description}
+              smallCard={true}
+              product={product}
+              
+              favoriteDos={finalla(product.id)}
+              favorite={finallaDos(product.id)}
+              favoriteNumFilter={product.favoriteFilter} 
+              favoriteDesFilter={product.favoriteFilterDesactivado}
+            />))
+          ):
+
+
+
+          // : (<div>No se encontraron productos</div>) ) :
 
           Array.isArray(currentItems) ? (
             currentItems?.map((product) => (
@@ -240,9 +335,9 @@ const Search = () => {
       </div>
       {/* Paginado */}
     <div className={`mt-2 flex flex-col justify-center items-center relative
-     ${productSearch.filterbyname==="Product no found" ? " hidden" : ""}`}>
+     ${showCategories===false ? "" : error==="Product no found" ? " hidden" : ""}`}>
     <Pagination 
-       count={showCategories===false ? Math.ceil(productFiltered.filterResult.length / itemsPerPage) : productSearch.filterbyname.length> 0 ? Math.ceil(productSearch.filterbyname.length/itemsPerPage) 
+       count={showCategories===false ? Math.ceil(productFiltered.filterResult.length / itemsPerPage) : newSearch.length> 0 ? Math.ceil(newSearch.length/itemsPerPage) 
        : Math.ceil(productFiltered.filterResult.length / itemsPerPage)}
        page={currentPage}
        onChange={(event, page) => setCurrentPage(page)}

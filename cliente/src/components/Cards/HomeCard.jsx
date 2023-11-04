@@ -15,19 +15,13 @@ import {activeIcon, iconDesactive} from "../../redux/slices/favoriteIcono"
 import { useSelector, useDispatch } from "react-redux";
 
 const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, favoriteNum, favoriteDes, filtrosProps, favoriteNumFilter, favoriteDesFilter  }) => {
-  // console.log("holalaal" + filtrosProps)
-  // console.log(favoriteNum)
-  // console.log("home card " + favorite)
-  
+
   const wishlist = useSelector((state) => state.wishlist);
   const favoritoo = useSelector((state) => state.favorite)
   const dispatch = useDispatch();
-  // console.log(wishlist)
 
   const [favorito, setFavorito] = useState(0)
   const [addedProducts, setAddedProducts] = useState([]);
-  // console.log(addedProducts)
-
 
   const handleAddToCart = () => {
     dispatch(addToCart({ id, name, price, image }));
@@ -76,11 +70,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
   // console.log(favoritoo)
   const favorites = (e) =>{
     if( favoriteNum === 1 || favoriteDes === 2){
-      console.log("normal")
-      // const favorito2 = favoritoo - 1;
-      // setFavorito(favorito2)
-      // dispatch(iconDesactive())
-      // dispatch(favoriteActivo(id))
+      toast.success("Delete to favorite succesfully");
       dispatch(noFavoriteActivo(id))
       dispatch(favoriteDesactivo(id))
       return dispatch(removeFromWishlist(product));
@@ -89,29 +79,19 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
       console.log("normal")
       dispatch(favoriteActivo(id))
       dispatch(noFavoriteDesactivo(id))
-    // dispatch(activeIcon())
       dispatch(addToWishlist(product));
       toast.success("Added to favorite successfully ");
       return setFavorito(1)
     }
     if(favorite === true){
       console.log("normal")
-
-
-      // const favorito2 = favoritoo - 1;
-      // setFavorito(favorito2)
-      // dispatch(iconDesactive())
-      // dispatch(favoriteActivo(id))
-      console.log("normal")
+      toast.success("Delete to favorite succesfully");
       dispatch(noFavoriteActivo(id))
       dispatch(favoriteDesactivo(id))
       return dispatch(removeFromWishlist(product));
     }
-    //await
-    // funcion()
-    // finalla(id)
+
     dispatch(favoriteActivo(id))
-    // dispatch(activeIcon())
     dispatch(addToWishlist(product));
     toast.success("Added to favorite successfully ");
     return setFavorito(1)
@@ -119,11 +99,8 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
   
   const favoritesFilter = (e) =>{
       if( favoriteNumFilter === 1 || favoriteDesFilter === 2){
-        console.log("filter")
-        // const favorito2 = favoritoo - 1;
-        // setFavorito(favorito2)
-        // dispatch(iconDesactive())
-        // dispatch(favoriteActivo(id))
+
+        toast.success("Delete to favorite succesfully");
         dispatch(noFavoriteFilterActivo(id))
         dispatch(favoriteFilterDesactivo(id))
         return dispatch(removeFromWishlist(product));
@@ -132,7 +109,6 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
         console.log("filter")
         dispatch(favoriteFilterActivo(id))
         dispatch(noFavoriteFilterDesactivo(id))
-      // dispatch(activeIcon())
         dispatch(addToWishlist(product));
         toast.success("Added to favorite successfully ");
         return setFavorito(1)
@@ -142,19 +118,13 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
         dispatch(noFavoriteFilterActivo(id))
         dispatch(favoriteFilterDesactivo(id))
   
-  
-        // const favorito2 = favoritoo - 1;
-        // setFavorito(favorito2)
-        // dispatch(iconDesactive())
-        // dispatch(favoriteActivo(id))
+        toast.success("Delete to favorite succesfully");
+
         return dispatch(removeFromWishlist(product));
       }
       console.log("filter")
-      //await
-      // funcion()
-      // finalla(id)
+
       dispatch(favoriteFilterActivo(id))
-      // dispatch(activeIcon())
       dispatch(addToWishlist(product));
       toast.success("Added to favorite successfully ");
       return setFavorito(1)
@@ -164,7 +134,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
   return (
     <div className="inline-flex flex-col gap-[8px] relative">
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl items-start"> */}
-        <div className="relative bg-violet-50 rounded-3xl flex justify-center items-center">
+        <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center">
           <Link to={`/${id}`}>
           <img
             className="relative w-auto h-auto object-cover"
@@ -189,7 +159,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
       </div>
 
       <div className="w-full justify-around items-center">
-        <div className="justify-between flex text-red-600 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal text-[20px]">
+        <div className="justify-between flex text-blue-600 text-lg font-semibold font-jakarta-sans leading-[28px] tracking-normal text-[20px]">
         $ {price}
         
         <div className="flex pb-30">
