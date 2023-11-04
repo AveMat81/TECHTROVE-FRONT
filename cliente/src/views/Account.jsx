@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -29,9 +30,12 @@ export const Account = () => {
         </div>        
       </div>
     )}
-  </div>
+    </div>
         <button onClick={() => logout({ returnTo: window.location.origin })} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
           Edit profile
+        </button>
+        <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
+            <Link to="/favorite">Favorite</Link>
         </button>
         <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
           My orders
@@ -44,12 +48,7 @@ export const Account = () => {
             Dashboard Admin
           </button>
         )}
-</div>  
-  
-
-
-
-
+    </div>
   );
 };
 
