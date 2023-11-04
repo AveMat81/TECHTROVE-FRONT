@@ -44,9 +44,9 @@ function App() {
 
   return (
     <div>
-      {showTopBar && <TopBar />}
       {/* <TopBar /> */}
       {/* <NavBar/> */}
+        {showTopBar && <TopBar />}
       <Routes>
         <Route path="/" element={<Landing onStoreImageClick={handleStoreImageClick}/>}/>
         <Route path="/home" element={<Home/>}/>
@@ -62,7 +62,7 @@ function App() {
       </Routes>
       {showAppBar && (
         <div
-           className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : " "}`}
+           className={`fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : " "}`}
         >
         <AppBar/>
         </div>

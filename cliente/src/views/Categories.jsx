@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 import getFilter from "../redux/actions/getFilter";
 import fetchProducts from "../redux/actions/getProducts";
@@ -14,10 +14,18 @@ import Mousepads from "../utils/images/CategoriesIcons/Mousepads.png";
 import Controllers from "../utils/images/CategoriesIcons/Controllers.png";
 import Earbuds from "../utils/images/CategoriesIcons/Earbuds.png";
 import Microphones from "../utils/images/CategoriesIcons/Microphones.png";
-
+ 
 
 
 const Categories = () => {
+
+  const dispatch = useDispatch();
+  const [selectCategory, setSelectCategory]= useState('')
+  
+  const handleSelection = (category) =>{
+    setSelectCategory(category)
+    dispatch(getFilter({category:category}))
+  }
 
   const categoryImages = [
     { name: "Headsets", image: Headsets },
@@ -42,8 +50,11 @@ const Categories = () => {
       <div className="flex flex-col items-center max-w-screen-xl mx-auto">
         <div className="grid grid-cols-2 gap-4 ">
           {categoryImages.map((category, index) => (
-            <Link to={`/Search?category=${category.name}`} key={index}>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex flex-col justify-center items-center m-2">
+            <Link to={`/Search`} key={index}>
+
+              <button 
+                onClick={() => handleSelection(category.name)}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex flex-col justify-center items-center m-2">
                 <img
                   src={category.image}
                   alt={category.name}
@@ -51,6 +62,7 @@ const Categories = () => {
                   />
                 {category.name}
               </button>
+
             </Link>
           ))}
         </div>
