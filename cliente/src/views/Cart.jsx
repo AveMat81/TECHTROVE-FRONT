@@ -113,6 +113,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setQuantity, removeItem } from "../redux/slices/cartSlice";
 import { toast } from "react-hot-toast";
+import axios from "axios";
 //import CreatePayment  from "../components/Cart/CreatePayment"
 
 const publicKey = 'TEST-dc97b69f-7789-424f-8254-81f321f3d7ab'; 
@@ -147,12 +148,12 @@ const Cart = () => {
 
    try {
      const { data } = await axios.post(
-       "https://localhost:3001/api/cart/create-preference", 
+       "https://localhost:3001/api/payment/create-order", 
        { cart, email: "asda@gmail.com" }
        );
        console.log("data de front 2", data);
    } catch (error) {
-    
+    console.log(error.message)
    }
 
     window.alert("accion de handle")
