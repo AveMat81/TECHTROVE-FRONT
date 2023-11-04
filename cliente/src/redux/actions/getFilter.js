@@ -9,6 +9,7 @@ const getFilter = (filterParams) => {
         params: filterParams,
       });
       //Codigo nuevo
+      console.dir(`Response de getFilter= ${response}`);
 
       const products = response.data.map((product) => ({
         ...product,
@@ -17,6 +18,7 @@ const getFilter = (filterParams) => {
         filtrosProps: 1,
       }));
 
+      console.dir(`Productos mappeados de getFilter= ${products}`);
       ////////
       dispatch(setFilter(products));
     } catch (error) {

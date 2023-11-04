@@ -1,18 +1,38 @@
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
+import backIcon from "../utils/images/BasicIcons/backIcon.png"
+
+
 
 export const Account = () => {
   const currentUser = useSelector((state) => state.user);
   const { logout } = useAuth0();
+  const navigate = useNavigate();
+
+
+
+  const goBackHandler = () => {
+    navigate(-1);
+  };
 
   console.log(currentUser);
 
   return (
     <div>
+        <button className="header flex  flex-row gap-5 w-full pl-4 pb-3  md:pl-15 lg:pl-20">
+          <img
+            src={backIcon}
+            alt="Arrow"
+            className="w-[24px] h-[24px]"
+            onClick={goBackHandler}
+          />
+        </button>
     <div className="flex flex-col items-center justify-center border border-gray-300 shadow-lg p-4 rounded-lg w-80 ml-8">
     <h1 className="text-2xl mb-4">User Account</h1>
     {currentUser.user && (
       <div className="text-center">
+        
         <div className="flex justify-center mb-2">
           <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
             <img

@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
-import getFilter from "../redux/actions/getFilter";
-import fetchProducts from "../redux/actions/getProducts";
+// import getFilter from "../redux/actions/getFilter";
+// import { setCategory } from "../../redux/slices/categorySlice";
+// import Loading from "../../views/Loading";
+
 
 import Monitors from "../utils/images/CategoriesIcons/Monitors.png";
 import Headsets from "../utils/images/CategoriesIcons/Headsets.png";
@@ -17,15 +19,30 @@ import Microphones from "../utils/images/CategoriesIcons/Microphones.png";
  
 
 
-const Categories = () => {
+const Categories = ({handlerSearch, setCurrentCategory, funcion, funcionFilter}) => {
 
-  const dispatch = useDispatch();
-  const [selectCategory, setSelectCategory]= useState('')
-  
-  const handleSelection = (category) =>{
-    setSelectCategory(category)
-    dispatch(getFilter({category:category}))
-  }
+  // const dispatch = useDispatch();
+  // const [selectCategory, setSelectCategory]= useState('');
+  // const [isLoading, setIsLoading] = useState(false);
+
+ 
+  // const handleSelection = async (category) => {
+  //   setCurrentCategory()
+  //   // funcion()
+  //   // funcionFilter()
+  //   setIsLoading(true);
+  //   setSelectCategory(category);
+  //   handlerSearch()
+  //   try {
+  //     await dispatch(setCategory({ category: category }));
+  //     await dispatch(getFilter({ category: category }));
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     console.error("Error en la acción:", error);
+  //     setIsLoading(false);
+  //   }
+
+  // };
 
   const categoryImages = [
     { name: "Headsets", image: Headsets },

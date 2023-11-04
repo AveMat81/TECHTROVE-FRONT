@@ -33,6 +33,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
     }
 
   };
+  
   const settings = {
     dots: false,
     infinite: true,
