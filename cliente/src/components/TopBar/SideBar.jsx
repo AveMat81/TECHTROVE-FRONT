@@ -123,7 +123,7 @@ function Sidebar() {
             </li>
             <li>
               <Link
-                to="/contact"
+                to="/Contact"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
               >
@@ -132,7 +132,7 @@ function Sidebar() {
             </li>
             <li>
               <Link
-                to="/about"
+                to="/About"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
               >
