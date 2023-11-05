@@ -18,6 +18,9 @@ import "tailwindcss/tailwind.css";
 import { useAuth0 } from "@auth0/auth0-react";
 //import { AppBar } from "@mui/material";
 
+import About from "./views/About";
+import Contact from "./views/Contact";
+
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [Desktop, setDesktop] = useState(window.innerWidth > 1024);
@@ -56,6 +59,9 @@ function App() {
                 />}/> */}
 
         <Route path="/Account" element={<Account/>}/>
+        <Route path="/About" element={<About/>}/>
+        <Route path="/Contact" element={<Contact/>}/>
+
       </Routes>
       <div
           className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : " "}`}
