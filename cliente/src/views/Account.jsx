@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import Back from "../utils/images/BasicIcons/backIcon.png";
+
 
 export const Account = () => {
   const currentUser = useSelector((state) => state.user);
@@ -11,7 +13,12 @@ export const Account = () => {
   return (
     <div>
     <div className="flex flex-col items-center justify-center border border-gray-300 shadow-lg p-4 rounded-lg w-80 ml-8">
-    <h1 className="text-2xl mb-4">User Account</h1>
+    <div className="flex flex-row gap-3 px-4 mb-8 mt-8 font-general-sans">
+        <Link to={"/"}>
+            <img src={Back} className="w-[30px] h-[30px]" alt="Back" />
+        </Link>
+        <h1 className="text-2xl mb-4">User Account</h1>
+    </div>
     {currentUser.user && (
       <div className="text-center">
         <div className="flex justify-center mb-2">
