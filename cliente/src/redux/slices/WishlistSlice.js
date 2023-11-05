@@ -1,7 +1,9 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = [];
+const initialState = JSON.parse(window.localStorage.getItem("wishlist")) || [];
+
+
 
 const wishlistSlice = createSlice({
   name: "wishlist",
@@ -14,14 +16,20 @@ const wishlistSlice = createSlice({
       if (!state.find(product => product.id === id)){
         //ahora si no esta lo agrega
         state.push(action.payload)
+        window.localStorage.setItem("wishlist", JSON.stringify(state));  
       }
       
     },
     removeFromWishlist: (state, action) => {
-      const {id} = action.payload
-      //y filtramos el productos basado en el ID
+      const {id} = action.payload;
+      const newState = state.filter(product => product.id !== id);
+      window.localStorage.setItem("wishlist", JSON.stringify(newState));
+      return newState;
+     
+      // const {id} = action.payload
+      // //y filtramos el productos basado en el ID
       
-      return state.filter(product => product.id !== id);
+      // return state.filter(product => product.id !== id);
     },
   },
 });
