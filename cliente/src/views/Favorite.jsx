@@ -1,28 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Back from "../utils/images/BasicIcons/backIcon.png";
 import { Link } from "react-router-dom";
 import { removeFromWishlist } from "../redux/slices/WishlistSlice";
 import WishlistCard from "../components/Cards/WishlistCard";
 import wishIconPrev from "../../src/utils/images/Logo/IMAGEN WISHLISTROJO.png"
+import Loading from "./Loading";
 
 const Favorite = () => {
         const dispatch = useDispatch();
         const wishlist = useSelector((state) => state.wishlist);
-        // const loginState = useSelector((state) => state.login);
-        // console.log("login state", loginState);
+        const [isLoading, setIsLoading] = useState(false); 
+
       
         const handleRemoveFromWishlist = (productId) => {
           dispatch(removeFromWishlist({ id: productId }));
           alert("Item removed");
         };
-      
-        // if (!loginState.login) {
-        //   return <Link to="/Account/SignUp">Go to SignUp</Link>;
-        // }
-      
         return (
           <div>
+            {isLoading && <Loading/>}
             <div className="flex flex-row gap-3 px-4 mb-8 mt-8 font-general-sans">
               <Link to={"/"}>
                 <img src={Back} className="w-[30px] h-[30px]" alt="Back" />

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getFilter from "../../redux/actions/getFilter"
 
-export const FilterSortRange = ({ showFilters, setShowFilters }) => {
+export const FilterSortRange = ({ showFilters, setShowFilters, selectedCategory }) => {
     
   const dispatch = useDispatch();
   const categoryState = useSelector((state) => state.category);
@@ -29,7 +29,7 @@ export const FilterSortRange = ({ showFilters, setShowFilters }) => {
     dispatch(
       getFilter({
         //esto hay que cambiarlo mas adelante
-        category: categoryState.category,
+        category: selectedCategory,
         min: minPrice,
         max: maxPrice,
         order: sortOrder,
