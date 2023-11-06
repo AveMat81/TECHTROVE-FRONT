@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link} from "react-router-dom";
 
 export const Account = () => {
   const currentUser = useSelector((state) => state.user);
@@ -40,9 +41,11 @@ export const Account = () => {
           Logout
         </button>
         {currentUser.user.isAdmin && (
+          <Link to="/estadistica">
           <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
             Dashboard Admin
           </button>
+          </Link>
         )}
 </div>  
   

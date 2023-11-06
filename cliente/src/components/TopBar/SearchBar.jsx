@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import getProductByName from "../../redux/actions/getProductByName";
+import fetchProducts from "../../redux/actions/getProducts";
+import getFilter from "../../redux/actions/getFilter";
 
 // eslint-disable-next-line react/prop-types
 const Searchbar = ({ onFocusChange, onClose, handlerSearch2, newSearchBar, funcion, funcionFilter, setCurrentSearch }) => {
@@ -14,6 +16,9 @@ const Searchbar = ({ onFocusChange, onClose, handlerSearch2, newSearchBar, funci
   const dispatch = useDispatch()
 
   const searcher = (e) => {
+    dispatch(getFilter());
+    dispatch(fetchProducts());
+    //
     setCurrentSearch()
     funcionFilter()
     funcion()

@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useSelector, useDispatch, } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import styles from "./Create.module.css";
 import Select from "react-select";
 import Swal from "sweetalert2";
@@ -9,43 +9,12 @@ import axios from "axios"
 import uploadImage from "../../utils/images/Logo/UPLOAD.png"
 import fetchProducts from "../../redux/actions/getProducts";
 import closeImage from "../../utils/images/Logo/CLOSE.png"
+import  fetchProductById  from '../../redux/actions/fetchProductById';
 import backIcon from "../../utils/images/BasicIcons/backIcon.png"
 
-function validate(input) {
-  const errors = {};
-  if (!input.name || input.name.length < 2 || input.name.length > 25) {
-    errors.name = "The name must be between 2 and 25 characters";
-  }
-  if (
-    isNaN(input.price) ||
-    input.price <= 0 ||
-    input.price.toString().length > 256
-  ) {
-    errors.price = "Price must be a valid number greater than 0";
-  }
-  if (
-    isNaN(input.stock) ||
-    input.stock <= 0 ||
-    input.price.toString().length > 256
-  ) {
-    errors.stock = "Stock must be a valid number greater than or equal to 0";
-  }
-  if (input.description.length > 256) {
-    errors.description = "Description must not exceed 256 characters";
-  }
-  // if (input.image.length > 5 || input.image.length < 1) {
-  //   errors.image = "Puedes seleccionar un máximo de 5 imágenes y un mínimo de 1";
-  // }
-  // if (input.marca.length === 0) {
-  //   errors.marca = "Debes seleccionar al menos una marca";
-  // }
-
-  return errors;
-}
-
-
-export default function FormCreateProduct() {
-  
+export default function FormEditProduct() {
+  const { id } = useParams();
+  const productDetail = useSelector(state => state.detail.detail);
   const dispatch = useDispatch();
 //   const marca = useSelector((state) => state.marca);
   const navigate = useNavigate();
@@ -54,22 +23,32 @@ export default function FormCreateProduct() {
   const [categorias, setCategorias] = useState([])
   const productsNormales = useSelector((state) => state.products.products);
 
-  const [input, setInput] = useState({
-    name: "",
-    //category: "",
-    //color: "",
-    description: "",
-    image: null,
-    isAvailable: true,
-    price: "",
-    stock: "",
-    category: "",
-    // isTrending: false, //averageRaiting
-    discount: "",
-    //deleted: ???
-    // marca: [], //falta realacion / modelo
-  });
+  const imageUrl = productDetail && productDetail.image && productDetail.image.url;
+/////////////////////////////////////////////////////////////////////////
+const [input, setInput] = useState({
+  name: productDetail.name,
+  description: productDetail.description,
+  image: productDetail.image,
+  isAvailible: productDetail.isAvailible,
+  price: productDetail.price,
+  stock: productDetail.stock,
+  category: productDetail.category,
+  discount: productDetail.discount,
+});
 
+////////////////////////////////////////////////////
+
+  // const [input, setInput] = useState({
+  //   name: productDetail.name,
+  //   description: productDetail.description,
+  //   image: null,
+  //   isAvailable: productDetail.isAvailable,
+  //   price: productDetail.price,
+  //   stock: productDetail.stock,
+  //   category: productDetail.category,
+  //   discount: productDetail.discount,
+  //   // marca: [], //falta realacion / modelo
+  // });
   const [errorsDos, setErrorsDos] = useState({
     name:"",
     difficulty: "",
@@ -150,25 +129,31 @@ export default function FormCreateProduct() {
     
   }
   
-  
-  
   const [errors, setErrors] = useState({});
-
-//   useEffect(() => {
-//     dispatch(getAllMarca());
-//   }, [dispatch]);
 
   useEffect(() => {
     const fetchData = async () => {
+      dispatch(fetchProductById(id))
       await dispatch(fetchProducts());
     };
 
     fetchData();
-    setErrors(validate(input));
-  }, [input]);
+  }, []);
+
+  useEffect(() => {
+    setInput({
+      name: productDetail.name,
+      description: productDetail.description,
+      image: productDetail.image,
+      isAvailible: productDetail.isAvailible,
+      price: productDetail.price,
+      stock: productDetail.stock,
+      category: productDetail.category,
+      discount: productDetail.discount,
+    });
+  }, [productDetail]);
 
   const category = (e) =>{
-    //console.log(e)
     setInput({
       ...input,
       category: e,
@@ -176,8 +161,6 @@ export default function FormCreateProduct() {
   }
 
   function handleChange(e) {
-    //console.log("eeee",e.target.name)
-    //console.log(category)
     const { name, type, checked, value } = e.target;
     if (type === "checkbox") {
       setInput({
@@ -205,20 +188,6 @@ export default function FormCreateProduct() {
 
   async function handlePhotoChange(event) {
     const files = event.target.files[0];
-
-    // const updatedPhotos = [...input.images];
-
-    // for (let i = 0; i < files.length; i++) {
-    //   try {
-    //     const base64 = await convertBase64(files[i]);
-    //     updatedPhotos.push(base64);
-    //   } catch (error) {
-    //     console.error("Error loading image:", error);
-    //   }
-    // }
-
-    //setInput({ ...input, images: updatedPhotos });
-
     setFile(files);
   }
 
@@ -252,33 +221,22 @@ export default function FormCreateProduct() {
         const formData = new FormData();
             formData.append('image', file);
             formData.append('name', input.name);
-            formData.append('isAvailable', input.isAvailable);
+            formData.append('isAvailible', input.isAvailible);
             formData.append('description', input.description);
             formData.append('price', input.price);
             formData.append('stock', input.stock);
             formData.append('category', input.category);
             formData.append('discount', input.discount);
 
-        await axios.post("http://localhost:3001/api/products/create", formData);
+        await axios.put(`http://localhost:3001/api/products/update/${id}`, formData);
         //dispatch(addProduct(input));
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Producto creado con exito!",
+          title: "Producto editado con exito!",
           showConfirmButton: false,
           timer: 2000,
-        }).then(() => {
-          setInput({
-            name: "",
-            price: "",
-            stock: "",
-            description: "",
-            available: true,
-            isTrending: false,
-            Marca: [],
-            image: [],
-          });
-        });
+        })
       } catch (error) {
         console.error("Error submitting form:", error);
       }
@@ -293,16 +251,15 @@ export default function FormCreateProduct() {
 
   ///FUNCION NUEVA
   const [selectedImage, setSelectedImage] = useState(null);
-  const [checkbox, setCheckbox] = useState(false)
+  const [checkbox, setCheckbox] = useState(true)
   const [dobleeliminado, setDobleeliminado] = useState(false)
-  //console.log(dobleeliminado)
-  //console.log("PRUEBA ERRORES 2",selectedImage)
+  const [radioCheck, setRadioCheck] = useState(true)
+  const [checkboxDos, setCheckboxDos] = useState(false)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
 
     if (file) {
-      //setDobleeliminado(true)
       
       setFile(file)
       const reader = new FileReader();
@@ -314,11 +271,6 @@ export default function FormCreateProduct() {
 
     }
     setErrorsDos({...errorsDos, image:""})
-
-
-    // validateDos({
-    //   [e.target.name]: selectedImage,
-    // }, e.target.name)
   };
 
   const eliminarImage = () =>{
@@ -326,16 +278,7 @@ export default function FormCreateProduct() {
 
     setDobleeliminado(false)
     setErrorsDos({...errorsDos, image:"La imagen es requerida"})
-
-    // validateDos({
-    //   imageCheck: dobleeliminado,
-    // }, "imageCheck")
-    
-    // validateDos({
-    //   image: selectedImage,
-    // }, "image")
   }
-
   const buttonDisabled = () =>{
     let disabledAux = true
     for(let errore in errorsDos){
@@ -351,10 +294,23 @@ export default function FormCreateProduct() {
   const botonCheck = (event) =>{
     const valuor = event.target.checked
     setCheckbox(valuor)
+    setCheckboxDos(valuor)
+
+    // if(input.discount === 0){
+    //   setCheckbox(false)
+    // }
+
+    if(valuor === true){
+      setInput({
+        ...input,
+        discount: productDetail.discount === 0 ? "" : productDetail.discount,
+      });
+    }
+
     if(valuor === false){
       setInput({
         ...input,
-        discount: "",
+        discount: 0,
       });
     }
     validateDos({...input,
@@ -362,21 +318,32 @@ export default function FormCreateProduct() {
     }, "discountCheck")
   }
 
+  const botonRadio = (opcion) =>{
+    setInput({
+      ...input,
+      isAvailible: opcion,
+    });
+    setRadioCheck(opcion)
+  }
+
+  const categoriasUnicas = [...new Set(productsNormales.map(producto => producto.category))];
+
+  const categoria = [
+    { value: input.category, label: input.category },
+  ];
+
   const goBackHandler = () => {
     navigate(-1);
   };
-
-  const categoriasUnicas = [...new Set(productsNormales.map(producto => producto.category))];
-  //console.log("categoriii",categoriasUnicas)
 
   return (
     <div>
       <div className="mt-4 sm:mt-28">
         <div className={styles.card_create}>
-          <img src={backIcon} onClick={goBackHandler} alt="back" className="w-8 h-8 top-28 absolute ml-2"/>
+          <img src={backIcon} alt="back" onClick={goBackHandler} className="w-8 h-8 top-28 absolute ml-2"/>
           <div className="mb-4">
             <h1 className="text-2xl sm:text-5xl font-semibold text-gray-900">
-              Create a new Product
+              Edit Product
             </h1>
           </div>
 
@@ -413,31 +380,9 @@ export default function FormCreateProduct() {
                   )}
                 </div>
 
-                {/* <div>
-                  <div className="font-semibold text-left mb-2">Brand:</div>
-                  <Select
-                    // options={marca.map((cate) => ({
-                    //   value: cate.id,
-                    //   label: cate.name,
-                    // }))}
-                    isMulti
-                    onChange={(selectedOptions) =>
-                      handleCategoryChange(selectedOptions)
-                    }
-                    className={styles.select}
-                  />
-                  {errors.marca && (
-                    <div className={styles.error}>{errors.marca}</div>
-                  )}
-                </div> */}
-
         <div className="mb-2">
                   <div className="font-semibold text-left mb-2 mt-2">Category:</div>
                   <Select
-                    // options={marca.map((cate) => ({
-                    //   value: cate.id,
-                    //   label: cate.name,
-                    // }))}
                     name="category"
                     options={categoriasUnicas.map((p) =>({
                       value: p,
@@ -448,12 +393,7 @@ export default function FormCreateProduct() {
                       const categoriaSeleccionada = selectedOption.value;
                       category(categoriaSeleccionada)
                     }}
-
-
-                    // onChange={(selectedOptions) =>
-                    //   handleCategoryChange(selectedOptions)
-                    // }
-                    // className={styles.select}
+                    value={categoria}
                   />
                   {errors.marca && (
                     <div className={styles.error}>{errors.marca}</div>
@@ -477,26 +417,23 @@ export default function FormCreateProduct() {
 
                 <div>
                 <div className="flex items-center mb-2 mr-10">
-                    {" "}
-                    {/* Utilizamos flex y items-center para alinear los elementos horizontalmente */}
                     <div className="mr-2 mb-2">
-                      {" "}
-                      {/* Agregamos un margen derecho entre los checkboxes */}
                       <input
                         type="checkbox"
                         name="available"
-                        // checked={input.available}
                         onChange={botonCheck}
                         className="mr-1"
+                        checked={input.discount === 0 ? checkboxDos : checkbox}
                       />
                     </div>
-                    {/* <div className="font-semibold text-gray-400 text-left mb-2">Discount (Opcional)</div> */}
-                    {checkbox === true ? <div className="font-semibold text-left mb-2">
+                    {input.discount > 0 ? <div className="font-semibold text-left mb-2">
+                        Discount</div> :
+                    checkboxDos === false ? <div className="font-semibold text-gray-400 text-left mb-2">
+                        Discount <span className="text-red-300">(Optional)</span>
+                      </div> : checkbox === true ? <div className="font-semibold text-left mb-2">
                         Discount</div> : <div className="font-semibold text-gray-400 text-left mb-2">
                         Discount <span className="text-red-300">(Optional)</span>
                       </div>}
-
-
                       
                   </div>  
                   <input
@@ -506,7 +443,7 @@ export default function FormCreateProduct() {
                     onChange={(e) => handleChange(e)}
                     placeholder="Discount"
                     className="w-full rounded-lg border border-blue-200 p-4 pe-12 text-[12px] shadow-sm"
-                    disabled={checkbox === false ? true : false}
+                    disabled={checkboxDos === true ? false : input.discount === 0 ? true : input.discount > 0 ? false : checkbox === false ? true : false}
                   />
                   {errorsDos.discount && (
                     <div className={styles.error}>{errorsDos.discount}</div>
@@ -522,7 +459,7 @@ export default function FormCreateProduct() {
               
 
               <div className={styles.der}>
-                <div>
+                <div className="mb-2">
                   <div className="font-semibold text-left mb-2">Description:</div>
                   <textarea
                     name="description"
@@ -536,63 +473,43 @@ export default function FormCreateProduct() {
                   )}
                 </div>
 
+                {!productDetail.isAvailible && (
+
+                  <div>
+                <div className="font-semibold text-left mb-4">is Availible?</div>
+                 <div className="flex items-center mb-2 mr-10">
+                     <div className="mr-2 mb-2">
+                       <input
+                         checked={input.isAvailible === true ? true : false}
+                         type="radio"
+                         name="available"
+                         onChange={() => botonRadio(true)}
+                         value={true}
+                         className="mr-1"
+                       />
+                     </div>
+                       <div className="font-semibold text-left mb-2 mr-8">Yes</div>
+                       <div className="mr-2 mb-2">
+                       <input
+                        checked={input.isAvailible === false ? true : false}
+                         value={false}
+                         type="radio"
+                         name="available"
+                         onChange={() => botonRadio(false)}
+                         className="mr-1"
+                       />
+                     </div>
+                       <div className="font-semibold text-left mb-2">No</div>
+                      
+                   </div>
+                </div>  )}
+
                 <div className="flex items-center mb-2 mt-2 font-semibold">Image:
                   
                   <div className="flex items-center mb-4">
-                    {" "}
-                    {/* Repetimos el mismo patrón para el segundo checkbox */}
-                    {/* <div className="mr-2">
-                      <input
-                        type="checkbox"
-                        name="isTrending"
-                        checked={input.isTrending}
-                        onChange={(e) => handleChange(e)}
-                        className="mr-1"
-                      />
-                    </div>
-                    <div>Is Trending</div> */}
                   </div>
-                </div>
+                </div> 
 
-                {/* <div>
-                  <div>Available:</div>
-                  <input
-                    type="checkbox"
-                    name="available"
-                    checked={input.available}
-                    onChange={(e) => handleChange(e)}
-                  />
-                </div>
-
-                <div>
-                  <div>Is Trending:</div>
-                  <input
-                    type="checkbox"
-                    name="isTrending"
-                    checked={input.isTrending}
-                    onChange={(e) => handleChange(e)}
-                  />
-                </div> */}
-
-                {/* <div>
-                  <div className="font-semibold text-left mb-2">Images:</div>
-                  <input
-                    type="file"
-                    //name="photo"
-                    onChange={handlePhotoChange}
-                    //multiple
-                    //className="pt-4"
-                  />
-                  {errors.image && (
-                    <div className={styles.error}>{errors.image}</div>
-                  )}
-                </div> */}
-
-
-                {/* <div className={styles.imagePreview}> */}
-
-                
-                
       {selectedImage ? (
         <div className="flex justify-between px-0 md:px-8 lg:px-12 xl:px-16" >
         <img
@@ -621,8 +538,14 @@ export default function FormCreateProduct() {
         </div>
 
       ) : (
-        <div className="mt-2 mb-2 w-40 h-40" >
-          <label htmlFor="image-upload" className="cursor-pointer">
+        <div className="flex justify-between px-0 md:px-8 lg:px-12 xl:px-16" >
+        <img
+          src={imageUrl ? imageUrl : input.image}
+          alt="Uploaded Image"
+          className="w-40 h-40 object-contain" 
+        />
+        
+          <label htmlFor="image-upload" className="cursor-pointer ">
             <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg flex-col cursor-pointer">
               {/* <span className="text-3xl">+</span> */}
               <img src={uploadImage} alt="upload" className="w-16 h-16 object-contain" />
@@ -637,30 +560,13 @@ export default function FormCreateProduct() {
             className="hidden"
             name="image"
           />
-          {errorsDos.image && (
+          
+        </div>
+
+      )}
+      {errorsDos.image && (
             <div className={styles.error}>{errorsDos.image}</div>
           )}
-        </div>
-      )}
-    
-
-
-
-
-
-
-                  {/* {input.image.map((image, index) => (
-                    <div key={index} className={styles.imageContainer}>
-                      <img
-                        src={image}
-                        alt={`Preview ${index}`}
-                        className={`${styles.previewImage} ${styles.imageHoverEffect}`}
-                        onClick={() => handleImageDelete(index)}
-                      />
-                    </div>
-                  ))} */}
-                  
-                {/* </div> */}
             
                 <button
                   id="bt"
@@ -669,7 +575,7 @@ export default function FormCreateProduct() {
                   onClick={(e) => handleSubmit(e)}
                   // disabled={Object.keys(errors).length > 0}
                 >
-                  Create
+                  Update
                 </button>
               </div>
             </div>
