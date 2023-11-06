@@ -38,8 +38,8 @@ export const Account = () => {
       </div>
     )}
     </div>
-        <button onClick={() => logout({ returnTo: window.location.origin })} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
-          Edit profile
+        <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
+          <Link to="/edit-profile">Edit profile</Link>
         </button>
         <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
             <Link to="/favorite">Favorite</Link>

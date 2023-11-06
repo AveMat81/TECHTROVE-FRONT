@@ -20,6 +20,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 import About from "./views/About";
 import Contact from "./views/Contact";
+import EditProfile from "./components/EditProfile/editProfile";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -61,6 +62,8 @@ function App() {
         <Route path="/Account" element={<Account/>}/>
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
+        <Route path="/edit-profile" element={<EditProfile/>}/>
+        
 
       </Routes>
       <div
@@ -87,4 +90,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
