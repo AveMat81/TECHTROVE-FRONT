@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import  fetchProductById  from '../redux/actions/fetchProductById';
 import { useParams } from 'react-router-dom';
@@ -8,10 +8,14 @@ import { clearDetail } from "../redux/slices/detailSlice";
 import backIcon from "../utils/images/BasicIcons/backIcon.png"
 import { addToCart } from '../redux/slices/cartSlice';
 import toast, { Toaster } from "react-hot-toast";
+import Loading from './Loading';
+
 const Detail = () => {
   
  
   const product = useSelector((state) => state.detail.detail);
+  const [isLoading, setIsLoading] = useState(true);
+
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -35,7 +39,9 @@ const Detail = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    setIsLoading(true); 
     dispatch(fetchProductById(id))
+    setIsLoading(false);
     return ()=>{
       dispatch(clearDetail())
     }
@@ -47,13 +53,14 @@ const Detail = () => {
   // console.log(productDetail)
   // console.log("holala" + productDetail.image)
   return (
+    
     <div className="container mx-auto mt-4 p-4 rounded-lg shadow light:bg-white-800 light:border-white-700">
       {productDetail.loading ? (
         <p className="text-center text-2xl font-semibold">Loading...</p>
-      ) : productDetail.error ? (
-        <p className="text-center text-2xl font-semibold text-red-500 font-color:black ">Error: {productDetail.error}</p>
-      ) : (
-        <div className="w-full max-w-sm bg-blue border border-blue-200 rounded-lg shadow light:bg-gray-800 light:border-gray-700">
+        ) : productDetail.error ? (
+          <p className="text-center text-2xl font-semibold text-red-500 font-color:black ">Error: {productDetail.error}</p>
+          ) : (
+            <div className="w-full max-w-sm bg-blue border border-blue-200 rounded-lg shadow light:bg-gray-800 light:border-gray-700">
         <a href="#">
         <button className="header flex  flex-row gap-5 w-full pl-4 pb-3  md:pl-15 lg:pl-20">
           <img
@@ -61,13 +68,15 @@ const Detail = () => {
             alt="Arrow"
             className="w-[24px] h-[24px]"
             onClick={goBackHandler}
-          />
+            />
+        <p className="font-general-sans"></p>
+            {isLoading && <Loading />}
         </button>
             <img className="p-3 rounded-t-lg" src={imageUrl ? imageUrl : productDetail.image} alt="product image" />
         </a>
         <div className="px-5 pb-5">
-          <FavoriteIcon ></FavoriteIcon>
             <a href="#">
+          <FavoriteIcon ></FavoriteIcon>
                 <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-black">{productDetail.name} </h5>
             </a>
                    
