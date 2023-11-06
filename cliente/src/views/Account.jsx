@@ -7,9 +7,7 @@ import Back from "../utils/images/BasicIcons/backIcon.png";
 export const Account = () => {
   const currentUser = useSelector((state) => state.user);
   const { logout } = useAuth0();
-  console.log("currentUser en account",currentUser);
   
-
   return (
     <div>
     <div className="flex flex-col items-center justify-center border border-gray-300 shadow-lg p-4 rounded-lg w-80 ml-8">
@@ -42,7 +40,7 @@ export const Account = () => {
           <Link to="/edit-profile">Edit profile</Link>
         </button>
         <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
-            <Link to="/favorite">Favorite</Link>
+            <Link to="/Favorite">Favorite</Link>
         </button>
         <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
           My orders
@@ -51,9 +49,11 @@ export const Account = () => {
           Logout
         </button>
         {currentUser?.user?.isAdmin && (
+          <Link to="/estadistica">
           <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
             Dashboard Admin
           </button>
+          </Link>
         )}
     </div>
   );

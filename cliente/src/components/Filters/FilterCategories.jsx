@@ -11,7 +11,7 @@ import Loading from "../../views/Loading";
 
 
 
-const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFilter}) => {
+const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFilter,selectedCategory, setSelectedCategory  }) => {
     const dispatch = useDispatch();
     const [selectCategory, setSelectCategory] = useState("Categories");
     const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +41,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
       await dispatch(setCategory({  category }));
       await dispatch(getFilter({  category }));
       setIsLoading(false);
+      setSelectedCategory(category);
     } catch (error) {
       console.error("Error en la acción:", error);
       setIsLoading(false);

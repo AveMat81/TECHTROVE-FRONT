@@ -1,5 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import backImage from "../../utils/images/DashBordBar/Dashbordchevron left.png"
+import boxImage from "../../utils/images/DashBordBar/Dashbordiconbox.png"
+import cartImage from "../../utils/images/DashBordBar/Dashbordicon cart.png"
+import personImage from "../../utils/images/DashBordBar/Dashbordperson.png"
+import dashbordImage from "../../utils/images/DashBordBar/Dashbordbar chart.png"
 
 function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -92,51 +97,56 @@ function Sidebar() {
               </svg>
             </button>
           </div>
-          <ul className="py-6 px-6 space-y-2 ml-8">
+          <ul className="py-6 space-y-2 ml-6 text-left">
             <li>
               <Link
-                to="/"
-                className="text-black text-xl font-normal block mb-6"
+                to="/Account"
+                className="text-black text-xl font-extrabold font-jakarta-sans block mb-8 flex items-center"
                 onClick={toggleSidebar}
               >
-                HOME
+                <img src={backImage} alt="back" className="w-6 h-8 mr-3" />
+                ACCOUNT
               </Link>
             </li>
             <li>
               <Link
 
-                to="/Search"
-                className="text-black text-xl font-normal block mb-6"
+                to="/estadistica"
+                className="text-black text-xl font-semibold font-jakarta-sans block mb-8 flex items-center"
                 onClick={toggleSidebar}
               >
-                PRODUCTS
+                <img src={dashbordImage} alt="back" className="w-6 h-6 mr-3" />
+                Dashboard
               </Link>
             </li>
             <li>
               <Link
-                to="/Contact"
-                className="text-black text-xl font-normal block mb-6"
+                to="/admin"
+                className="text-black text-xl font-semibold font-jakarta-sans block mb-8 flex items-center"
                 onClick={toggleSidebar}
               >
-                CONTACT US
+                <img src={boxImage} alt="back" className="w-6 h-6 mr-3" />
+                Products
               </Link>
             </li>
             <li>
               <Link
-                to="/About"
-                className="text-black text-xl font-normal block mb-6"
+                to="/adminusers"
+                className="text-black text-xl font-semibold font-jakarta-sans block mb-8 flex items-center"
                 onClick={toggleSidebar}
               >
-                ABOUT US
+                <img src={personImage} alt="back" className="w-6 h-6 mr-3" />
+                Users
               </Link>
             </li>
             <li>
               <Link
-                to="/Account"
-                className="text-black text-xl font-normal block mb-6"
+                to="/orders"
+                className="text-black text-xl font-semibold font-jakarta-sans block mb-8 flex items-center"
                 onClick={toggleSidebar}
               >
-                ACCOUNT
+                <img src={cartImage} alt="back" className="w-6 h-6 mr-3" />
+                Orders
               </Link>
             </li>
           </ul>
