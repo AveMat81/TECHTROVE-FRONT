@@ -116,7 +116,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 //import CreatePayment  from "../components/Cart/CreatePayment"
 
-const publicKey = 'TEST-dc97b69f-7789-424f-8254-81f321f3d7ab'; 
+const publicKey = 'TEST-f9a82898-7fc1-4ca1-8f35-fa385e4d3999'; 
 
 
 const Cart = () => {
