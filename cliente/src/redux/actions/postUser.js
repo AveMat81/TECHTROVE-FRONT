@@ -8,7 +8,7 @@ const postUser = (user) => {
         try {
             const response = await axios.post(endpoint, user);
             let data = response.data;
-            console.log("respuesta del back",data);           
+            //console.log("respuesta del back",data);           
             return dispatch(setUser(data));
         } catch (error) {
             console.log(error);

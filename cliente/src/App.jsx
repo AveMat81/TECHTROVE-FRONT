@@ -39,7 +39,7 @@ function App() {
     };
 
     window.addEventListener("resize", handleResize);
-    console.log("holaa")
+    
 
     return () => {
       window.removeEventListener("resize", handleResize);
