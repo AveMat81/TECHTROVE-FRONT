@@ -116,12 +116,12 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 //import CreatePayment  from "../components/Cart/CreatePayment"
 
-const publicKey = 'TEST-dc97b69f-7789-424f-8254-81f321f3d7ab'; 
+const publicKey = 'TEST-e2330555-adb7-4510-bc08-abc61dadbb22'; 
 
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart); // Selecciona el carrito desde Redux
-  const user = 1;
+  const user = useSelector((state)=> state.user);
   const [preferenceData, setPreferenceData] = useState(null);
 
   console.log("user en front ",user);
@@ -148,7 +148,8 @@ const Cart = () => {
 
    try {
     console.log("este es el cart ", cart)
-    const { data } = await axios.post("http://localhost:3001/api/payment/create-order", { cart: cart.items, email: "userdeprueba@gmail" });
+    const { data } = await axios.post("http://localhost:3001/api/payment/create-order", 
+      { cart: cart.items, email: user.user.email });
 
     console.log(data)
     location.href = data.result;

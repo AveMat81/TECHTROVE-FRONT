@@ -6,7 +6,7 @@ initMercadoPago(publicKey); // Inicializa Mercado Pago con tu clave pública
 
 const CreatePayment = async (preference) => {
   try {
-    const response = await fetch('http://localhost:3001/api/cart/create-preference', {
+    const response = await fetch('http://localhost:3001/api/payment/create-preference', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
