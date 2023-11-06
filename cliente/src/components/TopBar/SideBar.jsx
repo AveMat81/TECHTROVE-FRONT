@@ -114,15 +114,6 @@ function Sidebar() {
             </li>
             <li>
               <Link
-                to="/categories"
-                className="text-black text-xl font-normal block mb-6"
-                onClick={toggleSidebar}
-              >
-                CATEGORIES
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="/Contact"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
@@ -137,6 +128,15 @@ function Sidebar() {
                 onClick={toggleSidebar}
               >
                 ABOUT US
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/Account"
+                className="text-black text-xl font-normal block mb-6"
+                onClick={toggleSidebar}
+              >
+                ACCOUNT
               </Link>
             </li>
           </ul>
