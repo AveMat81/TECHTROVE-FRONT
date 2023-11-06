@@ -51,9 +51,11 @@ export const Account = () => {
           Logout
         </button>
         {currentUser?.user?.isAdmin && (
+          <Link to="/estadistica">
           <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
             Dashboard Admin
           </button>
+          </Link>
         )}
     </div>
   );

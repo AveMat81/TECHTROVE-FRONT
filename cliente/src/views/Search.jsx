@@ -24,9 +24,11 @@ const Search = () => {
   const [producWish, setproducWish] = useState([])
   const [producWishFilter, setproducWishFilter] = useState([])
   const wishlist = useSelector((state) => state.wishlist);
+  const [valueOrdenamiento, setValueOrdenamiento] = useState("");
   // console.log("whishlist:")
   // console.log(producWishFilter)
   const [showCategories, setShowCategories] = useState(true);
+  //console.log(showCategories)
 
   //resultado de toda la busqueda
   const productSearch = useSelector((state)=>state.filterName)
@@ -39,9 +41,6 @@ const Search = () => {
   const [newSearch, setNewSearch] = useState([])
   const [searchGlobal, setSearchGlobal] = useState([])
   const [input, setInput] = useState("");
-  //console.log(input)
-
-  //console.log("categorias: ", )
 
   //setea el estado showFilters de true a false o de false a true 
   const toFilter = () => {
@@ -128,7 +127,7 @@ const Search = () => {
   const newSearchBar = (value, category) =>{
     //console.log(value.length)
     // setInput(value);
-
+    setValueOrdenamiento(value)
     if(value.length === 0){
           //dispatch(getFilter({ category: category }));
  
@@ -234,6 +233,7 @@ const Search = () => {
         <FilterSortRange         
           showFilters={showFilters}
           setShowFilters={setShowFilters}
+          showCategories={showCategories}
         />
       }
       <div className="w-auto h-auto m-6">
@@ -243,6 +243,11 @@ const Search = () => {
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide  mr-8">
           Products
         </h1>
+        {/* {input === "Vacio" ? <button onClick={toFilter} style={{ marginLeft: 'auto' }}>
+          <BiLeftIndent className="text-black-500 text-[35px] font-semibold" />
+        </button> : input === "Lleno" ? <div></div> : <button onClick={toFilter} style={{ marginLeft: 'auto' }}>
+          <BiLeftIndent className="text-black-500 text-[35px] font-semibold" />
+        </button>} */}
         <button onClick={toFilter} style={{ marginLeft: 'auto' }}>
           <BiLeftIndent className="text-black-500 text-[35px] font-semibold" />
         </button>
@@ -262,7 +267,7 @@ const Search = () => {
                  id={product.id}
                  name={product.name}
                  price={product.price}
-                 image={product.image}
+                 image={product.image.url ? product.image.url : product.image}
                  description={product.description}
                  smallCard={true}
 

@@ -38,7 +38,7 @@ const Favorite = () => {
                       id={product.id}
                       name={product.name}
                       price={product.price}
-                      image={product.image}
+                      image={product.image.url ? product.image.url : product.image}
                       description={product.description}
                       isInWishlist={true}
                       toggleWishlist={handleRemoveFromWishlist}

@@ -27,6 +27,7 @@ const Detail = () => {
     dispatch(addToCart(productData));
   };
   const productDetail = useSelector(state => state.detail.detail);
+  const imageUrl = productDetail && productDetail.image && productDetail.image.url;
 
 
   const navigate = useNavigate();
@@ -43,8 +44,8 @@ const Detail = () => {
   const goBackHandler = () => {
     navigate(-1);
   };
-  console.log(productDetail)
-  console.log("holala" + productDetail.image)
+  // console.log(productDetail)
+  // console.log("holala" + productDetail.image)
   return (
     <div className="container mx-auto mt-4 p-4 rounded-lg shadow light:bg-white-800 light:border-white-700">
       {productDetail.loading ? (
@@ -62,7 +63,7 @@ const Detail = () => {
             onClick={goBackHandler}
           />
         </button>
-            <img className="p-3 rounded-t-lg" src={productDetail.image} alt="product image" />
+            <img className="p-3 rounded-t-lg" src={imageUrl ? imageUrl : productDetail.image} alt="product image" />
         </a>
         <div className="px-5 pb-5">
           <FavoriteIcon ></FavoriteIcon>
