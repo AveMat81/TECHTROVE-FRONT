@@ -11,22 +11,37 @@ import Loading from "../../views/Loading";
 
 
 
-const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFilter}) => {
+const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFilter,selectedCategory, setSelectedCategory  }) => {
     const dispatch = useDispatch();
-    const [selectCategory, setSelectCategory] = useState("");
+    const [selectCategory, setSelectCategory] = useState("Categories");
     const [isLoading, setIsLoading] = useState(false);
-  
+
+
+  const selecAllCategories = async (category)=>{
+    setIsLoading(true);
+    try {
+      await dispatch(setCategory({category:"Categories"}));
+      await dispatch(getFilter({category}));
+      setIsLoading(false);
+      setSelectCategory("Categories");
+
+    } catch (error) {
+      console.error("Error en la acción:", error);
+      setIsLoading(false); 
+    }
+
+
+  }
   const handleSelection = async (category) => {
-    setCurrentCategory()
-    // funcion()
-    // funcionFilter()
+    setCurrentCategory()  
     setIsLoading(true);
     setSelectCategory(category);
     handlerSearch()
     try {
-      await dispatch(setCategory({ category: category }));
-      await dispatch(getFilter({ category: category }));
+      await dispatch(setCategory({  category }));
+      await dispatch(getFilter({  category }));
       setIsLoading(false);
+      setSelectedCategory(category);
     } catch (error) {
       console.error("Error en la acción:", error);
       setIsLoading(false);
@@ -44,6 +59,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
     focusOnSelect: true,
   };
 
+
   const getImageForCategory = (category) => {
     // Supongamos que tienes una estructura de datos o un mapeo de categorías a sus respectivas imágenes
     const categoryImages = {
@@ -55,6 +71,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
       Controllers: "https://i.postimg.cc/Xqzjn1J2/Controllers.png",
       Earbuds: "https://i.postimg.cc/L4YLZck6/Earbuds.png",
       Microphones: "https://i.postimg.cc/3xKk9VGG/Microphones.png",
+      Categories: "https://i.postimg.cc/yNNZnkmJ/allcategories.png",
     };
   
     
@@ -65,20 +82,20 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
     <div className="w-auto">
       {isLoading && <Loading />}
       <Slider {...settings} className="mx-auto border-blue-200 ">
-        {["Monitors", "Headsets", "Keyboards", "Mice", "Mousepads", "Controllers", "Earbuds", "Microphones"].map((category) => (
+        {["Categories", "Monitors", "Headsets", "Keyboards", "Mice", "Mousepads", "Controllers", "Earbuds", "Microphones"].map((category) => (
           <div key={category} className="flex justify-center items-center">
-            <button
-              onClick={() => handleSelection(category)}
-              className={`w-[90px] h-[70px] rounded-xl  border-blue-200 flex flex-col justify-center items-center ${
+             <button
+              onClick={() => (category === "Categories" ? selecAllCategories() : handleSelection(category))}
+              className={`w-[90px] h-[70px] rounded-xl border-blue-200 flex flex-col justify-center items-center ${
                 selectCategory === category ? "bg-blue-300" : ""
               }`}
-              style={{ borderRadius: '50px' }}
+              style={{ borderRadius: "50px" }}
             >
               <img
                 src={getImageForCategory(category)}
                 alt={`${category} icon`}
                 className="w-[50px] h-[50px]"
-  />
+              />
               <div className="font-jakarta-sans font-semibold text-stone-900 text-[13px]">{category}</div>
             </button>
           </div>

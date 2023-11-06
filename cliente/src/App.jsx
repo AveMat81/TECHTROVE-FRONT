@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 //  import { useDispatch } from "react-redux";
 //  import { useSelector } from "react-redux";
@@ -18,9 +18,20 @@ import "tailwindcss/tailwind.css";
 import { useAuth0 } from "@auth0/auth0-react";
 //import { AppBar } from "@mui/material";
 
+import DashbordAdmin from "./components/DashBordAdmin/DshbordAdmin"
+import EditForm from "./components/Create/FormEditProduct"
+import SimpleBarCharts from "./components/DashBordAdmin/DashbordAnalitics"
+import TopBarDos from "./components/DashBordAdmin/TopBar"
+import Users from "./components/DashBordAdmin/UsersFalso"
+import Orders from "./components/DashBordAdmin/OrdersFake"
+
+import About from "./views/About";
+import Contact from "./views/Contact";
+
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [Desktop, setDesktop] = useState(window.innerWidth > 1024);
+  const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,22 +39,37 @@ function App() {
     };
 
     window.addEventListener("resize", handleResize);
+    console.log("holaa")
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  const isNotAdminPath = location.pathname === '/admin';
+  const createPath = location.pathname === '/create'
+  const editPath = location.pathname.startsWith('/edit');
+  const analaiticas = location.pathname === '/estadistica'
+  const top = location.pathname === '/top'
+  const fakeUno = location.pathname === '/adminusers'
+  const fakeDos = location.pathname === '/orders'
+
   return (
     <div>
-      <TopBar />
+      {isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true ? <TopBarDos/> : <TopBar />}
+      
       <NavBar/>
       <Routes>
+        {/* <Route path= "/top" element={<TopBarDos/>}/>  */}
+        <Route path= "/adminusers" element={<Users/>}/> 
+        <Route path= "/orders" element={<Orders/>}/> 
+        <Route path= "/estadistica" element={<SimpleBarCharts/>}/> 
+        <Route path= "/admin" element={<DashbordAdmin/>}/>
+        <Route path= "/edit/:id" element={<EditForm/>}/>
       {/* <Route path= "/home" element={<landing/>}/> */}
-
         <Route path= "/" element={<Home/>}/>
         <Route path= "/:id" element={<Detail/>}/>
-        <Route path="/Create" element={<FormCreateProduct/>}/>
+        <Route path="/create" element={<FormCreateProduct/>}/>
         <Route path="/Search" element={<Search/>}/>
         <Route path="/Cart" element={<Cart/>}/>
         <Route path="/Favorite" element={<Favorite />}/>
@@ -56,9 +82,12 @@ function App() {
                 />}/> */}
 
         <Route path="/Account" element={<Account/>}/>
+        <Route path="/About" element={<About/>}/>
+        <Route path="/Contact" element={<Contact/>}/>
+
       </Routes>
       <div
-          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : " "}`}
+          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true ? " hidden" : " "}`}
         >
 
         <AppBar/>

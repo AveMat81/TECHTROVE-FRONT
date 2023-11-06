@@ -15,19 +15,13 @@ import {activeIcon, iconDesactive} from "../../redux/slices/favoriteIcono"
 import { useSelector, useDispatch } from "react-redux";
 
 const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, favoriteNum, favoriteDes, filtrosProps, favoriteNumFilter, favoriteDesFilter  }) => {
-  // console.log("holalaal" + filtrosProps)
-  // console.log(favoriteNum)
-  // console.log("home card " + favorite)
-  
+
   const wishlist = useSelector((state) => state.wishlist);
   const favoritoo = useSelector((state) => state.favorite)
   const dispatch = useDispatch();
-  // console.log(wishlist)
 
   const [favorito, setFavorito] = useState(0)
   const [addedProducts, setAddedProducts] = useState([]);
-  // console.log(addedProducts)
-
 
   const handleAddToCart = () => {
     dispatch(addToCart({ id, name, price, image }));
@@ -76,11 +70,6 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
   // console.log(favoritoo)
   const favorites = (e) =>{
     if( favoriteNum === 1 || favoriteDes === 2){
-      console.log("normal")
-      // const favorito2 = favoritoo - 1;
-      // setFavorito(favorito2)
-      // dispatch(iconDesactive())
-      // dispatch(favoriteActivo(id))
       toast.success("Delete to favorite succesfully");
       dispatch(noFavoriteActivo(id))
       dispatch(favoriteDesactivo(id))
@@ -90,7 +79,6 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
       console.log("normal")
       dispatch(favoriteActivo(id))
       dispatch(noFavoriteDesactivo(id))
-    // dispatch(activeIcon())
       dispatch(addToWishlist(product));
       toast.success("Added to favorite successfully ");
       return setFavorito(1)
@@ -98,21 +86,12 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
     if(favorite === true){
       console.log("normal")
       toast.success("Delete to favorite succesfully");
-
-      // const favorito2 = favoritoo - 1;
-      // setFavorito(favorito2)
-      // dispatch(iconDesactive())
-      // dispatch(favoriteActivo(id))
-      console.log("normal")
       dispatch(noFavoriteActivo(id))
       dispatch(favoriteDesactivo(id))
       return dispatch(removeFromWishlist(product));
     }
-    //await
-    // funcion()
-    // finalla(id)
+
     dispatch(favoriteActivo(id))
-    // dispatch(activeIcon())
     dispatch(addToWishlist(product));
     toast.success("Added to favorite successfully ");
     return setFavorito(1)
@@ -120,11 +99,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
   
   const favoritesFilter = (e) =>{
       if( favoriteNumFilter === 1 || favoriteDesFilter === 2){
-        console.log("filter")
-        // const favorito2 = favoritoo - 1;
-        // setFavorito(favorito2)
-        // dispatch(iconDesactive())
-        // dispatch(favoriteActivo(id))
+
         toast.success("Delete to favorite succesfully");
         dispatch(noFavoriteFilterActivo(id))
         dispatch(favoriteFilterDesactivo(id))
@@ -134,7 +109,6 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
         console.log("filter")
         dispatch(favoriteFilterActivo(id))
         dispatch(noFavoriteFilterDesactivo(id))
-      // dispatch(activeIcon())
         dispatch(addToWishlist(product));
         toast.success("Added to favorite successfully ");
         return setFavorito(1)
@@ -145,18 +119,12 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
         dispatch(favoriteFilterDesactivo(id))
   
         toast.success("Delete to favorite succesfully");
-        // const favorito2 = favoritoo - 1;
-        // setFavorito(favorito2)
-        // dispatch(iconDesactive())
-        // dispatch(favoriteActivo(id))
+
         return dispatch(removeFromWishlist(product));
       }
       console.log("filter")
-      //await
-      // funcion()
-      // finalla(id)
+
       dispatch(favoriteFilterActivo(id))
-      // dispatch(activeIcon())
       dispatch(addToWishlist(product));
       toast.success("Added to favorite successfully ");
       return setFavorito(1)

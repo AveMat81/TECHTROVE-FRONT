@@ -12,7 +12,6 @@ const AppBar = ({ theme }) => {
   const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
   const dispatch = useDispatch();
 
-  console.log(currentUser.user);
 
   const handleLogin = () => {
     console.log("en el handle login");
