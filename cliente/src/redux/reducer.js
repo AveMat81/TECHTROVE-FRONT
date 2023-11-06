@@ -19,8 +19,6 @@ import cartReducer from "./slices/cartSlice"
     wishlist: wishlistReducer,
     favorite: favoritetSlice,
     cart: cartReducer,
-
-
     detail: detailReducer,
     user: userReducer,
   });

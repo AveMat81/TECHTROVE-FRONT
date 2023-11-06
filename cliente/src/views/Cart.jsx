@@ -150,7 +150,7 @@ const Cart = () => {
     console.log("este es el cart ", cart)
     const { data } = await axios.post("http://localhost:3001/api/payment/create-order", { cart: cart.items, email: "userdeprueba@gmail" });
 
-    console.log("data en cart front ",data)
+    console.log(data)
     location.href = data.result;
     
    } catch (error) {
@@ -231,3 +231,5 @@ const Cart = () => {
 };
 
 export default Cart;
+
+
