@@ -24,6 +24,7 @@ import SimpleBarCharts from "./components/DashBordAdmin/DashbordAnalitics"
 import TopBarDos from "./components/DashBordAdmin/TopBar"
 import Users from "./components/DashBordAdmin/UsersFalso"
 import Orders from "./components/DashBordAdmin/OrdersFake"
+import SuccessPayment from "./components/PaymentCase/SuccessPayment"
 
 import About from "./views/About";
 import Contact from "./views/Contact";
@@ -73,6 +74,7 @@ function App() {
         <Route path="/Search" element={<Search/>}/>
         <Route path="/Cart" element={<Cart/>}/>
         <Route path="/Favorite" element={<Favorite />}/>
+        <Route path="/paymentsucces" element={<SuccessPayment />}/>
         
         {/* Activa linea de abajo para que cuando no esta el email autenticado y quiera air a favorito lo redirija al Home (MATIAS)
         <Route path="/Favorite" element={<PrivateRoute
