@@ -36,7 +36,7 @@ const Cart = () => {
 
    try {
     const { data } = await axios.post("http://localhost:3001/api/payment/create-order", 
-      { cart: cart.items, email: user.user.email });
+      { cart: cart.items, email: "test_user_1981106115@testuser.com" });
 
     location.href = data.result;
     
