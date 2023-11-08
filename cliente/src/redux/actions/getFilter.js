@@ -2,7 +2,7 @@ import axios from "axios";
 import { setFilter } from "../slices/filterSlice";
 
 const getFilter = (filterParams) => {
-  return async function (dispatch) {
+  return async function (dispatch,getState) {
     try {
       const response = await axios.get(`http://localhost:3001/api/products/filter`, {
 

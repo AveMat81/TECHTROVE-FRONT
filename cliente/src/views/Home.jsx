@@ -5,6 +5,7 @@ import fetchProducts from "../redux/actions/getProducts";
 import getFilter from '../redux/actions/getFilter';
 import { Link } from "react-router-dom";
 import Slider from "../components/Cards/Home/Slider"
+import Loading from "./Loading";
 
 function Home() {
  
@@ -86,12 +87,14 @@ function Home() {
   useEffect(() => {
   
     const fetchData = async () => {
+      setIsLoading(true); 
       await dispatch(fetchProducts());
       await dispatch(getFilter({ min: '70' , max: '100'}));
       setIsLoading(false); 
       funcion();
       funcionFilter();
       funcionFilterTercero();
+      setIsLoading(false);
     };
 
     fetchData();
@@ -103,6 +106,7 @@ function Home() {
       <div className="h-full pb-32 pl-4 pr-4">
 
       <div className="h-auto mx-2 mt-10 w-auto">
+      {isLoading && <Loading/>}
         <Slider />
       </div>
       <div className="font-jakarta-sans w-auto flex justify-between items-center mt-10 my-6">
