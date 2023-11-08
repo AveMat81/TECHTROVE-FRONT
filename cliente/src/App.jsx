@@ -1,8 +1,10 @@
+import './App.css';
+import "tailwindcss/tailwind.css";
+
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 //  import { useDispatch } from "react-redux";
 //  import { useSelector } from "react-redux";
-import PrivateRoute from "./PrivateRoute";
 import Home from './views/Home';
 import Detail from './views/Detail';
 import NavBar from "./components/NavBar/NavBar";
@@ -11,10 +13,11 @@ import Search from "./views/Search";
 import Cart from "./views/Cart";
 import Favorite from "./views/Favorite";
 import Account from "./views/Account";
+import AdminUsers from "./views/AdminUsers";
 import TopBar from "./components/TopBar/TopBar";
 import AppBar from './components/AppBar/AppBar'
-import './App.css';
-import "tailwindcss/tailwind.css";
+import DetailUsers from "./views/DetailUsers";
+import FormEdit from "./views/FormEditUser";
 import { useAuth0 } from "@auth0/auth0-react";
 //import { AppBar } from "@mui/material";
 
@@ -60,12 +63,6 @@ function App() {
       
       <NavBar/>
       <Routes>
-        {/* <Route path= "/top" element={<TopBarDos/>}/>  */}
-        <Route path= "/adminusers" element={<Users/>}/> 
-        <Route path= "/orders" element={<Orders/>}/> 
-        <Route path= "/estadistica" element={<SimpleBarCharts/>}/> 
-        <Route path= "/admin" element={<DashbordAdmin/>}/>
-        <Route path= "/edit/:id" element={<EditForm/>}/>
       {/* <Route path= "/home" element={<landing/>}/> */}
         <Route path= "/" element={<Home/>}/>
         <Route path= "/:id" element={<Detail/>}/>
@@ -73,6 +70,11 @@ function App() {
         <Route path="/Search" element={<Search/>}/>
         <Route path="/Cart" element={<Cart/>}/>
         <Route path="/Favorite" element={<Favorite />}/>
+        <Route path="/estadistica" element={<SimpleBarCharts />}/>
+        <Route path="/admin" element={<DashbordAdmin />}/>
+
+        <Route path="/edit/:id" element={<EditForm />}/>
+        <Route path="/orders" element={<Orders />}/>
         
         {/* Activa linea de abajo para que cuando no esta el email autenticado y quiera air a favorito lo redirija al Home (MATIAS)
         <Route path="/Favorite" element={<PrivateRoute
@@ -85,6 +87,9 @@ function App() {
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
 
+        <Route path="/AdminUsers" element={<AdminUsers/>}/>
+        <Route path="/users/:id" element={<DetailUsers/>}/>
+        <Route path="/update/:id" element={<FormEdit/>}/>
       </Routes>
       <div
           className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true ? " hidden" : " "}`}

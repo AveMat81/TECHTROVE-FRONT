@@ -14,7 +14,7 @@ const Searchbar = ({ onFocusChange, onClose, handlerSearch2, newSearchBar, funci
   const products = useSelector((state) => state.products.products);
 
   const dispatch = useDispatch()
-
+  
   const searcher = (e) => {
     dispatch(getFilter());
     dispatch(fetchProducts());
@@ -31,6 +31,7 @@ const Searchbar = ({ onFocusChange, onClose, handlerSearch2, newSearchBar, funci
     // setSearch(searchTerm);
     // setShowSearch(searchTerm !== "")
   };
+  
 
   const filteredProducts = products.filter((product) => {
     const productName = product.name.toLowerCase();

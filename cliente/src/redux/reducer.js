@@ -7,6 +7,9 @@ import detailReducer from "./slices/detailSlice";
 import wishlistReducer from "./slices/WishlistSlice";
 import favoritetSlice from "./slices/favoriteIcono"
 import userReducer from "./slices/userSlice";
+import allUsersSlice from "./slices/allUsersSlice";
+import searchUsers from "./slices/searchUsers";
+import changeUsersSlice from "./slices/changeUsersSlice";
 
 import cartReducer from "./slices/cartSlice"
 
@@ -21,6 +24,9 @@ import cartReducer from "./slices/cartSlice"
     cart: cartReducer,
     detail: detailReducer,
     user: userReducer,
+    allUsers: allUsersSlice,
+    idUser: searchUsers,
+    putuser: changeUsersSlice,
   });
   
   export default rootReducer;
