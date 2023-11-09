@@ -11,6 +11,8 @@ import fetchProducts from "../../redux/actions/getProducts";
 import closeImage from "../../utils/images/Logo/CLOSE.png"
 import  fetchProductById  from '../../redux/actions/fetchProductById';
 import backIcon from "../../utils/images/BasicIcons/backIcon.png"
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
+
 
 export default function FormEditProduct() {
   const { id } = useParams();
@@ -228,7 +230,7 @@ const [input, setInput] = useState({
             formData.append('category', input.category);
             formData.append('discount', input.discount);
 
-        await axios.put(`http://localhost:3001/api/products/update/${id}`, formData);
+        await axios.put(`${VITE_VERCEL_API_URL_BASE}/api/products/update/${id}`, formData);
         //dispatch(addProduct(input));
         Swal.fire({
           position: "top-end",

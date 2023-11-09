@@ -10,6 +10,7 @@ import uploadImage from "../../utils/images/Logo/UPLOAD.png"
 import fetchProducts from "../../redux/actions/getProducts";
 import closeImage from "../../utils/images/Logo/CLOSE.png"
 import backIcon from "../../utils/images/BasicIcons/backIcon.png"
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 function validate(input) {
   const errors = {};
@@ -259,7 +260,7 @@ export default function FormCreateProduct() {
             formData.append('category', input.category);
             formData.append('discount', input.discount);
 
-        await axios.post("http://localhost:3001/api/products/create", formData);
+        await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/products/create`, formData);
         //dispatch(addProduct(input));
         Swal.fire({
           position: "top-end",

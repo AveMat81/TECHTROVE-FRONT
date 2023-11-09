@@ -1,10 +1,12 @@
 import axios from "axios";
 import { setFilter } from "../slices/filterSlice";
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
+
 
 const getFilter = (filterParams) => {
   return async function (dispatch,getState) {
     try {
-      const response = await axios.get(`http://localhost:3001/api/products/filter`, {
+      const response = await axios.get(`${VITE_VERCEL_API_URL_BASE}/api/products/filter`, {
 
         params: filterParams,
       });
