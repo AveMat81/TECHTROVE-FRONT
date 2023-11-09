@@ -75,7 +75,7 @@ useEffect(() => {
     const { data } = await axios.post("http://localhost:3001/api/payment/create-order", 
       { cart: cart.items, email: currentUser.user.email });
       location.href = data.result;
-      console.log("data en front despues del pago", data)
+      console.log("data en front despues del pago", data.result)
     
    } catch (error) {
     console.log(error.message)

@@ -19,22 +19,22 @@ const SuccessPayment  =  ()=>{
         const params = queryString.parse(window.location.search);
         
         const infoJson = JSON.parse(params.data); // 
-        
+        console.log("infoJson en succespayment ---",infoJson);
         const cart = JSON.parse(window.localStorage.getItem("cart"))
         const user = JSON.parse(window.localStorage.getItem("userData"))
         
         console.log("CARRITO DEL LOCALL STORAGE", cart)
-        console.log("ID DEL USER PARA MANDAR A LA ORDEN", user)
+        //console.log("ID DEL USER PARA MANDAR A LA ORDEN", user)
         const dataOrder ={
             paymentId: infoJson.payment_id,
             //email: currentUser.email, //agregar a DB
             products: cart.items,
             status: infoJson.status,
-            total: 99, //cart.totalPrice,
-            //preferenceId: infoJson.preference_id,
+            total: cart.totalPrice,
+            preferenceId: infoJson.preference_id,
             userId: user.id            
         }
-        console.log("ID DEL USER ENVIADO!!!", dataOrder.userId)
+        console.log("ID DEL USER ENVIADO!!!", dataOrder)
         
 
         const sendDataToServer = async () => {
