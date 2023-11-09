@@ -16,11 +16,11 @@ const Cart = () => {
   const [preferenceData, setPreferenceData] = useState(null);
   const { user, isAuthenticated, isLoading } = useAuth0();
   
-  //console.log("USER DE Auth0", user.email_verified);
+  console.log("USER DE Auth0", user);
 
   //console.log("carrito en view cart",cart);
 
-  //console.log(currentUser.user.email)
+  console.log("user de estado global ",currentUser.user.email)
 
 const dispatch = useDispatch();
 
@@ -59,7 +59,20 @@ useEffect(() => {
 
   
   const handleCheckout = async () => {
-    if(user.email_verified === false){
+    
+    if(!isAuthenticated){
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please log in...',
+        text: 'You must log in to make payment.',
+        allowOutsideClick: true,
+        showConfirmButton: true,
+        confirmButtonText: 'OK',
+      });
+      return
+    }
+
+    if(user && !user.email_verified){
       Swal.fire({
         icon: 'warning',
         title: 'Verify your email',
