@@ -11,8 +11,8 @@ const Favorite = () => {
         const dispatch = useDispatch();
         const wishlist = useSelector((state) => state.wishlist);
         const [isLoading, setIsLoading] = useState(false); 
-        console.log(wishlist)
 
+      
         const handleRemoveFromWishlist = (productId) => {
           dispatch(removeFromWishlist({ id: productId }));
           alert("Item removed");

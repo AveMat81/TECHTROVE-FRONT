@@ -10,6 +10,8 @@ import Pagination from "@mui/material/Pagination";
 import Searchbar from "../components/TopBar/SearchBar";
 import Productnofound from "../utils/images/BasicIcons/Productnofound.png";
 import Loading from "./Loading";
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from 'sweetalert2';
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -39,6 +41,8 @@ const Search = () => {
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
+
   //setea el estado showFilters de true a false o de false a true 
   const toFilter = () => {
     setShowFilters(!showFilters);
@@ -47,6 +51,9 @@ const Search = () => {
 
   //CODIGO NUEVO
   const finallaDos = (id) =>{
+    
+
+  
     const ojala = producWishFilter.some((p) => p.id === id)
     if (ojala === false){
 
@@ -69,6 +76,7 @@ const Search = () => {
   }
 
   const funcionFilter = () =>{
+    
     const updatedArray = [];
     for (const obj1 of productFiltered.filterResult) {
       for (const obj2 of wishlist) {
@@ -77,11 +85,29 @@ const Search = () => {
         }
       }
     }
-
+  
     return setproducWishFilter(updatedArray)
   }
 
   const funcion = () =>{
+
+    // if (!isAuthenticated){
+    //   Swal.fire({
+    //     title: 'Error',
+    //     text: 'You need to login first!',
+    //     icon: 'error',
+    //     showCancelButton: true,
+    //     confirmButtonText: 'Go to login',
+    //     confirmButtonColor: 'green',
+    //     cancelButtonText: 'Cancel',
+    //     cancelButtonColor: 'red', 
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       loginWithRedirect();
+    //     }
+    //   });
+    // return
+  // }
     const updatedArray = [];
     for (const obj1 of productsNormales) {
       for (const obj2 of wishlist) {

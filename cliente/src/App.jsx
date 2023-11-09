@@ -28,6 +28,11 @@ import TopBarDos from "./components/DashBordAdmin/TopBar"
 import Users from "./components/DashBordAdmin/UsersFalso"
 import Orders from "./components/DashBordAdmin/OrdersFake"
 import SuccessPayment from "./components/PaymentCase/SuccessPayment"
+import NotVerified from "./components/NotVerified/NotVerified";
+import NotFoundPage from "./views/NotFound";
+
+
+
 
 import About from "./views/About";
 import Contact from "./views/Contact";
@@ -67,9 +72,17 @@ function App() {
       
       <NavBar/>
       <Routes>
+        {/* <Route path= "/top" element={<TopBarDos/>}/>  */}
+        <Route path="/fail" element={<NotVerified />} />
+
+        
+        <Route path= "/orders" element={<Orders/>}/> 
+        <Route path= "/estadistica" element={<SimpleBarCharts/>}/> 
+        <Route path= "/admin" element={<DashbordAdmin/>}/>
+        <Route path= "/edit/:id" element={<EditForm/>}/>
       {/* <Route path= "/home" element={<landing/>}/> */}
         <Route path= "/" element={<Home/>}/>
-        <Route path= "/:id" element={<Detail/>}/>
+        <Route path= "/detail/:id" element={<Detail/>}/>
         <Route path="/create" element={<FormCreateProduct/>}/>
         <Route path="/Search" element={<Search/>}/>
         <Route path="/Cart" element={<Cart/>}/>
@@ -87,7 +100,7 @@ function App() {
                   isAuthenticated={isAuthenticated}
                   isLoading={isLoading}
                 />}/> */}
-
+        <Route path="*" element={<NotFoundPage />} />
         <Route path="/Account" element={<Account/>}/>
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>

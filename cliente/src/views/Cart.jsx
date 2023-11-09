@@ -5,6 +5,7 @@ import { setQuantity, removeItem, replaceCart} from "../redux/slices/cartSlice";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from 'sweetalert2';
 
 //const publicKey = 'TEST-e2330555-adb7-4510-bc08-abc61dadbb22'; 
 
@@ -13,21 +14,26 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart); // Selecciona el carrito desde Redux
   const currentUser = useSelector((state)=> state.user);
   const [preferenceData, setPreferenceData] = useState(null);
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  
+  console.log("USER DE Auth0", user);
 
-  console.log("carrito en view cart",cart);
+  //console.log("carrito en view cart",cart);
 
-  //console.log(currentUser.user.email)
+  console.log("user de estado global ",currentUser.user.email)
 
 const dispatch = useDispatch();
 
+
 useEffect(() => {
   // Guardar el estado del carrito en el localStorage cuando cambie
-  localStorage.setItem("cart", JSON.stringify(cart));
+  
+  window.localStorage.setItem("cart", JSON.stringify(cart));
 }, [cart]);
 
 useEffect(() => {
   // Obtener el estado del carrito del localStorage al cargar el componente
-  const savedCart = JSON.parse(localStorage.getItem("cart"));
+  const savedCart = JSON.parse(window.localStorage.getItem("cart"));
   
   if (savedCart) {
     dispatch(replaceCart(savedCart)); // Dispara la acción replaceCart con los datos del localStorage
@@ -51,13 +57,38 @@ useEffect(() => {
     toast.success("Item removed successfully");
   };
 
+  
   const handleCheckout = async () => {
+    
+    if(!isAuthenticated){
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please log in...',
+        text: 'You must log in to make payment.',
+        allowOutsideClick: true,
+        showConfirmButton: true,
+        confirmButtonText: 'OK',
+      });
+      return
+    }
 
+    if(user && !user.email_verified){
+      Swal.fire({
+        icon: 'warning',
+        title: 'Verify your email',
+        text: 'You must verify your email before accessing this page.',
+        allowOutsideClick: true,
+        showConfirmButton: true,
+        confirmButtonText: 'OK',
+      });
+      return
+    }
+    window.localStorage.setItem("cart", JSON.stringify(cart));
    try {
     const { data } = await axios.post("http://localhost:3001/api/payment/create-order", 
       { cart: cart.items, email: currentUser.user.email });
       location.href = data.result;
-      console.log("data en front despues del pago", data)
+      console.log("data en front despues del pago", data.result)
     
    } catch (error) {
     console.log(error.message)

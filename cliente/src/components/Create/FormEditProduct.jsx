@@ -531,11 +531,11 @@ const [input, setInput] = useState({
                 </div> 
 
       {selectedImage.length > 0 ? (
-        <div className="flex justify-between px-0 md:px-8 lg:px-12 xl:px-16" >
+        <div className="grid grid-cols-2 gap-2" >
          {selectedImage.map((image, index) => (
-        <div>
-        <img key={index} src={image} alt={`Image ${index}`} className="w-40 h-40 object-contain absolute" />
-        <img onClick={() => eliminarImage(index)} src={closeImage} alt="close" className="w-6 h-6 relative top-0 left-0" />
+        <div className="relative">
+        <img key={index} src={image} alt={`Image ${index}`} className="w-40 h-40 object-contain" />
+        <img onClick={() => eliminarImage(index)} src={closeImage} alt="close" className="w-6 h-6 absolute top-0 left-0" />
         </div>
       ))}
         {/* <button onClick={eliminarImage}>x</button> */}
@@ -559,7 +559,7 @@ const [input, setInput] = useState({
         </div>
 
       ) : (
-        <div className="flex justify-between px-0 md:px-8 lg:px-12 xl:px-16" >
+        <div className="grid grid-cols-2 gap-2" >
         {/* <img
           src={imageUrl ? imageUrl : input.image}
           alt="Uploaded Image"
@@ -567,7 +567,7 @@ const [input, setInput] = useState({
         /> */}
         {productDetail.imageCloudinary ? productDetail.imageCloudinary.map((image, index) =>(
           <div>
-          <img key={index} src={image.url} alt={`Image ${index}`} className="w-40 h-40 object-contain absolute" />
+          <img key={index} src={image.url} alt={`Image ${index}`} className="w-40 h-40 object-contain" />
           </div>
         )) : <img
         src={input.image}

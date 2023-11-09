@@ -8,7 +8,7 @@ import axios from "axios"
 import notAvailibleImage from "../../utils/images/Logo/NotAvailible.png"
 
 const DashborAdminCard = ({image, name, price, id, isAvailible, imageCloudinary}) => {
-  console.log(imageCloudinary)
+
 
   const deleteProduct = () =>{
     Swal.fire({

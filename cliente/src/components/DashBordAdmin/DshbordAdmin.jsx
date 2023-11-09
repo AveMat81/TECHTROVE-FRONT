@@ -24,15 +24,18 @@ const DshbordAdmin = () => {
   const [input, setInput] = useState("");
   const [newSearch, setNewSearch] = useState([])
   const [error, setError] = useState("")
+  const [filter, setFilter] = useState([])
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = productsNormales.slice(indexOfFirstItem, indexOfLastItem);
   const currentNewSearch = newSearch.slice(indexOfFirstItem, indexOfLastItem);
+  const currentFilter = filter.slice(indexOfFirstItem, indexOfLastItem)
   console.log(productsNormales, "aososossososo")
 
   const newSearchBar = (e) =>{
     const value = e.target.value
+    setFilter([])
     setCurrentPage(1);
     if(value.length === 0){
       setInput("Vacio")
@@ -73,6 +76,17 @@ const DshbordAdmin = () => {
       return setNewSearch(productName);
   }
 
+  const categoriasUnicas = [...new Set(productsNormales.map(producto => producto.category))];
+  console.log(categoriasUnicas)
+
+  console.log(filter, "fiiiiiiii")
+  const handlerCategory = (e) =>{
+    console.log(e.target.value)
+    setCurrentPage(1)
+    const productsNormalesDos = productsNormales.filter((product) => product.category === e.target.value);
+    //console.log(productsNormalesDos, "doooos")
+    return setFilter(productsNormalesDos)
+  }
 
   return (
     <div className="w-full p-4">
@@ -91,24 +105,24 @@ const DshbordAdmin = () => {
             onChange={newSearchBar}
           />
           <div className="w-1/5"></div> {/* Espacio entre los elementos */}
-          {/* <select className="w-2/5 p-2 rounded border border-gray-300">
+          <select onChange={handlerCategory} className="w-2/5 p-2 rounded border border-gray-300">
           <option value="" disabled selected>Category</option>
-            <option value="opcion1">Opción </option>
-            <option value="opcion2">Opción 2</option>
-            <option value="opcion3">Opción 3</option>
-          </select> */}
+            {categoriasUnicas.map(p => <option value={p}>{p} </option>)}
+
+          </select>
         </div>
       </div>
       <div className="mt-4">
         <div className="flex flex-wrap -m-2">
           <div className="">
             <div className="bg-white rounded-lg w-auto h-auto grid grid-cols-2 gap-4">
-              {input === "Vacio" ? 
+              {filter.length > 0 ? currentFilter.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image} id={product.id} isAvailible={product.isAvailible} imageCloudinary={product.imageCloudinary}/>))
+              : input === "Vacio" ? 
               currentItems.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image} id={product.id} isAvailible={product.isAvailible} imageCloudinary={product.imageCloudinary} />))
               : error==="Product no found" ? <div>Not found </div> : 
               newSearch.length > 0 ? 
                 currentNewSearch.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image} id={product.id} isAvailible={product.isAvailible} imageCloudinary={product.imageCloudinary}/>))
-              : currentItems.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image} id={product.id} isAvailible={product.isAvailible} imageCloudinary={product.imageCloudinary}/>))
+              :  currentItems.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image} id={product.id} isAvailible={product.isAvailible} imageCloudinary={product.imageCloudinary}/>))
               }
               
             </div>
@@ -120,7 +134,7 @@ const DshbordAdmin = () => {
 
       <div className={`mt-8 flex flex-col justify-center items-center relative${error==="Product no found" ? " hidden" : ""}`}>
     <Pagination 
-       count={newSearch.length> 0 ? Math.ceil(newSearch.length/itemsPerPage) : Math.ceil(productsNormales.length / itemsPerPage)}
+       count={filter.length > 0 ? Math.ceil(filter.length/itemsPerPage) : newSearch.length> 0 ? Math.ceil(newSearch.length/itemsPerPage) : Math.ceil(productsNormales.length / itemsPerPage)}
        page={currentPage}
        onChange={(event, page) => setCurrentPage(page)}
        size="large"       
