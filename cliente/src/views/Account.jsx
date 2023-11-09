@@ -6,6 +6,7 @@ import Back from "../utils/images/BasicIcons/backIcon.png";
 
 export const Account = () => {
   const currentUser = useSelector((state) => state.user);
+  console.log(currentUser.user, "hooooooo")
   const { logout } = useAuth0();
   
   return (

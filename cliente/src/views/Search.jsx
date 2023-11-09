@@ -135,6 +135,7 @@ const Search = () => {
       favoriteFilter: p.favorite,
       favoriteFilterDesactivado: p.favoriteDesactivado,
       filtrosProps: 1,
+      imageCloudinary: p.imageCloudinary
     }))
 
     const productName = minMayusculaProduct.filter(objeto => 
@@ -192,7 +193,7 @@ const Search = () => {
 
 
   return (
-    <div className="h-full pb-32 items-center mx-2 ">
+    <div className="h-full pb-8 items-center mx-2 ">
     <div className="h-full pb-32 items-center mx-2 "> 
       <Searchbar handlerSearch2={handlerSearch2} newSearchBar={newSearchBar} funcion={funcion} funcionFilter={funcionFilter} setCurrentSearch={setCurrentSearch} />
       <div className="font-jakarta-sans w-auto  flex justify-between items-center mx-10 my-6">
@@ -243,7 +244,7 @@ const Search = () => {
                 id={product.id}
                  name={product.name}
                  price={product.price}
-                 image={product.image.url ? product.image.url : product.image}
+                 image={product.image}
                  description={product.description}
                  smallCard={true}
 
@@ -252,6 +253,7 @@ const Search = () => {
                  favorite={finallaDos(product.id)}
                  favoriteNumFilter={product.favoriteFilter} 
                  favoriteDesFilter={product.favoriteFilterDesactivado}
+                 imageCloudinary={product.imageCloudinary}
                />
              ))
            ) : error==="Product no found"? <div><img className=" h-[240px] w-[240px] top-[340px] absolute left-[84px]" src={Productnofound} alt="Productnofound" /></div> :
@@ -266,7 +268,7 @@ const Search = () => {
               id={product.id}
               name={product.name}
               price={product.price}
-              image={product.image.url ? product.image.url : product.image}
+              image={product.image}
               description={product.description}
               smallCard={true}
               product={product}
@@ -275,6 +277,7 @@ const Search = () => {
               favorite={finallaDos(product.id)}
               favoriteNumFilter={product.favoriteFilter} 
               favoriteDesFilter={product.favoriteFilterDesactivado}
+              imageCloudinary={product.imageCloudinary}
             />))
           ):
           Array.isArray(currentItems) ? (
@@ -284,7 +287,7 @@ const Search = () => {
                 id={product.id}
                 name={product.name}
                 price={product.price}
-                image={product.image.url ? product.image.url : product.image}
+                image={product.image}
                 description={product.description}
                 smallCard={true}
                 product={product}
@@ -293,6 +296,7 @@ const Search = () => {
                 favorite={finallaDos(product.id)}
                 favoriteNumFilter={product.favoriteFilter} 
                 favoriteDesFilter={product.favoriteFilterDesactivado}
+                imageCloudinary={product.imageCloudinary}
               />
             ))
           ) :(

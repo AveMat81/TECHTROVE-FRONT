@@ -7,7 +7,9 @@ import Swal from "sweetalert2";
 import axios from "axios"
 import notAvailibleImage from "../../utils/images/Logo/NotAvailible.png"
 
-const DashborAdminCard = ({image, name, price, id, isAvailible}) => {
+const DashborAdminCard = ({image, name, price, id, isAvailible, imageCloudinary}) => {
+  console.log(imageCloudinary)
+
   const deleteProduct = () =>{
     Swal.fire({
       title: 'Are you sure?',
@@ -39,7 +41,7 @@ const DashborAdminCard = ({image, name, price, id, isAvailible}) => {
       {isAvailible === false ? (
         <div>
           <img
-              src={image}
+              src={imageCloudinary ? imageCloudinary[0].url : image}
               alt="Imagen"
               className="relative w-auto h-auto object-cover"
             />
@@ -62,7 +64,7 @@ const DashborAdminCard = ({image, name, price, id, isAvailible}) => {
       ) : (<div> 
 
             <img
-              src={image}
+              src={imageCloudinary ? imageCloudinary[0].url : image}
               alt="Imagen"
               className="relative w-auto h-auto object-cover"
             />

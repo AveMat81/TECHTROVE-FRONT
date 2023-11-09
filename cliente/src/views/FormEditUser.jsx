@@ -11,6 +11,9 @@ import fetchProducts from "../redux/actions/getProducts";
 import  fetchProductById  from '../redux/actions/fetchProductById';
 // import backIcon from "../../utils/images/BasicIcons/backIcon.png"
 import getIdUsers from "../redux/actions/idUsers";
+import uploadImage from "../utils/images/Logo/UPLOAD.png"
+import backIcon from "../utils/images/BasicIcons/backIcon.png"
+import closeImage from "../utils/images/Logo/CLOSE.png"
 
 export default function FormEditProduct() {
   const { id } = useParams();
@@ -261,7 +264,7 @@ const [input, setInput] = useState({
     <div>
       <div className="mt-4 sm:mt-28">
         <div className={styles.card_create}>
-          <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freeiconspng.com%2Fimages%2Fupload-icon&psig=AOvVaw1agC6JOby5IPYiNmepRRUv&ust=1699379545130000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMizx434r4IDFQAAAAAdAAAAABAY" alt="back" onClick={goBackHandler} className="w-8 h-8 top-28 absolute ml-2"/>
+          <img src={backIcon} alt="back" onClick={goBackHandler} className="w-8 h-8 top-28 absolute ml-2"/>
           <div className="mb-4">
             <h1 className="text-2xl sm:text-5xl font-semibold text-gray-900">
               Edit Users
@@ -379,13 +382,13 @@ const [input, setInput] = useState({
           alt="Uploaded Image"
           className="w-40 h-40 object-contain absolute" 
         />
-        <img onClick={eliminarImage} src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freeiconspng.com%2Fimages%2Fupload-icon&psig=AOvVaw1agC6JOby5IPYiNmepRRUv&ust=1699379545130000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMizx434r4IDFQAAAAAdAAAAABAY" alt="close" className="w-6 h-6 relative top-0 left-0" />
+        <img onClick={eliminarImage} src={closeImage} alt="close" className="w-6 h-6 relative top-0 left-0" />
         {/* <button onClick={eliminarImage}>x</button> */}
         
           <label htmlFor="image-upload" className="cursor-pointer ">
             <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg flex-col cursor-pointer">
               {/* <span className="text-3xl">+</span> */}
-              <img src="hola" alt="upload" className="w-16 h-16 object-contain" />
+              <img src={uploadImage} alt="upload" className="w-16 h-16 object-contain" />
               <div className="mt-2 font-semibold text-gray-400">Upload</div>
             </div>
           </label>
@@ -410,7 +413,7 @@ const [input, setInput] = useState({
           <label htmlFor="image-upload" className="cursor-pointer ">
             <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg flex-col cursor-pointer">
               {/* <span className="text-3xl">+</span> */}
-              <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freeiconspng.com%2Fimages%2Fupload-icon&psig=AOvVaw1agC6JOby5IPYiNmepRRUv&ust=1699379545130000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMizx434r4IDFQAAAAAdAAAAABAY" alt="upload" className="w-16 h-16 object-contain" />
+              <img src={uploadImage} alt="upload" className="w-16 h-16 object-contain" />
               <div className="mt-2 font-semibold text-gray-400">Upload</div>
             </div>
           </label>

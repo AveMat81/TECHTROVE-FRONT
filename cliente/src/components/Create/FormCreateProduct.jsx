@@ -59,7 +59,7 @@ export default function FormCreateProduct() {
     //category: "",
     //color: "",
     description: "",
-    image: null,
+    image: [],
     isAvailable: true,
     price: "",
     stock: "",
@@ -250,7 +250,11 @@ export default function FormCreateProduct() {
         //console.log(input)
 
         const formData = new FormData();
-            formData.append('image', file);
+        for (const file of selectedImage) {
+          formData.append('image', file);
+        }
+
+            //formData.append('image', selectedImage);
             formData.append('name', input.name);
             formData.append('isAvailable', input.isAvailable);
             formData.append('description', input.description);
@@ -292,40 +296,49 @@ export default function FormCreateProduct() {
   };
 
   ///FUNCION NUEVA
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState([]);
   const [checkbox, setCheckbox] = useState(false)
   const [dobleeliminado, setDobleeliminado] = useState(false)
   //console.log(dobleeliminado)
   //console.log("PRUEBA ERRORES 2",selectedImage)
 
+  console.log("imageeen", selectedImage)
+
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      //setDobleeliminado(true)
-      
-      setFile(file)
+    const files = e.target.files;
+    const newImages = []; 
+    //console.log(newImages, "soy fileees")
+    setFile(files)
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
       const reader = new FileReader();
+
       reader.onload = (event) => {
-        
-        setSelectedImage(event.target.result);
+        newImages.push(event.target.result);
+
+        // Verifica si se han cargado todas las imágenes antes de actualizar el estado.
+        if (newImages.length === files.length) {
+          setSelectedImage([...selectedImage, ...newImages]);
+        }
       };
+
       reader.readAsDataURL(file);
-
     }
+
     setErrorsDos({...errorsDos, image:""})
-
-
-    // validateDos({
-    //   [e.target.name]: selectedImage,
-    // }, e.target.name)
   };
 
-  const eliminarImage = () =>{
-    setSelectedImage(null)
+  const eliminarImage = (index) =>{
+    const newImages = [...selectedImage];
+    newImages.splice(index, 1);
+    setSelectedImage(newImages);
 
     setDobleeliminado(false)
-    setErrorsDos({...errorsDos, image:"La imagen es requerida"})
+
+    if(selectedImage.length <= 1){
+      setErrorsDos({...errorsDos, image:"La imagen es requerida"})
+
+    }
 
     // validateDos({
     //   imageCheck: dobleeliminado,
@@ -594,14 +607,14 @@ export default function FormCreateProduct() {
                 
                 
       {selectedImage ? (
-        <div className="flex justify-between px-0 md:px-8 lg:px-12 xl:px-16" >
-        <img
-          src={selectedImage}
-          alt="Uploaded Image"
-          className="w-40 h-40 object-contain absolute" 
-        />
-        <img onClick={eliminarImage} src={closeImage} alt="close" className="w-6 h-6 relative top-0 left-0" />
-        {/* <button onClick={eliminarImage}>x</button> */}
+        <div className="grid grid-cols-2 gap-2" >
+        {selectedImage.map((image, index) => (
+        <div className="relative">
+        <img key={index} src={image} alt={`Image ${index}`} className="w-40 h-40 object-contain" />
+        <img onClick={() => eliminarImage(index)} src={closeImage} alt="close" className="w-6 h-6 absolute top-0 left-0" />
+        </div>
+      ))}
+        {/* <img onClick={eliminarImage} src={closeImage} alt="close" className="w-6 h-6 relative top-0 left-0" /> */}
         
           <label htmlFor="image-upload" className="cursor-pointer ">
             <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg flex-col cursor-pointer">
@@ -610,7 +623,7 @@ export default function FormCreateProduct() {
               <div className="mt-2 font-semibold text-gray-400">Upload</div>
             </div>
           </label>
-          <input
+          <input multiple 
             type="file"
             id="image-upload"
             accept="image/*"
@@ -629,7 +642,7 @@ export default function FormCreateProduct() {
               <div className="mt-2 font-semibold text-gray-400">Upload</div>
             </div>
           </label>
-          <input
+          <input multiple 
             type="file"
             id="image-upload"
             accept="image/*"
@@ -637,10 +650,10 @@ export default function FormCreateProduct() {
             className="hidden"
             name="image"
           />
-          {errorsDos.image && (
-            <div className={styles.error}>{errorsDos.image}</div>
-          )}
         </div>
+      )}
+      {errorsDos.image && (
+        <div className={styles.error}>{errorsDos.image}</div>
       )}
     
 

@@ -58,9 +58,12 @@ function App() {
   const fakeUno = location.pathname === '/adminusers'
   const fakeDos = location.pathname === '/orders'
 
+  const usersAdmin = location.pathname.startsWith('/users');
+  const editUser = location.pathname.startsWith('/update');
+
   return (
     <div>
-      {isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true ? <TopBarDos/> : <TopBar />}
+      {isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true || editUser || usersAdmin ? <TopBarDos/> : <TopBar />}
       
       <NavBar/>
       <Routes>
@@ -94,7 +97,7 @@ function App() {
         <Route path="/update/:id" element={<FormEdit/>}/>
       </Routes>
       <div
-          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true ? " hidden" : " "}`}
+          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true || editUser || usersAdmin ? " hidden" : " "}`}
         >
 
         <AppBar/>

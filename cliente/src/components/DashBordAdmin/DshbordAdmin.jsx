@@ -29,6 +29,7 @@ const DshbordAdmin = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = productsNormales.slice(indexOfFirstItem, indexOfLastItem);
   const currentNewSearch = newSearch.slice(indexOfFirstItem, indexOfLastItem);
+  console.log(productsNormales, "aososossososo")
 
   const newSearchBar = (e) =>{
     const value = e.target.value
@@ -40,7 +41,7 @@ const DshbordAdmin = () => {
       setInput("Lleno")
     }
 
-
+    
     const minMayusculaProduct = productsNormales.map(p =>({
       id: p.id,
       name: p.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
@@ -57,6 +58,7 @@ const DshbordAdmin = () => {
       favoriteFilter: p.favorite,
       favoriteFilterDesactivado: p.favoriteDesactivado,
       filtrosProps: 1,
+      imageCloudinary: p.imageCloudinary
     }))
 
     const productName = minMayusculaProduct.filter(objeto => 
@@ -102,11 +104,11 @@ const DshbordAdmin = () => {
           <div className="">
             <div className="bg-white rounded-lg w-auto h-auto grid grid-cols-2 gap-4">
               {input === "Vacio" ? 
-              currentItems.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image.url ? product.image.url : product.image} id={product.id} isAvailible={product.isAvailible} />))
+              currentItems.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image} id={product.id} isAvailible={product.isAvailible} imageCloudinary={product.imageCloudinary} />))
               : error==="Product no found" ? <div>Not found </div> : 
               newSearch.length > 0 ? 
-                currentNewSearch.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image.url ? product.image.url : product.image} id={product.id} isAvailible={product.isAvailible} />))
-              : currentItems.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image.url ? product.image.url : product.image} id={product.id} isAvailible={product.isAvailible} />))
+                currentNewSearch.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image} id={product.id} isAvailible={product.isAvailible} imageCloudinary={product.imageCloudinary}/>))
+              : currentItems.map((product, i) => (<DashborAdminCard key={i} name={product.name} price={product.price} image={product.image} id={product.id} isAvailible={product.isAvailible} imageCloudinary={product.imageCloudinary}/>))
               }
               
             </div>

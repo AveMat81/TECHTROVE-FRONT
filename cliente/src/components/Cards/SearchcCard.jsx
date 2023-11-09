@@ -9,7 +9,7 @@ import {favoriteFilterActivo, favoriteFilterDesactivo, noFavoriteFilterActivo, n
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slices/cartSlice";
 
-const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos  }) => {
+const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos, imageCloudinary  }) => {
   const dispatch = useDispatch();
   
 
@@ -22,6 +22,7 @@ const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilte
   
 
   const favoritesFilter = (e) =>{
+    console.log("estadooooooo")
 
     if( favoriteNumFilter === 1 || favoriteDesFilter === 2){
       // console.log("filter")
@@ -92,7 +93,7 @@ const getFavoriteIcon = () => {
           <img
             className="relative w-auto h-auto object-cover bg-black-500"
             alt="Rectangle"
-            src={image}
+            src={imageCloudinary ? imageCloudinary[0].url : image}
           />
         {/* <button class="absolute top-0 right-0 bg-blue-500 text-white px-2 py-1">Botón</button> */}
         </Link>
