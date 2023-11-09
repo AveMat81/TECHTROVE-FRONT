@@ -10,20 +10,25 @@ const AppBar = ({ theme }) => {
   const currentPath = location.pathname;
   const currentUser = useSelector((state) => state.user);
   const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
+  
   const dispatch = useDispatch();
+  console.log("log de Linea 14 AppBar", user)
+  
 
 
   const handleLogin = () => {
     console.log("en el handle login");
     loginWithRedirect();
-  };
-
+  };  
+  
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(postUser(user));
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated,]);
 
+
+  
   return (
     <div
       className={`bg-neutral-800 absolute bottom-0 left-0 font-general-sans w-full h-[80px] justify-around items-center inline-flex ${

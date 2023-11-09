@@ -13,7 +13,8 @@ import {favoriteActivo, favoriteDesactivo, noFavoriteActivo, noFavoriteDesactivo
 import {favoriteFilterActivo, favoriteFilterDesactivo, noFavoriteFilterActivo, noFavoriteFilterDesactivo} from "../../redux/slices/filterSlice"
 import {activeIcon, iconDesactive} from "../../redux/slices/favoriteIcono"
 import { useSelector, useDispatch } from "react-redux";
-
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from 'sweetalert2';
 const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, favoriteNum, favoriteDes, filtrosProps, favoriteNumFilter, favoriteDesFilter  }) => {
 
   const wishlist = useSelector((state) => state.wishlist);
@@ -22,6 +23,8 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
 
   const [favorito, setFavorito] = useState(0)
   const [addedProducts, setAddedProducts] = useState([]);
+
+  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
 
   const handleAddToCart = () => {
     dispatch(addToCart({ id, name, price, image }));
@@ -55,7 +58,26 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
     }
   };
 
-  const favoriteDefinitivo = (e) =>{
+  // const loginAlert = () => {
+    
+    const favoriteDefinitivo = (e) =>{
+      if (!isAuthenticated){
+        Swal.fire({
+          title: 'Error',
+          text: 'You need to login first!',
+          icon: 'error',
+          showCancelButton: true,
+          confirmButtonText: 'Go to login',
+          confirmButtonColor: 'green',
+          cancelButtonText: 'Cancel',
+          cancelButtonColor: 'red', 
+        }).then((result) => {
+          if (result.isConfirmed) {
+            loginWithRedirect();
+          }
+        });
+      return
+    }
     if(filtrosProps !== 1){
       console.log("normal")
       return favorites()

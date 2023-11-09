@@ -11,6 +11,7 @@ const Favorite = () => {
         const dispatch = useDispatch();
         const wishlist = useSelector((state) => state.wishlist);
         const [isLoading, setIsLoading] = useState(false); 
+        
 
       
         const handleRemoveFromWishlist = (productId) => {
