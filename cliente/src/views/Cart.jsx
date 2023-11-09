@@ -6,8 +6,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from 'sweetalert2';
-
-//const publicKey = 'TEST-e2330555-adb7-4510-bc08-abc61dadbb22'; 
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 
 const Cart = () => {
@@ -85,7 +84,7 @@ useEffect(() => {
     }
     window.localStorage.setItem("cart", JSON.stringify(cart));
    try {
-    const { data } = await axios.post("http://localhost:3001/api/payment/create-order", 
+    const { data } = await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/payment/create-order`, 
       { cart: cart.items, email: currentUser.user.email });
       location.href = data.result;
       console.log("data en front despues del pago", data.result)

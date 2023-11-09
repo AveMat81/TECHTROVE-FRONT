@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { cleanCart } from "../../redux/slices/cartSlice"
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 const SuccessPayment  =  ()=>{
     
@@ -39,7 +40,7 @@ const SuccessPayment  =  ()=>{
 
         const sendDataToServer = async () => {
             try {              
-               const response = await axios.post("http://localhost:3001/api/orders/", dataOrder);
+               const response = await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/orders/`, dataOrder);
                 setOrederCreate(true)
                 console.log("La RESPONSE ENVIO" ,response)
            

@@ -11,7 +11,6 @@ const Favorite = () => {
         const dispatch = useDispatch();
         const wishlist = useSelector((state) => state.wishlist);
         const [isLoading, setIsLoading] = useState(false); 
-        
 
       
         const handleRemoveFromWishlist = (productId) => {
@@ -36,10 +35,11 @@ const Favorite = () => {
                       id={product.id}
                       name={product.name}
                       price={product.price}
-                      image={product.image.url ? product.image.url : product.image}
+                      image={product.image}
                       description={product.description}
                       isInWishlist={true}
                       toggleWishlist={handleRemoveFromWishlist}
+                      imageCloudinary={product.imageCloudinary}
                     />
                   ))
                 ) : (

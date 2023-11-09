@@ -20,6 +20,7 @@ export default function FormEditProduct() {
   const dispatch = useDispatch();
 //   const marca = useSelector((state) => state.marca);
   const navigate = useNavigate();
+  console.log(productDetail)
 
   const [file, setFile] = useState(null)
   const [categorias, setCategorias] = useState([])
@@ -221,7 +222,10 @@ const [input, setInput] = useState({
         //console.log(input)
 
         const formData = new FormData();
-            formData.append('image', file);
+            // formData.append('image', file);
+            for (const file of selectedImage) {
+              formData.append('image', file);
+            }    
             formData.append('name', input.name);
             formData.append('isAvailible', input.isAvailible);
             formData.append('description', input.description);
@@ -251,35 +255,51 @@ const [input, setInput] = useState({
     }
   };
 
+
   ///FUNCION NUEVA
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState([]);
   const [checkbox, setCheckbox] = useState(true)
   const [dobleeliminado, setDobleeliminado] = useState(false)
   const [radioCheck, setRadioCheck] = useState(true)
   const [checkboxDos, setCheckboxDos] = useState(false)
 
+  console.log(selectedImage,"ooooooooooooooooooo")
+
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      
-      setFile(file)
+    const files = e.target.files;
+    const newImages = []; 
+    //console.log(newImages, "soy fileees")
+    setFile(files)
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
       const reader = new FileReader();
-      reader.onload = (event) => {
-        
-        setSelectedImage(event.target.result);
-      };
-      reader.readAsDataURL(file);
 
+      reader.onload = (event) => {
+        newImages.push(event.target.result);
+
+        // Verifica si se han cargado todas las imágenes antes de actualizar el estado.
+        if (newImages.length === files.length) {
+          setSelectedImage([...selectedImage, ...newImages]);
+        }
+      };
+
+      reader.readAsDataURL(file);
     }
+
     setErrorsDos({...errorsDos, image:""})
   };
 
-  const eliminarImage = () =>{
-    setSelectedImage(null)
+  const eliminarImage = (index) =>{
+    const newImages = [...selectedImage];
+    newImages.splice(index, 1);
+    setSelectedImage(newImages);
 
     setDobleeliminado(false)
-    setErrorsDos({...errorsDos, image:"La imagen es requerida"})
+
+    if(selectedImage.length <= 1){
+      setErrorsDos({...errorsDos, image:"La imagen es requerida"})
+
+    }
   }
   const buttonDisabled = () =>{
     let disabledAux = true
@@ -512,14 +532,14 @@ const [input, setInput] = useState({
                   </div>
                 </div> 
 
-      {selectedImage ? (
-        <div className="flex justify-between px-0 md:px-8 lg:px-12 xl:px-16" >
-        <img
-          src={selectedImage}
-          alt="Uploaded Image"
-          className="w-40 h-40 object-contain absolute" 
-        />
-        <img onClick={eliminarImage} src={closeImage} alt="close" className="w-6 h-6 relative top-0 left-0" />
+      {selectedImage.length > 0 ? (
+        <div className="grid grid-cols-2 gap-2" >
+         {selectedImage.map((image, index) => (
+        <div className="relative">
+        <img key={index} src={image} alt={`Image ${index}`} className="w-40 h-40 object-contain" />
+        <img onClick={() => eliminarImage(index)} src={closeImage} alt="close" className="w-6 h-6 absolute top-0 left-0" />
+        </div>
+      ))}
         {/* <button onClick={eliminarImage}>x</button> */}
         
           <label htmlFor="image-upload" className="cursor-pointer ">
@@ -530,6 +550,7 @@ const [input, setInput] = useState({
             </div>
           </label>
           <input
+            multiple
             type="file"
             id="image-upload"
             accept="image/*"
@@ -540,12 +561,21 @@ const [input, setInput] = useState({
         </div>
 
       ) : (
-        <div className="flex justify-between px-0 md:px-8 lg:px-12 xl:px-16" >
-        <img
+        <div className="grid grid-cols-2 gap-2" >
+        {/* <img
           src={imageUrl ? imageUrl : input.image}
           alt="Uploaded Image"
           className="w-40 h-40 object-contain" 
-        />
+        /> */}
+        {productDetail.imageCloudinary ? productDetail.imageCloudinary.map((image, index) =>(
+          <div>
+          <img key={index} src={image.url} alt={`Image ${index}`} className="w-40 h-40 object-contain" />
+          </div>
+        )) : <img
+        src={input.image}
+        alt="Uploaded Image"
+        className="w-40 h-40 object-contain" 
+      />}
         
           <label htmlFor="image-upload" className="cursor-pointer ">
             <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg flex-col cursor-pointer">
@@ -555,6 +585,7 @@ const [input, setInput] = useState({
             </div>
           </label>
           <input
+            multiple
             type="file"
             id="image-upload"
             accept="image/*"

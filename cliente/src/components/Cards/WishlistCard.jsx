@@ -8,7 +8,7 @@ import { addToCart } from "../../redux/slices/cartSlice";
 import toast, { Toaster } from "react-hot-toast";
 
 
-const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggleWishlist  }) => {
+const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggleWishlist, imageCloudinary  }) => {
   
   const dispatch = useDispatch();
   const [showFullDescription, setShowFullDescription] = useState(false);
@@ -65,7 +65,7 @@ const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggl
             onClick={() => removeCard(id)}
           />
             <img
-              src={image}
+              src={imageCloudinary ? imageCloudinary[0].url : image}
               alt={name}
               className="relative w-1/2 h-1/2 object-cover"
               style={{  padding: "4px" }}

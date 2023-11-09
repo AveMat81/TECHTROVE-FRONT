@@ -9,12 +9,14 @@ import backIcon from "../utils/images/BasicIcons/backIcon.png"
 import { addToCart } from '../redux/slices/cartSlice';
 import toast, { Toaster } from "react-hot-toast";
 import Loading from './Loading';
+import Slider from "../components/Cards/Home/SliderDetail"
 
 const Detail = () => {
   
  
   const product = useSelector((state) => state.detail.detail);
   const [isLoading, setIsLoading] = useState(true);
+  const [cloudinaryData, setCloudinaryData] = useState();
 
   const dispatch = useDispatch();
 
@@ -34,6 +36,7 @@ const Detail = () => {
   const imageUrl = productDetail && productDetail.image && productDetail.image.url;
 
 
+
   const navigate = useNavigate();
   
   const { id } = useParams();
@@ -45,7 +48,16 @@ const Detail = () => {
     return ()=>{
       dispatch(clearDetail())
     }
-  }, [dispatch, id]);
+  }, []);
+
+  useEffect(() => {
+    if (productDetail.imageCloudinary) {
+      setCloudinaryData(productDetail.imageCloudinary);
+    }
+  }, [productDetail]);
+
+  const cloudinary = productDetail && productDetail.imageCloudinary
+  console.log(cloudinaryData, "llooo")
 
   const goBackHandler = () => {
     navigate(-1);
@@ -60,7 +72,7 @@ const Detail = () => {
         ) : productDetail.error ? (
           <p className="text-center text-2xl font-semibold text-red-500 font-color:black ">Error: {productDetail.error}</p>
           ) : (
-            <div className="w-full max-w-sm bg-blue border border-blue-200 rounded-lg shadow light:bg-gray-800 light:border-gray-700">
+            <div className="mb-32 bg-blue border border-blue-200 rounded-lg shadow light:bg-gray-800 light:border-gray-700">
         <a href="#">
         <button className="header flex  flex-row gap-5 w-full pl-4 pb-3  md:pl-15 lg:pl-20">
           <img
@@ -72,8 +84,11 @@ const Detail = () => {
         <p className="font-general-sans"></p>
             {isLoading && <Loading />}
         </button>
-            <img className="p-3 rounded-t-lg" src={imageUrl ? imageUrl : productDetail.image} alt="product image" />
+            {productDetail.image ? <img className="p-3 rounded-t-lg" src={productDetail.image} alt="product image"/> : <Slider cloudinary={productDetail && productDetail.imageCloudinary} />}
+            {/* <img className="p-3 rounded-t-lg" src={productDetail.image} alt="product image" /> */}
         </a>
+        {/* // <Slider cloudinary={productDetail && productDetail.imageCloudinary} /> */}
+
         <div className="px-5 pb-5">
             <a href="#">
           <FavoriteIcon ></FavoriteIcon>

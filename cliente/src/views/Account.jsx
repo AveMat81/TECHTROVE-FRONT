@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 export const Account = () => {
   const currentUser = useSelector((state) => state.user);
+  console.log(currentUser.user, "hooooooo")
   const { user, isAuthenticated, isLoading } = useAuth0();
   //const emailVerifiel = user.email_verified
   console.log("EL PUTO USER", user.email_verified)

@@ -11,7 +11,7 @@ import { addToCart } from "../../redux/slices/cartSlice";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from 'sweetalert2';
 
-const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos  }) => {
+const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos, imageCloudinary  }) => {
   const dispatch = useDispatch();
   
 
@@ -26,6 +26,8 @@ const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilte
   
   
   const favoritesFilter = (e) =>{
+    console.log("estadooooooo")
+
     if (!isAuthenticated){
       console.log("isAuthenticated en search card",isAuthenticated);
       Swal.fire({
@@ -109,11 +111,11 @@ const getFavoriteIcon = () => {
     <div className="inline-flex flex-col items-start gap-[10px] relative my-5">
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
         <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center">
-          <Link to={`/${id}`}>
+          <Link to={`/detail/${id}`}>
           <img
             className="relative w-auto h-auto object-cover bg-black-500"
             alt="Rectangle"
-            src={image}
+            src={imageCloudinary ? imageCloudinary[0].url : image}
           />
         {/* <button class="absolute top-0 right-0 bg-blue-500 text-white px-2 py-1">Botón</button> */}
         </Link>
