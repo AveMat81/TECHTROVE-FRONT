@@ -157,7 +157,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
     <div className="inline-flex flex-col gap-[8px] relative">
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl items-start"> */}
         <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center">
-          <Link to={`/${id}`}>
+          <Link to={`/detail/${id}`}>
           <img
             className="relative w-auto h-auto object-cover"
             alt="Rectangle"

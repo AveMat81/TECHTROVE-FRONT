@@ -46,6 +46,7 @@ const Search = () => {
   //setea el estado showFilters de true a false o de false a true 
   const toFilter = () => {
     setShowFilters(!showFilters);
+    
   };
 
   //CODIGO NUEVO
@@ -202,10 +203,11 @@ const Search = () => {
 
   const handlerSearch = ()=>{
     setShowCategories(false)
-  } 
 
+  } 
+  
   const handlerSearch2 = ()=>{
-    setShowCategories(true)
+    setShowCategories(true);
   }
 
   const indexOfLastItem = currentPage * itemsPerPage;
