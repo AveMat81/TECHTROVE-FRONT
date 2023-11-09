@@ -8,6 +8,8 @@ import {
 import {favoriteFilterActivo, favoriteFilterDesactivo, noFavoriteFilterActivo, noFavoriteFilterDesactivo} from "../../redux/slices/filterSlice"
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slices/cartSlice";
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from 'sweetalert2';
 
 const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos  }) => {
   const dispatch = useDispatch();
@@ -15,14 +17,33 @@ const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilte
 
   const [favorito, setFavorito] = useState(0)
 
+  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  
   const handleAddToCart = () => {
     dispatch(addToCart({ id, name, price, image }));
     toast.success("Added to cart successfully ");
   };
   
-
+  
   const favoritesFilter = (e) =>{
-
+    if (!isAuthenticated){
+      console.log("isAuthenticated en search card",isAuthenticated);
+      Swal.fire({
+        title: 'Error',
+        text: 'You need to login first!',
+        icon: 'error',
+        showCancelButton: true,
+        confirmButtonText: 'Go to login',
+        confirmButtonColor: 'green',
+        cancelButtonText: 'Cancel',
+        cancelButtonColor: 'red', 
+      }).then((result) => {
+        if (result.isConfirmed) {
+          loginWithRedirect();
+        }
+      });
+    return
+  }
     if( favoriteNumFilter === 1 || favoriteDesFilter === 2){
       // console.log("filter")
       toast.success("Delete to favorite succesfully");

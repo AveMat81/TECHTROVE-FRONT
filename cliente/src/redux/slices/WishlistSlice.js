@@ -31,8 +31,14 @@ const wishlistSlice = createSlice({
       
       // return state.filter(product => product.id !== id);
     },
+    clearWishlist(state) {
+      state.splice(0, state.length);
+      window.localStorage.removeItem("wishlist");
+
+    },
+
   },
 });
 
-export const { addToWishlist, removeFromWishlist } = wishlistSlice.actions;
+export const { addToWishlist, removeFromWishlist, clearWishlist, } = wishlistSlice.actions;
 export default wishlistSlice.reducer;

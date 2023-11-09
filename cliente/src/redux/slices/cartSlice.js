@@ -4,7 +4,7 @@ export const totalCount = (price1, price2, taxes) => price1 + price2 + taxes;
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: {
+  initialState: JSON.parse(window?.localStorage?.getItem("cart")) || {
     items: [],
     subtotal: 0,
     shippingPrice: 15,
