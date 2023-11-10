@@ -77,7 +77,6 @@ const [input, setInput] = useState({
 
       
       if(name === "image"){
-        //console.log("soy imagen" ,state.image)
         if(state.image !== null) setErrorsDos({...errorsDos, image:"The image is required"})
         else setErrorsDos({...errorsDos, image:""})
       }

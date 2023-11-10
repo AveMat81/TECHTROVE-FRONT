@@ -19,7 +19,7 @@ function NotFoundPage() {
           Sorry, the page you are looking for could not be found.
         </p>
         <Link to="/">
-                <div className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-gray-100 px-4 py-2 rounded transition duration-150">
+                <div className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-gray-100 px-6 py-4 rounded transition duration-150">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -36,7 +36,7 @@ function NotFoundPage() {
                 </div>
                 </Link>
       </div>
-      <div class="w-1/2 lg:h-full flex lg:items-end justify-center p-4">
+      <div class="que es esto w-1/2 sm:h-full flex lg:items-end justify-center ">
         <svg
           class="w-full text-green-600"
           xmlns="http://www.w3.org/2000/svg"

@@ -13,7 +13,6 @@ const Loading = () => {
         >
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <img src={Logo} alt='Techtrove Logo' style={{ marginBottom: '15px' }} />
-                {/* <img src={loadingGif} alt='Loading' /> */}
             </div>
         </div>
     )

@@ -15,7 +15,6 @@ const AdminUsers=()=>{
 
     const imageUrl = usersList.allUsers && usersList.allUsers.image && usersList.allUsers.image.url;
 
-    console.log("aquii", usersList.allUsers);
     
     return(
         <div>

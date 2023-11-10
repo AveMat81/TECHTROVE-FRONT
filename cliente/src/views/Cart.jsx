@@ -15,11 +15,8 @@ const Cart = () => {
   const [preferenceData, setPreferenceData] = useState(null);
   const { user, isAuthenticated, isLoading } = useAuth0();
   
-  console.log("USER DE Auth0", user);
 
-  //console.log("carrito en view cart",cart);
 
-  console.log("user de estado global ",currentUser.user.email)
 
 const dispatch = useDispatch();
 
@@ -87,7 +84,6 @@ useEffect(() => {
     const { data } = await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/payment/create-order`, 
       { cart: cart.items, email: currentUser.user.email });
       location.href = data.result;
-      console.log("data en front despues del pago", data.result)
     
    } catch (error) {
     console.log(error.message)
