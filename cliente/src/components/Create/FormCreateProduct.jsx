@@ -65,7 +65,7 @@ export default function FormCreateProduct() {
     stock: "",
     category: "",
     // isTrending: false, //averageRaiting
-    discount: "",
+    discount: 0,
     //deleted: ???
     // marca: [], //falta realacion / modelo
   });
@@ -360,14 +360,22 @@ export default function FormCreateProduct() {
     }
     return disabledAux;
   }
-
+  console.log(input)
   const botonCheck = (event) =>{
     const valuor = event.target.checked
     setCheckbox(valuor)
-    if(valuor === false){
+    if(valuor === true){
       setInput({
         ...input,
         discount: "",
+      });
+    }
+
+
+    if(valuor === false){
+      setInput({
+        ...input,
+        discount: 0,
       });
     }
     validateDos({...input,

@@ -20,7 +20,7 @@ const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilte
   const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
   
   const handleAddToCart = () => {
-    dispatch(addToCart({ id, name, price, image }));
+    dispatch(addToCart({ id, name, price, image, imageCloudinary }));
     toast.success("Added to cart successfully ");
   };
   
