@@ -17,8 +17,6 @@ const DetailUsers=()=>{
 
     const imageUrl = usersId.idUsers && usersId.idUsers.image && usersId.idUsers.image.url;
 
-    console.log("aquiii",usersId.idUsers);
-
     const defaultImageUrl = 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fimage.emojipng.com%2F346%2F10131346.jpg&tbnid=tu_GQ9S87UJIUM&vet=12ahUKEwiZ8JjtjrGCAxWEcDABHQCpD-8QMygEegQIARBS..i&imgrefurl=https%3A%2F%2Fwww.emojipng.com%2Fpreview%2F10131346&docid=bIGsMx7zCWLWIM&w=900&h=593&q=imagen%20perfil%20sin%20imagen%20png&hl=es-419&ved=2ahUKEwiZ8JjtjrGCAxWEcDABHQCpD-8QMygEegQIARBS';
 
     return(

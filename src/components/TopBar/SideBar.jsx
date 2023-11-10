@@ -12,9 +12,13 @@ function Sidebar() {
   useEffect(() => {
     // Agrega un event listener para detectar clics fuera del Sidebar
     const handleClickOutside = (event) => {
+      
+      
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         setIsSidebarOpen(false);
       }
+
+      
     };
 
     // Agrega el event listener al montar el componente

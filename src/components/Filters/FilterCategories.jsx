@@ -40,6 +40,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
     try {
       await dispatch(setCategory({  category }));
       await dispatch(getFilter({  category }));
+      //handlerSearch()
       setIsLoading(false);
       setSelectedCategory(category);
     } catch (error) {

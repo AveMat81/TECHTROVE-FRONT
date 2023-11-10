@@ -51,19 +51,19 @@ const Detail = () => {
   }, []);
 
   useEffect(() => {
+    setIsLoading(true); 
     if (productDetail.imageCloudinary) {
       setCloudinaryData(productDetail.imageCloudinary);
     }
+    setIsLoading(false); 
   }, [productDetail]);
 
   const cloudinary = productDetail && productDetail.imageCloudinary
-  console.log(cloudinaryData, "llooo")
 
   const goBackHandler = () => {
     navigate(-1);
   };
-  // console.log(productDetail)
-  // console.log("holala" + productDetail.image)
+
   return (
     
     <div className="container mx-auto mt-4 p-4 rounded-lg shadow light:bg-white-800 light:border-white-700">
