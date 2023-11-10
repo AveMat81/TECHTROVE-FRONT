@@ -19,17 +19,21 @@ const Search = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
-
+  //console.log(showFilters, "aveeeer")
   const productsNormales = useSelector((state) => state.products.products);
   const [producWish, setproducWish] = useState([])
   const [producWishFilter, setproducWishFilter] = useState([])
   const wishlist = useSelector((state) => state.wishlist);
   const [valueOrdenamiento, setValueOrdenamiento] = useState("");
   const [showCategories, setShowCategories] = useState(true);
-
+  console.log(productFiltered)
   //resultado de toda la busqueda
   const productSearch = useSelector((state)=>state.filterName)
+  const userA = useSelector((state) =>state.user)
  
+  const [sort, setSort] = useState("")
+  //console.log(sort, "lissttooooo")
+
 
   const category = useSelector((state) => state.category)
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -37,6 +41,7 @@ const Search = () => {
   const [newSearch, setNewSearch] = useState([])
   const [searchGlobal, setSearchGlobal] = useState([])
   const [input, setInput] = useState("");
+  //console.log(input, "vamooooos")
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -110,7 +115,13 @@ const Search = () => {
     setCurrentPage(1);
   }
 
-  
+  const handlerAllCategories = () =>{
+    setSort("AllCategories")
+  }
+
+  const handlerCategoriesSort = () =>{
+    setSort("Sort")
+  }
 
   const newSearchBar = (value, category) =>{
     
@@ -194,6 +205,7 @@ const Search = () => {
   const currentItems = productFiltered.filterResult.slice(indexOfFirstItem, indexOfLastItem);
   const currentItemsName = productSearch.filterbyname.slice(indexOfFirstItem, indexOfLastItem);
   const currentNewSearch = newSearch.slice(indexOfFirstItem, indexOfLastItem);
+  //console.log(currentItems,"aaaaaaaaa")
 
 
   return (
@@ -211,10 +223,13 @@ const Search = () => {
           setShowFilters={setShowFilters}
           showCategories={showCategories}
           setSelectedCategory={setSelectedCategory} 
+          sort={sort}
         />
       }
       <div className="w-auto h-auto m-6">
        <CategoriesFilter
+        handlerAllCategories={handlerAllCategories}
+        handlerCategoriesSort={handlerCategoriesSort}
           handlerSearch={handlerSearch} 
           setCurrentCategory={setCurrentCategory} 
           funcion={funcion} 
