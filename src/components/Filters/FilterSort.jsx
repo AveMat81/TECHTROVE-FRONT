@@ -3,14 +3,15 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getFilter from "../../redux/actions/getFilter"
 
-export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,setSelectedCategory }) => {
+export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,setSelectedCategory, sort }) => {
   console.log(showCategories, "dentro de ordenamientooo")
   const dispatch = useDispatch();
   const categoryState = useSelector((state) => state.category);
   const [sortOrder, setSortOrder] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-
+  console.log(sort, "osisisisisisisisi")
+  console.log(showCategories, "sooooooh")
   const handleSortOrderChange = (order) => {
     setSortOrder(order);
   };
@@ -37,8 +38,18 @@ export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,se
         })
       );
     }
-    if(showCategories === false){
-
+    if(showCategories === false && sort === "AllCategories"){
+      dispatch(
+        getFilter({
+          //esto hay que cambiarlo mas adelante
+          //category: categoryState.category,
+          min: minPrice,
+          max: maxPrice,
+          order: sortOrder,
+        })
+      );
+    }
+    if(showCategories === false && sort === "Sort"){
       dispatch(
         getFilter({
           //esto hay que cambiarlo mas adelante
