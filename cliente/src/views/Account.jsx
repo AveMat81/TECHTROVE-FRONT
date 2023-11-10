@@ -7,7 +7,7 @@ import Back from "../utils/images/BasicIcons/backIcon.png";
 export const Account = () => {
   const currentUser = useSelector((state) => state.user);
   const { logout } = useAuth0();
-  
+  const imageUrl = currentUser && currentUser.user && currentUser.user.image && currentUser.user.image.url
   return (
     <div>
     <div className="flex flex-col items-center justify-center border border-gray-300 shadow-lg p-4 rounded-lg w-80 ml-8">
@@ -22,7 +22,7 @@ export const Account = () => {
         <div className="flex justify-center mb-2">
           <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
             <img
-              src={currentUser.user.image}
+              src={imageUrl ? imageUrl: currentUser.user.image}
               alt={currentUser.user.name}
               className="w-full h-full object-cover"
             />
@@ -32,6 +32,7 @@ export const Account = () => {
           <h3 className="text-center text-sm">{currentUser.user.email}</h3>
           <h3 className="text-sm">Name: {currentUser.user.name}</h3>
           <h3 className="text-sm">Username: {currentUser.user.username}</h3>
+          <h3 className="text-sm">Address: {currentUser.user.address}</h3>
         </div>        
       </div>
     )}
