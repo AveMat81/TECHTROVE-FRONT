@@ -11,7 +11,7 @@ export const Account = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   
   const { logout } = useAuth0();
-  
+  const imageUrl = currentUser && currentUser.user && currentUser.user.image && currentUser.user.image.url
   return (
     <div>
       {!user.email_verified ? Swal.fire({
@@ -43,7 +43,7 @@ export const Account = () => {
         <div className="flex justify-center mb-2">
           <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-300 flex items-center justify-center">
             <img
-              src={currentUser.user.image}
+              src={imageUrl ? imageUrl: currentUser.user.image}
               alt={currentUser.user.name}
               className="w-full h-full object-cover"
               />
@@ -53,12 +53,13 @@ export const Account = () => {
           <h3 className="text-center text-sm">{currentUser.user.email}</h3>
           <h3 className="text-sm">Name: {currentUser.user.name}</h3>
           <h3 className="text-sm">Username: {currentUser.user.username}</h3>
+          <h3 className="text-sm">Address: {currentUser.user.address}</h3>
         </div>        
       </div>
     )}
     </div>
-        <button onClick={() => logout({ returnTo: window.location.origin })} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
-          Edit profile
+        <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
+          <Link to="/edit-profile">Edit profile</Link>
         </button>
         <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
             <Link to="/Favorite">Favorite</Link>
