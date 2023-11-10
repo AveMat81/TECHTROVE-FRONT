@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -109,7 +113,7 @@ function Sidebar() {
             <li>
               <Link
 
-                to="/Search"
+                to="/search"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
               >
@@ -118,7 +122,7 @@ function Sidebar() {
             </li>
             <li>
               <Link
-                to="/Contact"
+                to="/contact"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
               >
@@ -127,21 +131,22 @@ function Sidebar() {
             </li>
             <li>
               <Link
-                to="/About"
+                to="/about"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
               >
                 ABOUT US
               </Link>
             </li>
-            <li>
+            <li>{isAuthenticated ? 
               <Link
-                to="/Account"
+                to="/account"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
               >
                 ACCOUNT
-              </Link>
+              </Link> : null
+              }
             </li>
           </ul>
         </aside>

@@ -59,7 +59,7 @@ export const Account = () => {
     )}
     </div>
         <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
-          <Link to="/edit-profile">Edit profile</Link>
+          <Link to="/profile-edit">Edit profile</Link>
         </button>
         <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
             <Link to="/Favorite">Favorite</Link>
