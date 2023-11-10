@@ -1,10 +1,10 @@
 import './App.css';
 import "tailwindcss/tailwind.css";
 
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 //  import { useDispatch } from "react-redux";
-//  import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Home from './views/Home';
 import Detail from './views/Detail';
 import NavBar from "./components/NavBar/NavBar";
@@ -42,6 +42,8 @@ function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [Desktop, setDesktop] = useState(window.innerWidth > 1024);
   const location = useLocation();
+  const currentUser = useSelector((state) => state.user);
+  console.log("Usuario en App", currentUser.user.isAdmin)
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,13 +58,13 @@ function App() {
     };
   }, []);
 
-  const isNotAdminPath = location.pathname === '/admin';
-  const createPath = location.pathname === '/create'
-  const editPath = location.pathname.startsWith('/edit');
-  const analaiticas = location.pathname === '/estadistica'
+  const isNotAdminPath = location.pathname === '/admin'; // ruta prote
+  const createPath = location.pathname === '/create'  // ruta prote
+  const editPath = location.pathname.startsWith('/edit'); // ruta prote
+  const analaiticas = location.pathname === '/estadistica' // ruta prote
   const top = location.pathname === '/top'
-  const fakeUno = location.pathname === '/adminusers'
-  const fakeDos = location.pathname === '/orders'
+  const fakeUno = location.pathname === '/adminusers' // ruta prote
+  const fakeDos = location.pathname === '/orders' // ruta prote
 
   const usersAdmin = location.pathname.startsWith('/users');
   const editUser = location.pathname.startsWith('/update');
@@ -74,17 +76,21 @@ function App() {
       <NavBar/>
       <Routes>
         {/* <Route path= "/top" element={<TopBarDos/>}/>  */}
-        <Route path="/fail" element={<NotVerified />} />
+        <Route path="/fail" element={<NotVerified />} />        
+        <Route path= "/orders" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <Orders/>}/> 
+        <Route path= "/estadistica" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <SimpleBarCharts/>}/> 
+        <Route
+          path="/admin"
+          element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <DashbordAdmin />}
+        />
+       {/* <Route path= "/admin" element={<DashbordAdmin/>}/> */}
+        <Route path= "/edit/:id" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <EditForm/>}/>
 
-        
-        <Route path= "/orders" element={<Orders/>}/> 
-        <Route path= "/estadistica" element={<SimpleBarCharts/>}/> 
-        <Route path= "/admin" element={<DashbordAdmin/>}/>
-        <Route path= "/edit/:id" element={<EditForm/>}/>
       {/* <Route path= "/home" element={<landing/>}/> */}
         <Route path= "/" element={<Home/>}/>
         <Route path= "/detail/:id" element={<Detail/>}/>
-        <Route path="/create" element={<FormCreateProduct/>}/>
+        <Route path="/create" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <FormCreateProduct/>}/>
+
         <Route path="/Search" element={<Search/>}/>
         <Route path="/Cart" element={<Cart/>}/>
         <Route path="/Favorite" element={<Favorite />}/>
@@ -100,10 +106,10 @@ function App() {
         <Route path="/Account" element={<Account/>}/>
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
-        <Route path="/edit-profile" element={<EditProfile/>}/>
+        <Route path="/profile-edit" element={<EditProfile/>}/>
         
 
-        <Route path="/AdminUsers" element={<AdminUsers/>}/>
+        <Route path="/adminUsers" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <AdminUsers/>}/>
         <Route path="/users/:id" element={<DetailUsers/>}/>
         <Route path="/update/:id" element={<FormEdit/>}/>
       </Routes>
