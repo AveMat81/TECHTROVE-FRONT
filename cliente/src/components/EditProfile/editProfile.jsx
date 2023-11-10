@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import Back from "../../utils/images/BasicIcons/backIcon.png";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 import axios from "axios";
 
 export default function EditProfile() {
   const currentUser = useSelector(state => state.user); // Importa el usuario actual desde el estado de Redux
   const dispatch = useDispatch();
-  console.log(currentUser.user.username)  
   // Define un estado local para los campos de edición de perfil
   const [profileData, setProfileData] = useState({
     username: currentUser.user.username,
@@ -22,7 +23,6 @@ export default function EditProfile() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const [initialProfileData, setInitialProfileData] = useState({}); // Estado para almacenar los datos iniciales del perfil
-  console.log(initialProfileData);
 
   const [errors, setErrors] = useState({
     username: "",
@@ -129,10 +129,8 @@ export default function EditProfile() {
     };
 
 
-  console.log(profileData);
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    console.log("Entro a la función");
     
         // Realiza la lógica de actualización del perfil aquí, utilizando Axios o la biblioteca que prefieras
         try {
@@ -142,19 +140,16 @@ export default function EditProfile() {
                 formData.append('username', profileData.username);
                 formData.append('address', profileData.address);
           
-                // Enviar una solicitud al servidor para actualizar el perfil
-          console.log(`Esto es el usuario: ${currentUser.user}`)
-          console.log(currentUser.user.id);
-          await axios.put(`http://localhost:3001/api/users/update/${currentUser.user.id}`, formData);
-          // Actualizar el estado del usuario en Redux con los nuevos datos
-          //dispatch({ type: "UPDATE_USER", payload: response.data });
-          // Mostrar una notificación de éxito
-          alert("Perfil actualizado con éxito");
+            // Enviar una solicitud al servidor para actualizar el perfil
+          await axios.put(`${VITE_VERCEL_API_URL_BASE}/api/users/update/${currentUser.user.id}`, formData);
+          
+          toast.success("User edit successful");
+
         } catch (error) {
           // Manejar errores en la actualización del perfil
           console.error("Error en la actualización del perfil:", error);
           // Mostrar un mensaje de error
-          alert("Hubo un error al actualizar el perfil");
+            toast.success("Error when editing  user");
         }
     
   };
