@@ -82,6 +82,10 @@ const DshbordAdmin = () => {
   console.log(filter, "fiiiiiiii")
   const handlerCategory = (e) =>{
     console.log(e.target.value)
+    if(e.target.value === "Categories"){
+      setCurrentPage(1)
+      return setFilter([])
+    }
     setCurrentPage(1)
     const productsNormalesDos = productsNormales.filter((product) => product.category === e.target.value);
     //console.log(productsNormalesDos, "doooos")
@@ -105,8 +109,9 @@ const DshbordAdmin = () => {
             onChange={newSearchBar}
           />
           <div className="w-1/5"></div> {/* Espacio entre los elementos */}
-          <select onChange={handlerCategory} className="w-2/5 p-2 rounded border border-gray-300">
+          <select onChange={handlerCategory} className={`w-2/5 p-2 rounded border border-gray-300${input === "Lleno" ? " hidden" : ""}`}>
           <option value="" disabled selected>Category</option>
+          <option value="Categories" >All Categories</option>
             {categoriasUnicas.map(p => <option value={p}>{p} </option>)}
 
           </select>

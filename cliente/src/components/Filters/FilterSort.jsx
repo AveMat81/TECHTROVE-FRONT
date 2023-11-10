@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getFilter from "../../redux/actions/getFilter"
 
-export const FilterSortRange = ({ showFilters, setShowFilters, showCategories }) => {
+export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,setSelectedCategory }) => {
   console.log(showCategories, "dentro de ordenamientooo")
   const dispatch = useDispatch();
   const categoryState = useSelector((state) => state.category);
@@ -50,7 +50,7 @@ export const FilterSortRange = ({ showFilters, setShowFilters, showCategories })
       );
     }
   };
-
+  console.log(applyFilter);
   return (
 
     <div className={`fixed inset-0 z-50 ${showFilters ? "block" : "hidden"}`}>

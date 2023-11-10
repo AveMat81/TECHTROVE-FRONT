@@ -232,6 +232,7 @@ const Search = () => {
           showFilters={showFilters}
           setShowFilters={setShowFilters}
           showCategories={showCategories}
+          setSelectedCategory={setSelectedCategory} 
         />
       }
       <div className="w-auto h-auto m-6">
@@ -253,7 +254,7 @@ const Search = () => {
           <BiLeftIndent className="text-black-500 text-[35px] font-semibold" />
         </button>} */}
         <button onClick={toFilter} style={{ marginLeft: 'auto' }}>
-          <BiLeftIndent className="text-black-500 text-[35px] font-semibold" />
+          <BiLeftIndent className={`text-black-500 text-[35px] font-semibold${input === "Lleno" ? " hidden" : ""}`} />
         </button>
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide"></h1>
       </div>
