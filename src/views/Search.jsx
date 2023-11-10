@@ -271,7 +271,7 @@ const Search = () => {
                  imageCloudinary={product.imageCloudinary}
                />
              ))
-           ) : error==="Product no found"? <div><img className=" h-[240px] w-[240px] top-[340px] absolute left-[84px]" src={Productnofound} alt="Productnofound" /></div> :
+           ) : error==="Product no found" || currentItems.length === 0 ? <div><img className=" h-[240px] w-[240px] top-[340px] absolute left-[84px]" src={Productnofound} alt="Productnofound" /></div> :
           
             
           
