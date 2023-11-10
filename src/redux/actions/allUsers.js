@@ -6,7 +6,7 @@ const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE
 const getAllUsers = () => {
   return async function (dispatch) {
     try {
-      const response = await axios.get("http://localhost:3001/api/users");
+      const response = await axios.get(`${VITE_VERCEL_API_URL_BASE}/api/users`);
       
       dispatch(getUsers(response.data));
     } catch (error) {
