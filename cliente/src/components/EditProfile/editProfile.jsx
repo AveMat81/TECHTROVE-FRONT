@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 import axios from "axios";
-
+//groso
 export default function EditProfile() {
   const currentUser = useSelector(state => state.user); // Importa el usuario actual desde el estado de Redux
   const dispatch = useDispatch();
