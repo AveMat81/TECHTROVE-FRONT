@@ -9,7 +9,7 @@ import axios from "axios"
 import uploadImage from "../../utils/images/Logo/UPLOAD.png"
 import fetchProducts from "../../redux/actions/getProducts";
 import closeImage from "../../utils/images/Logo/CLOSE.png"
-import  fetchProductById  from '../../redux/actions/fetchProductById';
+import fetchProductById  from '../../redux/actions/fetchProductById';
 import backIcon from "../../utils/images/BasicIcons/backIcon.png"
 const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
@@ -28,16 +28,16 @@ export default function FormEditProduct() {
 
   const imageUrl = productDetail && productDetail.image && productDetail.image.url;
 /////////////////////////////////////////////////////////////////////////
-const [input, setInput] = useState({
-  name: productDetail.name,
-  description: productDetail.description,
-  image: productDetail.image,
-  isAvailible: productDetail.isAvailible,
-  price: productDetail.price,
-  stock: productDetail.stock,
-  category: productDetail.category,
-  discount: productDetail.discount,
-});
+  const [input, setInput] = useState({
+    name: productDetail.name,
+    description: productDetail.description,
+    image: productDetail.image,
+    isAvailible: productDetail.isAvailible,
+    price: productDetail.price,
+    stock: productDetail.stock,
+    category: productDetail.category,
+    discount: productDetail.discount,
+  });
 
 ////////////////////////////////////////////////////
 
