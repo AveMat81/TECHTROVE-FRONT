@@ -14,7 +14,7 @@ const Cart = () => {
   const currentUser = useSelector((state)=> state.user);
   const [preferenceData, setPreferenceData] = useState(null);
   const { user, isAuthenticated, isLoading } = useAuth0();
-  
+  console.log(cart ,"cart en front ");
 
 
 
@@ -118,9 +118,11 @@ useEffect(() => {
         <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">     
               <hr className="my-4" />
               <div className="flex justify-between">
-                <p className="text-lg font-bold">Total</p>
+                <p className="text-lg font-bold"></p>
                 <div className="">
-                  <p className="mb-1 text-lg font-bold">${cart.totalPrice} </p>
+                <p className="mb-1 text-lg font-bold"> Shipping Price $ {cart.shippingPrice} </p>
+                <p className="mb-1 text-lg font-bold"> Tax $ {cart.tax} </p>
+                  <p className="mb-1 text-lg font-bold"> Total $ {cart.totalPrice} </p>
                   <button onClick={handleCheckout}
                   className="mt-6 w-full rounded-md bg-black py-1.5 font-medium text-blue-50 hover:bg-black-600"
                   >Checkout with mercado pago</button>

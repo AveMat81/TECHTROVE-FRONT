@@ -69,16 +69,16 @@ const AppBar = ({ theme }) => {
           </div>
         </Link>
 
-        <Link to="/Search">
+        <Link to="/search">
           <div className="flex-col justify-start items-center inline-flex">
             <img
               alt="Search"
               src={
-                theme === "dark" && currentPath === "/Search"
+                theme === "dark" && currentPath === "/search"
                   ? imagePaths.Search.inactive
                   : theme === "dark"
                   ? imagePaths.Search.dark
-                  : theme !== "dark" && currentPath === "/Search"
+                  : theme !== "dark" && currentPath === "/search"
                   ? imagePaths.Search.active
                   : imagePaths.Search.inactive
               }
@@ -86,11 +86,11 @@ const AppBar = ({ theme }) => {
             />
             <div
               className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Search"
+                theme === "dark" && currentPath === "/search"
                   ? "text-red-500"
                   : theme === "dark"
                   ? "text-gray-400"
-                  : theme !== "dark" && currentPath === "/Search"
+                  : theme !== "dark" && currentPath === "/search"
                   ? "text-white opacity-80"
                   : "text-white opacity-80"
               }`}
@@ -100,48 +100,35 @@ const AppBar = ({ theme }) => {
           </div>
         </Link>
 
-        <Link to="/Cart">
+        <Link to="/cart">
           <div className="flex-col justify-start items-center inline-flex">
             <img
               alt="MyCart"
               src={
-                theme === "dark" && currentPath === "/Cart"
+                theme === "dark" && currentPath === "/cart"
                   ? imagePaths.Cart.inactive
                   : theme === "dark"
                   ? imagePaths.Cart.dark
-                  : theme !== "dark" && currentPath === "/Cart"
+                  : theme !== "dark" && currentPath === "/cart"
                   ? imagePaths.Cart.active
                   : imagePaths.Cart.inactive
               }
               className="w-16 h-16 mb-16"
             />
-            {/* <div
-              className={`text-xs font-medium ${
-                theme === "dark" && currentPath === "/Cart"
-                  ? "text-red-500"
-                  : theme === "dark"
-                  ? "text-gray-400"
-                  : theme !== "dark" && currentPath === "/Cart"
-                  ? "text-white opacity-80"
-                  : "text-white opacity-80"
-              }`}
-            >
-              Cart
-            </div> */}
           </div>
         </Link>
 
         {
-          <Link to="/Favorite">
+          <Link to="/favorite">
             <div className="flex-col justify-start items-center inline-flex">
               <img
                 alt="Favorite"
                 src={
-                  theme === "dark" && currentPath === "/Favorite"
+                  theme === "dark" && currentPath === "/favorite"
                     ? imagePaths.Wishlist.inactive
                     : theme === "dark"
                     ? imagePaths.Wishlist.dark
-                    : theme !== "dark" && currentPath === "/Favorite"
+                    : theme !== "dark" && currentPath === "/favorite"
                     ? imagePaths.Wishlist.active
                     : imagePaths.Wishlist.inactive
                 }
@@ -149,11 +136,11 @@ const AppBar = ({ theme }) => {
               />
               <div
                 className={`text-xs font-medium ${
-                  theme === "dark" && currentPath === "/Favorite"
+                  theme === "dark" && currentPath === "/favorite"
                     ? "text-red-500"
                     : theme === "dark"
                     ? "text-gray-400"
-                    : theme !== "dark" && currentPath === "/Favorite"
+                    : theme !== "dark" && currentPath === "/favorite"
                     ? "text-white opacity-80"
                     : "text-white opacity-80"
                 }`}
@@ -170,11 +157,11 @@ const AppBar = ({ theme }) => {
               <img
                 alt="Account"
                 src={
-                  theme === "dark" && currentPath === "/Account"
+                  theme === "dark" && currentPath === "/account"
                     ? imagePaths.Account.inactive
                     : theme === "dark"
                     ? imagePaths.Account.dark
-                    : theme !== "dark" && currentPath === "/Account"
+                    : theme !== "dark" && currentPath === "/account"
                     ? imagePaths.Account.active
                     : imagePaths.Account.inactive
                 }
@@ -182,11 +169,11 @@ const AppBar = ({ theme }) => {
               />
               <div
                 className={`text-xs font-medium ${
-                  theme === "dark" && currentPath === "/Account"
+                  theme === "dark" && currentPath === "/account"
                     ? "text-red-500"
                     : theme === "dark"
                     ? "text-gray-400"
-                    : theme !== "dark" && currentPath === "/Account"
+                    : theme !== "dark" && currentPath === "/account"
                     ? "text-white opacity-80"
                     : "text-white opacity-80"
                 }`}
@@ -201,11 +188,11 @@ const AppBar = ({ theme }) => {
               <img
                 alt="Account"
                 src={
-                  theme === "dark" && currentPath === "/Account"
+                  theme === "dark" && currentPath === "/account"
                     ? imagePaths.Account.inactive
                     : theme === "dark"
                     ? imagePaths.Account.dark
-                    : theme !== "dark" && currentPath === "/Account"
+                    : theme !== "dark" && currentPath === "/account"
                     ? imagePaths.Account.active
                     : imagePaths.Account.inactive
                 }
@@ -213,11 +200,11 @@ const AppBar = ({ theme }) => {
               />
               <div
                 className={`text-xs font-medium ${
-                  theme === "dark" && currentPath === "/Account"
+                  theme === "dark" && currentPath === "/account"
                     ? "text-red-500"
                     : theme === "dark"
                     ? "text-gray-400"
-                    : theme !== "dark" && currentPath === "/Account"
+                    : theme !== "dark" && currentPath === "/account"
                     ? "text-white opacity-80"
                     : "text-white opacity-80"
                 }`}

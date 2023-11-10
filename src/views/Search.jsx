@@ -26,7 +26,6 @@ const Search = () => {
   const wishlist = useSelector((state) => state.wishlist);
   const [valueOrdenamiento, setValueOrdenamiento] = useState("");
   const [showCategories, setShowCategories] = useState(true);
-  //console.log(showCategories)
 
   //resultado de toda la busqueda
   const productSearch = useSelector((state)=>state.filterName)
@@ -91,23 +90,6 @@ const Search = () => {
 
   const funcion = () =>{
 
-    // if (!isAuthenticated){
-    //   Swal.fire({
-    //     title: 'Error',
-    //     text: 'You need to login first!',
-    //     icon: 'error',
-    //     showCancelButton: true,
-    //     confirmButtonText: 'Go to login',
-    //     confirmButtonColor: 'green',
-    //     cancelButtonText: 'Cancel',
-    //     cancelButtonColor: 'red', 
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //       loginWithRedirect();
-    //     }
-    //   });
-    // return
-  // }
     const updatedArray = [];
     for (const obj1 of productsNormales) {
       for (const obj2 of wishlist) {
@@ -134,10 +116,6 @@ const Search = () => {
     
     setValueOrdenamiento(value)
     if(value.length === 0){
-          //dispatch(getFilter({ category: category }));
- 
-    
-
       setInput("Vacio")
     }
     if(value.length > 0){
@@ -248,11 +226,6 @@ const Search = () => {
         <h1 className="text-stone-900 text-[18px] font-bold tracking-wide  mr-8">
           Products
         </h1>
-        {/* {input === "Vacio" ? <button onClick={toFilter} style={{ marginLeft: 'auto' }}>
-          <BiLeftIndent className="text-black-500 text-[35px] font-semibold" />
-        </button> : input === "Lleno" ? <div></div> : <button onClick={toFilter} style={{ marginLeft: 'auto' }}>
-          <BiLeftIndent className="text-black-500 text-[35px] font-semibold" />
-        </button>} */}
         <button onClick={toFilter} style={{ marginLeft: 'auto' }}>
           <BiLeftIndent className={`text-black-500 text-[35px] font-semibold${input === "Lleno" ? " hidden" : ""}`} />
         </button>

@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import axios from "axios"
 import notAvailibleImage from "../../utils/images/Logo/NotAvailible.png"
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 const DashborAdminCard = ({image, name, price, id, isAvailible, imageCloudinary}) => {
 
@@ -23,7 +24,7 @@ const DashborAdminCard = ({image, name, price, id, isAvailible, imageCloudinary}
       
       
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:3001/api/products/${id}`);
+        await axios.delete(`${VITE_VERCEL_API_URL_BASE}/api/products/${id}`);
         Swal.fire(
           'Deleted!',
           'Your file has been deleted.',
