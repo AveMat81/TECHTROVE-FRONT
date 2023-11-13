@@ -25,10 +25,10 @@ const SuccessPayment  =  ()=>{
         const user = JSON.parse(window.localStorage.getItem("userData"))
         
         console.log("CARRITO DEL LOCALL STORAGE", cart)
-        //console.log("ID DEL USER PARA MANDAR A LA ORDEN", user)
+        console.log("ID DEL USER PARA MANDAR A LA ORDEN", user)
         const dataOrder ={
             paymentId: infoJson.payment_id,
-            //email: currentUser.email, //agregar a DB
+            email: user.email,
             products: cart.items,
             status: infoJson.status,
             total: cart.totalPrice,
@@ -40,9 +40,11 @@ const SuccessPayment  =  ()=>{
 
         const sendDataToServer = async () => {
             try {              
-               const response = await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/orders/`, dataOrder);
+               const response = await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/orders/`, dataOrder); //success o pending
+               const responseII = await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/payment/webhook/`, dataOrder) //envio de email
                 setOrederCreate(true)
                 console.log("La RESPONSE ENVIO" ,response)
+                console.log("La RESPONSEII ENVIO" ,responseII)
            
             } catch (error) {
                 console.log("Error al enviar datos al servidor:", error);
@@ -51,7 +53,11 @@ const SuccessPayment  =  ()=>{
 
        sendDataToServer(); 
 
+       
     }, []);
+
+   
+    
     useEffect(()=>{
        setOrederCreate(true)
 
