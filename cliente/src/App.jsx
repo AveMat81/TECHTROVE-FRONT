@@ -14,6 +14,9 @@ import TopBar from "./components/TopBar/TopBar";
 import AppBar from './components/AppBar/AppBar'
 import './App.css';
 import "tailwindcss/tailwind.css";
+import Brand from "./views/Brand";
+import BrandEdit from "./views/BrandEdit";
+import CreateBrand from "./views/CreateBrand";
 //import { AppBar } from "@mui/material";
 
 function App() {
@@ -45,6 +48,9 @@ function App() {
         <Route path="/Cart" element={<Cart/>}/>
         <Route path="/Favorite" element={<Favorite/>}/>
         <Route path="/Account" element={<Account/>}/>
+        <Route path="/brand" element={<Brand/>}/>
+        <Route path="/editBrand/:id" element={<BrandEdit/>} />
+        <Route path="/createBrand" element={<CreateBrand/>} />
       </Routes>
       <div
           className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : " "}`}

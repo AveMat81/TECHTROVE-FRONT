@@ -7,7 +7,7 @@ import detailReducer from "./slices/detailSlice";
 import wishlistReducer from "./slices/WishlistSlice";
 import favoritetSlice from "./slices/favoriteIcono"
 import userReducer from "./slices/userSlice";
-
+import brandReducer from "./slices/brandSlice";
 
 
   const rootReducer = combineReducers({
@@ -19,6 +19,7 @@ import userReducer from "./slices/userSlice";
     favorite: favoritetSlice,
     detail: detailReducer,
     user: userReducer,
+    brands: brandReducer
   });
   
   export default rootReducer;
