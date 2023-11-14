@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const sidebarRef = useRef(null);
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -12,9 +16,13 @@ function Sidebar() {
   useEffect(() => {
     // Agrega un event listener para detectar clics fuera del Sidebar
     const handleClickOutside = (event) => {
+      
+      
       if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
         setIsSidebarOpen(false);
       }
+
+      
     };
 
     // Agrega el event listener al montar el componente
@@ -105,20 +113,11 @@ function Sidebar() {
             <li>
               <Link
 
-                to="/Search"
+                to="/search"
                 className="text-black text-xl font-normal block mb-6"
                 onClick={toggleSidebar}
               >
                 PRODUCTS
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/categories"
-                className="text-black text-xl font-normal block mb-6"
-                onClick={toggleSidebar}
-              >
-                CATEGORIES
               </Link>
             </li>
             <li>
@@ -138,6 +137,16 @@ function Sidebar() {
               >
                 ABOUT US
               </Link>
+            </li>
+            <li>{isAuthenticated ? 
+              <Link
+                to="/account"
+                className="text-black text-xl font-normal block mb-6"
+                onClick={toggleSidebar}
+              >
+                ACCOUNT
+              </Link> : null
+              }
             </li>
           </ul>
         </aside>

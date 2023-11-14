@@ -1,7 +1,10 @@
-import { Routes, Route } from "react-router-dom";
+import './App.css';
+import "tailwindcss/tailwind.css";
+
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 //  import { useDispatch } from "react-redux";
-//  import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Home from './views/Home';
 import Detail from './views/Detail';
 import NavBar from "./components/NavBar/NavBar";
@@ -10,17 +13,35 @@ import Search from "./views/Search";
 import Cart from "./views/Cart";
 import Favorite from "./views/Favorite";
 import Account from "./views/Account";
+import AdminUsers from "./views/AdminUsers";
 import TopBar from "./components/TopBar/TopBar";
 import AppBar from './components/AppBar/AppBar'
-import './App.css';
-import "tailwindcss/tailwind.css";
-import Brand from "./views/Brand";
-import BrandEdit from "./views/BrandEdit";
-import CreateBrand from "./views/CreateBrand";
-//import { AppBar } from "@mui/material";
+import DetailUsers from "./views/DetailUsers";
+import FormEdit from "./views/FormEditUser";
+import { useAuth0 } from "@auth0/auth0-react";
+
+import DashbordAdmin from "./components/DashBordAdmin/DshbordAdmin"
+import EditForm from "./components/Create/FormEditProduct"
+import SimpleBarCharts from "./components/DashBordAdmin/DashbordAnalitics"
+import TopBarDos from "./components/DashBordAdmin/TopBar"
+import Orders from "./components/DashBordAdmin/OrdersFake"
+import SuccessPayment from "./components/PaymentCase/SuccessPayment"
+import NotVerified from "./components/NotVerified/NotVerified";
+import NotFoundPage from "./views/NotFound";
+import PrivateRoute from "./PrivateRoute"
+
+
+
+import About from "./views/About";
+import Contact from "./views/Contact";
+import EditProfile from "./components/EditProfile/editProfile";
 
 function App() {
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const [Desktop, setDesktop] = useState(window.innerWidth > 1024);
+  const location = useLocation();
+  const currentUser = useSelector((state) => state.user);
+  console.log("Usuario en App", currentUser.user.isAdmin)
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,52 +49,76 @@ function App() {
     };
 
     window.addEventListener("resize", handleResize);
+    
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
 
+  const isNotAdminPath = location.pathname === '/admin'; // ruta prote
+  const createPath = location.pathname === '/create'  // ruta prote
+  const editPath = location.pathname.startsWith('/edit'); // ruta prote
+  const analaiticas = location.pathname === '/estadistica' // ruta prote
+  const top = location.pathname === '/top'
+  const fakeUno = location.pathname === '/adminusers' // ruta prote
+  const fakeDos = location.pathname === '/orders' // ruta prote
+
+  const usersAdmin = location.pathname.startsWith('/users');
+  const editUser = location.pathname.startsWith('/update');
+
   return (
     <div>
-      <TopBar />
+      {isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true || editUser || usersAdmin ? <TopBarDos/> : <TopBar />}
+      
       <NavBar/>
       <Routes>
-      {/* <Route path= "/home" element={<landing/>}/> */}
+        {/* <Route path= "/top" element={<TopBarDos/>}/>  */}
+        <Route path="/fail" element={<NotVerified />} />        
+        <Route path= "/orders" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <Orders/>}/> 
+        <Route path= "/estadistica" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <SimpleBarCharts/>}/> 
+        <Route
+          path="/admin"
+          element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <DashbordAdmin />}
+        />
+       {/* <Route path= "/admin" element={<DashbordAdmin/>}/> */}
+        <Route path= "/edit/:id" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <EditForm/>}/>
 
+      {/* <Route path= "/home" element={<landing/>}/> */}
         <Route path= "/" element={<Home/>}/>
-        <Route path= "/:id" element={<Detail/>}/>
-        <Route path="/Create" element={<FormCreateProduct/>}/>
-        <Route path="/Search" element={<Search/>}/>
-        <Route path="/Cart" element={<Cart/>}/>
-        <Route path="/Favorite" element={<Favorite/>}/>
-        <Route path="/Account" element={<Account/>}/>
-        <Route path="/brand" element={<Brand/>}/>
-        <Route path="/editBrand/:id" element={<BrandEdit/>} />
-        <Route path="/createBrand" element={<CreateBrand/>} />
+        <Route path= "/detail/:id" element={<Detail/>}/>
+        <Route path="/create" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <FormCreateProduct/>}/>
+
+        <Route path="/search" element={<Search/>}/>
+        <Route path="/cart" element={<Cart/>}/>
+        <Route path="/favorite" element={<Favorite />}/>
+        <Route path="/paymentsucces" element={<SuccessPayment />}/>
+        
+         {/* Activa linea de abajo para que cuando no esta el email autenticado y quiera air a favorito lo redirija al Home (MATIAS) */}
+        <Route path="/favorite" element={<PrivateRoute
+                  element={<Favorite />}
+                  isAuthenticated={isAuthenticated}
+                  isLoading={isLoading}
+                />}/> 
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/account" element={<Account/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/contact" element={<Contact/>}/>
+        <Route path="/profile-edit" element={<EditProfile/>}/>
+        
+
+        <Route path="/adminUsers" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <AdminUsers/>}/>
+        <Route path="/users/:id" element={<DetailUsers/>}/>
+        <Route path="/update/:id" element={<FormEdit/>}/>
       </Routes>
       <div
-          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : " "}`}
+          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true || editUser || usersAdmin ? " hidden" : " "}`}
         >
 
         <AppBar/>
       </div>
-      {/* <div
-          className={` fixed bottom-0 left-0 w-full z-[1000] ${
-            Desktop ? "hidden" : ""
-          }`}
-        >
-          <AppBar theme={theme} />
-        </div> */}
-      {/* <div
-          className={` fixed bottom-0 left-0 w-full z-[1000] ${
-            Desktop ? "hidden" : ""
-          }`}
-        >
-          <AppBar theme={theme} />
-        </div> */}
     </div>
   )
 }
 
-export default App
+export default App;

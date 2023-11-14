@@ -7,19 +7,45 @@ import {
 } from "../../redux/slices/WishlistSlice";
 import {favoriteFilterActivo, favoriteFilterDesactivo, noFavoriteFilterActivo, noFavoriteFilterDesactivo} from "../../redux/slices/filterSlice"
 import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../../redux/slices/cartSlice";
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from 'sweetalert2';
 
-const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos  }) => {
+const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos, imageCloudinary  }) => {
   const dispatch = useDispatch();
   
 
   const [favorito, setFavorito] = useState(0)
 
-  const prueba = (e) =>{
+  const { user, isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id, name, price, image, imageCloudinary }));
     toast.success("Added to cart successfully ");
-  }
-
+  };
+  
+  
   const favoritesFilter = (e) =>{
+    console.log("estadooooooo")
 
+    if (!isAuthenticated){
+      console.log("isAuthenticated en search card",isAuthenticated);
+      Swal.fire({
+        title: 'Error',
+        text: 'You need to login first!',
+        icon: 'error',
+        showCancelButton: true,
+        confirmButtonText: 'Go to login',
+        confirmButtonColor: 'green',
+        cancelButtonText: 'Cancel',
+        cancelButtonColor: 'red', 
+      }).then((result) => {
+        if (result.isConfirmed) {
+          loginWithRedirect();
+        }
+      });
+    return
+  }
     if( favoriteNumFilter === 1 || favoriteDesFilter === 2){
       // console.log("filter")
       toast.success("Delete to favorite succesfully");
@@ -85,11 +111,11 @@ const getFavoriteIcon = () => {
     <div className="inline-flex flex-col items-start gap-[10px] relative my-5">
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
         <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center">
-          <Link to={`/${id}`}>
+          <Link to={`/detail/${id}`}>
           <img
             className="relative w-auto h-auto object-cover bg-black-500"
             alt="Rectangle"
-            src={image}
+            src={imageCloudinary ? imageCloudinary[0].url : image}
           />
         {/* <button class="absolute top-0 right-0 bg-blue-500 text-white px-2 py-1">Botón</button> */}
         </Link>
@@ -117,7 +143,7 @@ const getFavoriteIcon = () => {
         
         <div className="flex pb-30">
             <img 
-            onClick={prueba}
+            onClick={handleAddToCart}
               alt="Home"
               src={
                 imagePaths.Add.inactive

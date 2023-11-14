@@ -19,7 +19,7 @@ const SearchCardName = ({ image,id, name, price  }) => {
     <div className="inline-flex flex-col items-start gap-[10px] relative my-5">
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
         <div className="relative bg-blue-200 rounded-3xl flex justify-center items-center">
-          <Link to={`/${id}`}>
+          <Link to={`/detail/${id}`}>
           <img
             className="relative w-auto h-auto object-cover bg-black-500"
             alt="Rectangle"

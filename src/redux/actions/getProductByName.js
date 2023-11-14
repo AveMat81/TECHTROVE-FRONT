@@ -1,10 +1,11 @@
 import axios from "axios";
 import { setFilterName } from "../slices/filterbynameSlice";
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 const getProductByName = (name) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/api/products/?name=${name}`);
+      const response = await axios.get(`${VITE_VERCEL_API_URL_BASE}/api/products/?name=${name}`);
 
       const products = response.data.map((product) => ({
         ...product,

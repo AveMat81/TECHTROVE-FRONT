@@ -7,7 +7,11 @@ import detailReducer from "./slices/detailSlice";
 import wishlistReducer from "./slices/WishlistSlice";
 import favoritetSlice from "./slices/favoriteIcono"
 import userReducer from "./slices/userSlice";
-import brandReducer from "./slices/brandSlice";
+import allUsersSlice from "./slices/allUsersSlice";
+import searchUsers from "./slices/searchUsers";
+import changeUsersSlice from "./slices/changeUsersSlice";
+
+import cartReducer from "./slices/cartSlice"
 
 
   const rootReducer = combineReducers({
@@ -17,9 +21,12 @@ import brandReducer from "./slices/brandSlice";
     filterName: filternameReducer,    
     wishlist: wishlistReducer,
     favorite: favoritetSlice,
+    cart: cartReducer,
     detail: detailReducer,
     user: userReducer,
-    brands: brandReducer
+    allUsers: allUsersSlice,
+    idUser: searchUsers,
+    putuser: changeUsersSlice,
   });
   
   export default rootReducer;

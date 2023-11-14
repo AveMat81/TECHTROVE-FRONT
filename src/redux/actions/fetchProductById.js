@@ -1,9 +1,11 @@
 import axios from "axios";
 import { setProductDetail } from "../slices/detailSlice";
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
+
 const fetchProductById = (id) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/api/products/${id}`);
+      const response = await axios.get(`${VITE_VERCEL_API_URL_BASE}/api/products/${id}`);
            
            dispatch(setProductDetail(response.data));
            
