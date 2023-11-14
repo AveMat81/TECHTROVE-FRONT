@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 export const Account = () => {
   const currentUser = useSelector((state) => state.user);
   const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log(currentUser);
   
   const { logout } = useAuth0();
   const imageUrl = currentUser && currentUser.user && currentUser.user.image && currentUser.user.image.url
@@ -65,7 +66,7 @@ export const Account = () => {
             <Link to="/Favorite">Favorite</Link>
         </button>
         <button className="mt-2 px-4 py-2 bg-blue-500 text-white rounded-lg">
-          My orders
+        <Link to={`/myorders/${currentUser.user.id}`}>My Orders</Link>
         </button>
         <LogoutButton onClick={LogoutButton } >
           

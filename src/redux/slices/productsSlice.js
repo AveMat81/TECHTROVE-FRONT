@@ -63,10 +63,23 @@ const productSlice = createSlice({
         return product; // Mantén los demás productos sin cambios
       });
     },
+    updateRatingSuccess(state, action) {
+      const { productId, rating } = action.payload;
+      const index = state.products.findIndex(
+        (product) => product.id === productId
+      );
+      if (index !== -1) {
+        state.products[index] = {
+          ...state.products[index],
+          rating: rating,
+        };
+      }
+    },
   },
 });
 
-export const { getProducts, addProduct, filterProducts, removeProduct, updateProduct, favoriteActivo, favoriteDesactivo, noFavoriteActivo, noFavoriteDesactivo } =
+export const { getProducts, addProduct, filterProducts,updateRatingSuccess, removeProduct, updateProduct, favoriteActivo, favoriteDesactivo, noFavoriteActivo, noFavoriteDesactivo } =
   productSlice.actions;
 
 export default productSlice.reducer;
+

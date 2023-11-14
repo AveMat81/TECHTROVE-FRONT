@@ -28,6 +28,7 @@ import Orders from "./components/DashBordAdmin/OrdersFake"
 import SuccessPayment from "./components/PaymentCase/SuccessPayment"
 import NotVerified from "./components/NotVerified/NotVerified";
 import NotFoundPage from "./views/NotFound";
+import MyOrders from "../src/components/MyOrders/MyOrders"
 import PrivateRoute from "./PrivateRoute"
 
 
@@ -91,6 +92,8 @@ function App() {
         <Route path="/search" element={<Search/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/favorite" element={<Favorite />}/>
+        <Route path="/myorders/:id" element={<MyOrders />}/>
+        <Route path="/rating/:id" element={<MyOrders />}/>
         <Route path="/paymentsucces" element={<SuccessPayment />}/>
         
          {/* Activa linea de abajo para que cuando no esta el email autenticado y quiera air a favorito lo redirija al Home (MATIAS) */}

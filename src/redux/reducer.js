@@ -10,7 +10,7 @@ import userReducer from "./slices/userSlice";
 import allUsersSlice from "./slices/allUsersSlice";
 import searchUsers from "./slices/searchUsers";
 import changeUsersSlice from "./slices/changeUsersSlice";
-
+import orderReducer from "./slices/orderUserSlice"
 import cartReducer from "./slices/cartSlice"
 
 
@@ -27,6 +27,7 @@ import cartReducer from "./slices/cartSlice"
     allUsers: allUsersSlice,
     idUser: searchUsers,
     putuser: changeUsersSlice,
+    orderR: orderReducer
   });
   
   export default rootReducer;
