@@ -41,7 +41,6 @@ function App() {
   const [Desktop, setDesktop] = useState(window.innerWidth > 1024);
   const location = useLocation();
   const currentUser = useSelector((state) => state.user);
-  console.log("Usuario en App", currentUser.user.isAdmin)
 
   useEffect(() => {
     const handleResize = () => {
@@ -75,19 +74,19 @@ function App() {
       <Routes>
         {/* <Route path= "/top" element={<TopBarDos/>}/>  */}
         <Route path="/fail" element={<NotVerified />} />        
-        <Route path= "/orders" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <Orders/>}/> 
-        <Route path= "/estadistica" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <SimpleBarCharts/>}/> 
+        <Route path= "/orders" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <Orders /> : <Orders />}/> 
+        <Route path= "/estadistica" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <SimpleBarCharts /> : <SimpleBarCharts />}/> 
         <Route
           path="/admin"
-          element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <DashbordAdmin />}
+          element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <DashbordAdmin /> : <DashbordAdmin />}
         />
        {/* <Route path= "/admin" element={<DashbordAdmin/>}/> */}
-        <Route path= "/edit/:id" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <EditForm/>}/>
+        <Route path= "/edit/:id" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <EditForm /> : <EditForm />}/>
 
       {/* <Route path= "/home" element={<landing/>}/> */}
         <Route path= "/" element={<Home/>}/>
         <Route path= "/detail/:id" element={<Detail/>}/>
-        <Route path="/create" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <FormCreateProduct/>}/>
+        <Route path="/create" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <FormCreateProduct /> : <FormCreateProduct />}/>
 
         <Route path="/search" element={<Search/>}/>
         <Route path="/cart" element={<Cart/>}/>
@@ -95,11 +94,11 @@ function App() {
         <Route path="/paymentsucces" element={<SuccessPayment />}/>
         
          {/* Activa linea de abajo para que cuando no esta el email autenticado y quiera air a favorito lo redirija al Home (MATIAS) */}
-        <Route path="/favorite" element={<PrivateRoute
+        {/* <Route path="/favorite" element={<PrivateRoute
                   element={<Favorite />}
                   isAuthenticated={isAuthenticated}
                   isLoading={isLoading}
-                />}/> 
+                />}/>  */}
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/account" element={<Account/>}/>
         <Route path="/about" element={<About/>}/>
@@ -107,7 +106,7 @@ function App() {
         <Route path="/profile-edit" element={<EditProfile/>}/>
         
 
-        <Route path="/adminUsers" element={!currentUser.user.isAdmin || !isAuthenticated ? <Navigate to="/" /> : <AdminUsers/>}/>
+        <Route path="/adminUsers" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <AdminUsers /> : <AdminUsers />}/>
         <Route path="/users/:id" element={<DetailUsers/>}/>
         <Route path="/update/:id" element={<FormEdit/>}/>
       </Routes>
