@@ -18,6 +18,7 @@ import TopBar from "./components/TopBar/TopBar";
 import AppBar from './components/AppBar/AppBar'
 import DetailUsers from "./views/DetailUsers";
 import FormEdit from "./views/FormEditUser";
+import AboutTeam from "./components/About/AboutTeam";
 import { useAuth0 } from "@auth0/auth0-react";
 //import { AppBar } from "@mui/material";
 
@@ -101,6 +102,8 @@ function App() {
         <Route path="/About" element={<About/>}/>
         <Route path="/Contact" element={<Contact/>}/>
         <Route path="/edit-profile" element={<EditProfile/>}/>
+        <Route path="/about-team" element={<AboutTeam/>}/>
+        
         
 
         <Route path="/AdminUsers" element={<AdminUsers/>}/>
