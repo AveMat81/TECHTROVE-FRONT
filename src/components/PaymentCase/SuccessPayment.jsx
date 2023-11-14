@@ -31,7 +31,7 @@ const SuccessPayment  =  ()=>{
         //console.log("ID DEL USER PARA MANDAR A LA ORDEN", user)
         const dataOrder ={
             paymentId: infoJson.payment_id,
-            //email: currentUser.email, //agregar a DB
+            email: currentUser.email, //agregar a DB
             products: cart.items,
             status: infoJson.status,
             total: cart.totalPrice,
@@ -44,6 +44,8 @@ const SuccessPayment  =  ()=>{
         const sendDataToServer = async () => {
             try {              
                const response = await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/orders/`, dataOrder);
+               const responseII = await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/payment/webhook/`, dataOrder)
+
                 setOrederCreate(true)
                 console.log("La RESPONSE ENVIO" ,response)
            
