@@ -3,6 +3,7 @@ import getIdUsers from "../redux/actions/idUsers";
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import imageee from "../utils/images/incog.jpg"
+import Back from "../utils/images/BasicIcons/backIcon.png";
 
 const DetailUsers=()=>{
     const { id } = useParams();
@@ -22,6 +23,12 @@ const DetailUsers=()=>{
     return(
 
         <div className="mt-10 pr-4 pl-4 w-96 mx-auto ">
+          <div className="flex flex-row gap-3 px-2 mb-6 mt-8 font-general-sans">
+        <Link to={"/adminusers"}>
+          <img src={Back} className="w-[30px] h-[30px]" alt="Back" />
+        </Link>
+        <p className="font-general-sans text-[22px] absolute left-16 top-[123px]">Back</p>
+        </div>
         <div className="bg-blue-400 rounded-t-lg p-2 flex flex-col items-center ">
           <img
             src={imageUrl || imageee}
@@ -34,7 +41,7 @@ const DetailUsers=()=>{
           <p className="text-[16.7px] mt-1">Address: {usersId.idUsers.address}</p>
           <p className="text-[16.7px] mt-1">UserName: {usersId.idUsers.username}</p>
           <p className="text-[16.7px] mt-2 mb-2">
-                Administrador: {usersId.idUsers.isAdmin === false ? <span className="bg-red-500 p-2 rounded-lg">Is not administrator</span> : <span className="bg-green-500 p-1 rounded-lg">Is administrator</span>}
+                Administrador: {usersId.idUsers.isAdmin === false ? <span className="bg-red-500 p-1 rounded-lg">Is not administrator</span> : <span className="bg-green-500 p-1 rounded-lg">Is administrator</span>}
           </p>
         </div>
         <div className="mt-4">

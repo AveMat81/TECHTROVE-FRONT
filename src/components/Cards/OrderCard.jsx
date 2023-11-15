@@ -1,52 +1,39 @@
 
-
 import {Link} from "react-router-dom"
 import imagePaths from "../AppBar/imagePaths";
 import React from "react";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import logoproduct from "../../utils/images/Logo/logoproduct.png"
 
 
 const OrderCard = ({paymentId, status,total,paymentMethod, product}) => {
 
-    console.log(product);
+    console.log("product",product);
          const dispatch = useDispatch();
 
-
+console.log();
   return (
-    <div className="inline-flex flex-col gap-[8px] relative">
-        {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl items-start"> */}
-        <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center">
-          
-          
-        
-        <img 
-              alt="Home"
-              className="w-8 h-8 opacity-80 absolute top-1 right-1"
-              />
-        </div>
-      
+  <Link to={`/order/${product.id}`}>
+    <div className="bg-white rounded-lg p-4 pl-1 ml-4 mr-4 mb-4 shadow-xl flex items-center">
 
-      <div className="flex flex-col items-start relative self-stretch w-full flex-[0_0_auto]">
-        <div className="text-left text-stone-900 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal">
-        {status}</div>
+      <img
+          src={logoproduct}
+          className="w-[92px] h-[74px] rounded-full border-4 border-white object-cover mr-2"
+      />
+      <div className="mb-2 mr-4">
+        <strong>Status:</strong> {status}
       </div>
-      <div className="flex flex-col items-start relative self-stretch w-full flex-[0_0_auto]">
-        <div className="text-left text-stone-900 text-sm font-semibold font-jakarta-sans leading-[21px] tracking-normal">
-        {status}</div>
+      <div className="mb-2 mr-3">
+        <strong>Total:</strong> ${total}
+      </div>
+      <div className="mb-2 text-[14px]">
+        <strong>Payment Method:</strong> {paymentMethod}
       </div>
 
-      <div className="w-full justify-around items-center">
-        <div className="justify-between flex text-blue-600 text-lg font-semibold font-jakarta-sans leading-[28px] tracking-normal text-[20px]">
-        $ {paymentId}
-        
 
-        </div>
-
-      </div>
-
-      
     </div>
+    </Link> 
   );
 };
 

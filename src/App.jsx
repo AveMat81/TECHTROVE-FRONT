@@ -17,6 +17,7 @@ import AdminUsers from "./views/AdminUsers";
 import TopBar from "./components/TopBar/TopBar";
 import AppBar from './components/AppBar/AppBar'
 import DetailUsers from "./views/DetailUsers";
+import DetailOrder from "./views/DetailOrder";
 import FormEdit from "./views/FormEditUser";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -111,6 +112,7 @@ function App() {
 
         <Route path="/adminUsers" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <AdminUsers /> : <AdminUsers />}/>
         <Route path="/users/:id" element={<DetailUsers/>}/>
+        <Route path="/order/:id" element={<DetailOrder/>}/>
         <Route path="/update/:id" element={<FormEdit/>}/>
       </Routes>
       <div

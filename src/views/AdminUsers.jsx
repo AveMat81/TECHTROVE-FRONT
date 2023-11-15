@@ -17,8 +17,8 @@ const AdminUsers=()=>{
 
     
     return(
-        <div>
-      <h1 className="text-2xl text-black mt-[22px] mb-[21px]">Users</h1>
+      <div>
+      <h1 className="text-[36px] text-black mt-[22px] mb-[21px]">Users</h1>
       {usersList.allUsers?.map((user) => {
         return (
           <div className="bg-white rounded-lg p-4 pl-1 ml-4 mr-4 mb-4 shadow-xl flex items-center">
@@ -27,7 +27,7 @@ const AdminUsers=()=>{
               className="w-16 h-16 rounded-full border-4 border-white object-cover"
             />
             <div className="ml-4 text-left flex-grow">
-              <p className="text-lg font-semibold truncate">Name: {user.name}</p>
+              <p className="text-lg font-semibold w-48 truncate">Name: {user.name}</p>
               <p className="text-base truncate">UserName: {user.username}</p>
               <p className="text-base w-48 truncate">Email: {user.email}</p>
             </div>
@@ -39,6 +39,8 @@ const AdminUsers=()=>{
           </div>
         );
       })}
+
+      
     </div>
     )
 }
