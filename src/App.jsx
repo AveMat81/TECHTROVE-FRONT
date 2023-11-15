@@ -29,12 +29,15 @@ import SuccessPayment from "./components/PaymentCase/SuccessPayment"
 import NotVerified from "./components/NotVerified/NotVerified";
 import NotFoundPage from "./views/NotFound";
 import PrivateRoute from "./PrivateRoute"
+import BrandEdit from './views/BrandEdit';
+import Brand from './views/Brand';
 
 
 
 import About from "./views/About";
 import Contact from "./views/Contact";
 import EditProfile from "./components/EditProfile/editProfile";
+import CreateBrand from './views/CreateBrand';
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -109,6 +112,9 @@ function App() {
         <Route path="/adminUsers" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <AdminUsers /> : <AdminUsers />}/>
         <Route path="/users/:id" element={<DetailUsers/>}/>
         <Route path="/update/:id" element={<FormEdit/>}/>
+        <Route path="/brands" element={<Brand/> }/>
+        <Route path="/editBrand/:id" element={<BrandEdit/>}/>
+        <Route path="/createBrand" element={<CreateBrand/> }/>
       </Routes>
       <div
           className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true || editUser || usersAdmin ? " hidden" : " "}`}
