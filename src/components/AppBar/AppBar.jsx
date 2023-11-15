@@ -14,7 +14,7 @@ const AppBar = ({ theme }) => {
   const dispatch = useDispatch();
   console.log("log de Linea 14 AppBar", user)
   
-
+  
 
   const handleLogin = () => {
     console.log("en el handle login");
@@ -183,7 +183,7 @@ const AppBar = ({ theme }) => {
             </div>
           </button>
         ) : (
-          <Link to="/Account">
+          <Link to="/account">
             <div className="flex-col justify-start items-center inline-flex">
               <img
                 alt="Account"

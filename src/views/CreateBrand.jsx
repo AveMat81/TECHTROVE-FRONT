@@ -66,24 +66,7 @@ CREATE
   };
 export default CreateBrand;
 
-///////
 
-  
-//     // Función para manejar el envío del formulario
-//     const handleSubmit = async (e) => {
-//       e.preventDefault();
-  
-//       try {
-       
-//         await dispatch(createBrands(brandData));
-//               setBrandData({
-//           name: "",
-//           // Restablecer otros campos si es necesario
-//         });
-//       } catch (error) {
-//         console.error("Error creating brand:", error);
-//       }
-//     };
   
 //     return (
 //       <div>

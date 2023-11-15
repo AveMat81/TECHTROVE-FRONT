@@ -28,8 +28,6 @@ export default function EditProfile() {
     username: "",
     name: "",
     address: "",
-    password: "",
-    confirmPassword: "",
     profileImage: "",
   });
 
@@ -53,25 +51,6 @@ export default function EditProfile() {
         errorsCopy.name = "El nombre debe contener solo letras y espacios. Debe tener entre 2 y 50 caracteres.";
         } else {
         errorsCopy.name = "";
-        }
-    }
-
-    if (name === "password") {
-        // Establece tus propias reglas de validación para la contraseña
-        // Por ejemplo, una contraseña segura podría requerir al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.
-        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
-        if (!passwordRegex.test(data.password)) {
-        errorsCopy.password = "La contraseña debe contener al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número.";
-        } else {
-        errorsCopy.password = "";
-        }
-    }
-
-    if (name === "confirmPassword") {
-        if (data.confirmPassword !== data.password) {
-        errorsCopy.confirmPassword = "Las contraseñas no coinciden.";
-        } else {
-        errorsCopy.confirmPassword = "";
         }
     }
 
@@ -201,31 +180,6 @@ export default function EditProfile() {
             onChange={handleInputChange}
           />
           {errors.name && <div className="text-red-500 text-xs mt-1">{errors.name}</div>}
-        </div>
-        <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Password:
-          </label>
-          <input
-            className="w-full md:w-1/2 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="password"
-            name="password"
-            value={profileData.password}
-            onChange={handleInputChange}
-          />
-          {errors.password && <div>{errors.password}</div>}
-        </div>
-        <div>
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Confirm Password:</label>
-          <input
-            className="w-full md:w-1/2 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="password"
-            name="confirmPassword"
-            value={profileData.confirmPassword}
-            onChange={handleInputChange}
-          />
-          {errors.confirmPassword && <div>{errors.confirmPassword}</div>}
         </div>
         <div>
           <label>Profile Image:</label>
