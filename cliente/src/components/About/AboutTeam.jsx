@@ -5,18 +5,18 @@ import CardsAbout from "./CardsAbout";
 const teamMembers = [
   {
     id: 1,
-    name: "Mathias Avesani",
-    image: "https://avatars.githubusercontent.com/u/106494323?s=400&u=2299fd5a95f170c7185252e686ef45213550a490&v=4",
-    github: "https://github.com/AveMat81",
-    linkedin: "https://www.linkedin.com/in/matias-avesani/",
+    name: "Anthoaned Zavala",
+    image: "https://avatars.githubusercontent.com/u/94303392?v=4",
+    github: "https://github.com/tyffcode",
+    linkedin: "https://www.linkedin.com/in/anthozavala/",
     description: "FULLSTACK DEVELOPER",
   },
   {
     id: 3,
-    name: "Santiago Ramirez",
-    image: "https://avatars.githubusercontent.com/u/128662221?v=4",
-    github: "https://github.com/SantiagoRC31",
-    linkedin: "https://www.linkedin.com/in/santiago-ramirez-49b3b7271/",
+    name: "Mathias Avesani",
+    image: "https://avatars.githubusercontent.com/u/106494323?s=400&u=2299fd5a95f170c7185252e686ef45213550a490&v=4",
+    github: "https://github.com/AveMat81",
+    linkedin: "https://www.linkedin.com/in/matias-avesani/",
     description: "FULLSTACK DEVELOPER",
   },
   {
@@ -45,10 +45,10 @@ const teamMembers = [
   },
   {
     id: 7,
-    name: "Anthoaned Zavala",
-    image: "https://avatars.githubusercontent.com/u/94303392?v=4",
-    github: "https://github.com/tyffcode",
-    linkedin: "https://www.linkedin.com/in/anthozavala/",
+    name: "Santiago Ramirez",
+    image: "https://avatars.githubusercontent.com/u/128662221?v=4",
+    github: "https://github.com/SantiagoRC31",
+    linkedin: "https://www.linkedin.com/in/santiago-ramirez-49b3b7271/",
     description: "FULLSTACK DEVELOPER",
   },
 ];
@@ -60,7 +60,11 @@ const About = () => {
 
   return (
     <div className="aboutContainer">
-      <h1 className="aboutTeam text-5xl text-center text-white my-8">TEAM MEMBERS</h1>
+      <div>
+        <h1 className="aboutTeam text-5xl text-center text-white font-bold bg-purple-600 py-4 my-8">
+          TEAM MEMBERS
+        </h1>
+      </div>
       <div className="flexContainer">
         <CardsAbout members={teamMembers} />
       </div>

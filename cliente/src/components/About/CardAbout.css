@@ -7,17 +7,17 @@
   border-radius: 8px;
   padding: 20px;
   text-align: center;
-  margin: 20px;
-  width: 300px;
-  height: 380px;
+  margin: 5vw;
+  width: 80%;
+  height: auto;
   position: relative;
   transition: transform 0.5s;
   transform-style: preserve-3d;
 }
 
 .cardContainer img {
-  width: 220px;
-  height: 220px;
+  width: 70%;
+  height: auto;
   border-radius: 50%;
 }
 
@@ -32,7 +32,7 @@
 
 .cardFront,
 .cardBack {
-  padding: 30px;
+  padding: 5%;
 
   position: absolute;
   top: 0;
@@ -75,8 +75,8 @@
 }
 
 .cardInfo img {
-  width: 100px;
-  height: 100px;
+  width: 30%;
+  height: auto;
   border-radius: 50%;
   margin-bottom: 10px;
 }
@@ -92,14 +92,24 @@
   margin: 5px 0;
 }
 
-.cardInfo a:hover {
+/* .cardInfo a:hover {
   text-decoration: underline;
-}
+} */
 
-.cardLinks {
+/* .cardLinks {
   display: flex;
   justify-content: space-around;
   align-items: center;
+} */
+
+.cardLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cardInfo {
+  order: 1; /* Cambia el orden en vista móvil */
 }
 
 .cardLinks a {
@@ -116,3 +126,15 @@
   flex-direction: column;
   gap: 20px;
 }
+
+@media (max-width: 768px) {
+  .cardContainer {
+    width: 90%;
+  }
+
+  .cardInfo img {
+    width: 50%;
+  }
+}
+
+

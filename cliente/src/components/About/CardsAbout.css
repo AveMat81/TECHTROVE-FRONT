@@ -3,4 +3,12 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     justify-items: center;
     align-items: center;
+    gap: 20px
+}
+
+
+@media (max-width: 768px) {
+    .contenedorCards {
+        grid-template-columns: 1fr; /* Cambiamos a una columna en vista móvil */
+    }
 }
