@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import getFilter from "../../redux/actions/getFilter"
 
 export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,setSelectedCategory, sort }) => {
-  console.log(showCategories, "dentro de ordenamientooo")
   const dispatch = useDispatch();
   const categoryState = useSelector((state) => state.category);
   const [sortOrder, setSortOrder] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  console.log(sort, "osisisisisisisisi")
-  console.log(showCategories, "sooooooh")
+
+
   const handleSortOrderChange = (order) => {
     setSortOrder(order);
   };
@@ -67,7 +66,7 @@ export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,se
     <div className={`fixed inset-0 z-50 ${showFilters ? "block" : "hidden"}`}>
     
     
-    <div className="filterConatiner flex flex-col h-[420px] max-w-[400px] items-center justify-center gap-[35px] pl-0 pr-[8px] pt-[13px] pb-[15px] relative rounded-md ">
+    <div className="filterConatiner mt-[200px] ml-[15px] flex flex-col h-[420px] max-w-[400px] items-center justify-center gap-[35px] pl-0 pr-[8px] pt-[13px] pb-[15px] relative rounded-md ">
     <div className="bg-white p-6 rounded shadow-lg">
       <div className="titleContainer flex w-[297px] items-center gap-[35px] relative flex-[0_0_auto]">
         <div className="relative items-center flex-1 mt-[-1.00px] font-bold text-black text-[24px] tracking-[0.20px] leading-[36px]">

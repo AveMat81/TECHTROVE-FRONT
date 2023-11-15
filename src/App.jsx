@@ -19,6 +19,7 @@ import AppBar from './components/AppBar/AppBar'
 import DetailUsers from "./views/DetailUsers";
 import DetailOrder from "./views/DetailOrder";
 import FormEdit from "./views/FormEditUser";
+import AboutTeam from "./components/About/AboutTeam";
 import { useAuth0 } from "@auth0/auth0-react";
 
 import DashbordAdmin from "./components/DashBordAdmin/DshbordAdmin"
@@ -108,6 +109,8 @@ function App() {
         <Route path="/about" element={<About/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/profile-edit" element={<EditProfile/>}/>
+        <Route path="/about-team" element={<AboutTeam/>}/>
+        
         
 
         <Route path="/adminUsers" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <AdminUsers /> : <AdminUsers />}/>

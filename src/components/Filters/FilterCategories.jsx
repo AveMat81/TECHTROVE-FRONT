@@ -84,7 +84,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
   return (
     <div className="w-auto">
       {isLoading && <Loading />}
-      <Slider {...settings} className="mx-auto border-blue-200 mr-[-40px] ">
+      <Slider {...settings} className="mx-auto border-blue-200  ">
         {["Categories", "Monitors", "Headsets", "Keyboards", "Mice", "Mousepads", "Controllers", "Earbuds", "Microphones"].map((category) => (
           <div key={category} className="flex justify-center items-center">
              <button
@@ -92,7 +92,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
               className={`w-[90px] h-[70px] rounded-xl border-blue-200 flex flex-col justify-center items-center ${
                 selectCategory === category ? "bg-blue-300" : ""
               }`}
-              style={{ borderRadius: "" }}
+              
             >
               <img
                 src={getImageForCategory(category)}
