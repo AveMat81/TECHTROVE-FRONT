@@ -328,29 +328,28 @@ const Search = () => {
           )}
         </div>
       </div>
-      {/* Paginado */}
-    <div className={`mt-2 flex flex-col justify-center items-center relative
-    ${showCategories===false ? "" : error==="Product no found" ? " hidden" : ""}`}>
-    <Pagination 
-       count={showCategories===false ? Math.ceil(productFiltered.filterResult.length / itemsPerPage) : newSearch.length> 0 ? Math.ceil(newSearch.length/itemsPerPage) 
-       : Math.ceil(productFiltered.filterResult.length / itemsPerPage)}
-       page={currentPage}
-       onChange={(event, page) => setCurrentPage(page)}
-       size="large"       
-       sx={{
-         "& .Mui-selected": {
-           backgroundColor: "#50a050",
-           fontSize: "20px",
-          },
-          "& .MuiPaginationItem-root": {
-            fontSize: "15px",
-          },
-          "& .paginationButton": {
-            backgroundColor: "#50a100",
-          },
-        }}
-     />
-    </div>
+  {/* Paginado */}
+  <div className={`mt-2 flex justify-center items-center relative
+  ${showCategories === false ? "" : error === "Product no found" ? " hidden" : ""}`}>
+  <Pagination
+    count={showCategories === false ? Math.ceil(productFiltered.filterResult.length / itemsPerPage) : newSearch.length > 0 ? Math.ceil(newSearch.length / itemsPerPage) : Math.ceil(productFiltered.filterResult.length / itemsPerPage)}
+    page={currentPage}
+    onChange={(event, page) => setCurrentPage(page)}
+    size="large"
+    classes={{ ul: "flex gap-2" }}
+    style={{ justifyContent: 'center', padding: '1px', marginLeft: '-23px' }}
+    sx={{
+      "& .Mui-selected": {
+        backgroundColor: "#50a050",
+        fontSize: "20px",
+      },
+      "& .MuiPaginationItem-root": {
+        fontSize: "17px",
+        marginRight: "-11px",
+      },
+    }}
+  />
+</div>
     </div>
   </div>
   );

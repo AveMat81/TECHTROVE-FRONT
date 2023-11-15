@@ -1,55 +1,74 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
-import fetchOrderById from "../../redux/actions/fetchOrderById"
+import { useParams } from 'react-router-dom';
+import fetchOrderById from "../../redux/actions/fetchOrderById";
 import OrderCard from "../Cards/OrderCard";
 import { Link } from "react-router-dom";
+import Pagination from "@mui/material/Pagination";
+
+const MyOrders = () => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const order = useSelector((state) => state.orderR);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
 
 
+  useEffect(() => {
+    if (dispatch) {
+      dispatch(fetchOrderById(id));
+    }
+  }, [dispatch, id]);
 
-const  MyOrders = ()=>{
-    
-    //     //const navigate = useNavigate();
-    const { id } = useParams();
-    console.log(id);
-    const dispatch = useDispatch();    
-    const order = useSelector((state) => state.orderR)
-    console.log(order);
-    
-        useEffect(() => {
-                // Asegúrate de que dispatch esté definido
-                if (dispatch) {
-                      dispatch(fetchOrderById(id));
-                    }
-                  }, [dispatch, id]);
-            
-            
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentOrders = order.orderId.slice(indexOfFirstItem, indexOfLastItem);
 
-    return (
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
 
-        <div>
-            <div>
-            <h2>Order Details</h2>
-            {order.orderId.map((order, i) => (
-            <OrderCard key={i} 
-            paymentId={order.paymentId} 
+  return (
+    <div className="mb-[118px]">
+      <div>
+        <h2 className="text-[34px] text-black mt-[22px] mb-[21px] "> Order Details</h2>
+        {currentOrders.map((order, i) => (
+          <OrderCard
+            key={i}
+            paymentId={order.paymentId}
             status={order.status}
-            total={order.total} 
-            paymentMethod={order.paymentMethod} 
-                product={order.products[0]} 
+            total={order.total}
+            paymentMethod={order.paymentMethod}
+            product={order.products[0]}
+          />
+        ))}
+      </div>
 
-                />
-            ))} 
+      {/* Agregar el paginado */}
+      <div className="mt-8 flex justify-center items-center relative">
+        <Pagination
+          count={Math.ceil(order.orderId.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          size="large"
+          sx={{
+            "& .Mui-selected": {
+              backgroundColor: "#50a050",
+              fontSize: "20px",
+            },
+            "& .MuiPaginationItem-root": {
+              fontSize: "17px",
+              marginRight: "11px",
+            },
+          }}
+        />
+      </div>
 
-        </div>
-                <Link to={"/rating"}>
-                <button>
-
-                </button>
-
-                </Link>
-        </div>
-    )
+      <Link to={"/rating"}>
+        <button></button>
+      </Link>
+    </div>
+  );
 }
 
 export default MyOrders;

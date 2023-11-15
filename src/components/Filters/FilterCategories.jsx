@@ -44,7 +44,6 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
     try {
       await dispatch(setCategory({  category }));
       await dispatch(getFilter({  category }));
-      //handlerSearch()
       setIsLoading(false);
       setSelectedCategory(category);
     } catch (error) {
@@ -66,7 +65,6 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
 
 
   const getImageForCategory = (category) => {
-    // Supongamos que tienes una estructura de datos o un mapeo de categorías a sus respectivas imágenes
     const categoryImages = {
       Monitors: "https://i.postimg.cc/xjXTwHc6/monitor-9678589-7924228.png",
       Headsets: "https://i.postimg.cc/xdsn7TYr/gaming-headset-7480997-6138641.png",
@@ -86,7 +84,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
   return (
     <div className="w-auto">
       {isLoading && <Loading />}
-      <Slider {...settings} className="mx-auto border-blue-200 ">
+      <Slider {...settings} className="mx-auto border-blue-200 mr-[-40px] ">
         {["Categories", "Monitors", "Headsets", "Keyboards", "Mice", "Mousepads", "Controllers", "Earbuds", "Microphones"].map((category) => (
           <div key={category} className="flex justify-center items-center">
              <button
@@ -94,7 +92,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
               className={`w-[90px] h-[70px] rounded-xl border-blue-200 flex flex-col justify-center items-center ${
                 selectCategory === category ? "bg-blue-300" : ""
               }`}
-              style={{ borderRadius: "50px" }}
+              style={{ borderRadius: "" }}
             >
               <img
                 src={getImageForCategory(category)}
