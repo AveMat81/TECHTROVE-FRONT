@@ -87,7 +87,7 @@ function App() {
           path="/admin"
           element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <DashbordAdmin /> : <DashbordAdmin />}
         />
-       {/* <Route path= "/admin" element={<DashbordAdmin/>}/> */}
+       
         <Route path= "/edit/:id" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <EditForm /> : <EditForm />}/>
 
       {/* <Route path= "/home" element={<landing/>}/> */}
