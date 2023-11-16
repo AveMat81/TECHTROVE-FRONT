@@ -15,8 +15,8 @@ import {activeIcon, iconDesactive} from "../../redux/slices/favoriteIcono"
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from 'sweetalert2';
-const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, favoriteNum, favoriteDes, filtrosProps, favoriteNumFilter, favoriteDesFilter  }) => {
-
+const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, favoriteNum, favoriteDes, filtrosProps, favoriteNumFilter, favoriteDesFilter, isAvailible  }) => {
+  console.log(isAvailible, "eliminado hommeeee")
   const wishlist = useSelector((state) => state.wishlist);
   const favoritoo = useSelector((state) => state.favorite)
   const dispatch = useDispatch();
@@ -154,6 +154,10 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
   }
 
   return (
+    <>
+    {
+      isAvailible === false ? null : 
+
     <div className="inline-flex flex-col gap-[8px] relative">
         {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl items-start"> */}
         <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center">
@@ -199,6 +203,8 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
 
       
     </div>
+    }
+    </>
   );
 };
 

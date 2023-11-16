@@ -10,6 +10,7 @@ import uploadImage from "../../utils/images/Logo/UPLOAD.png"
 import fetchProducts from "../../redux/actions/getProducts";
 import closeImage from "../../utils/images/Logo/CLOSE.png"
 import backIcon from "../../utils/images/BasicIcons/backIcon.png"
+import fetchBrands from "../../redux/actions/getBrand"
 const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 function validate(input) {
@@ -54,6 +55,8 @@ export default function FormCreateProduct() {
   const [file, setFile] = useState(null)
   const [categorias, setCategorias] = useState([])
   const productsNormales = useSelector((state) => state.products.products);
+  const brands = useSelector((state) => state.brands)
+  console.log("maarrrrrcaaass", brands.brands)
 
   const [input, setInput] = useState({
     name: "",
@@ -67,6 +70,7 @@ export default function FormCreateProduct() {
     category: "",
     // isTrending: false, //averageRaiting
     discount: 0,
+    brand: "",
     //deleted: ???
     // marca: [], //falta realacion / modelo
   });
@@ -162,6 +166,7 @@ export default function FormCreateProduct() {
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(fetchProducts());
+      await dispatch(fetchBrands());
     };
 
     fetchData();
@@ -173,6 +178,14 @@ export default function FormCreateProduct() {
     setInput({
       ...input,
       category: e,
+    });
+  }
+
+  const brand = (e) =>{
+    //console.log(e)
+    setInput({
+      ...input,
+      brand: e,
     });
   }
 
@@ -251,8 +264,15 @@ export default function FormCreateProduct() {
         //console.log(input)
 
         const formData = new FormData();
-        for (const file of selectedImage) {
-          formData.append('image', file);
+        if(selectedImage.length === 1){
+          console.log("una imagen")
+          formData.append('Unaimage', selectedImage);
+        }
+        if(selectedImage.length > 1){
+          console.log("varias imagenes")
+          for (const file of selectedImage) {
+            formData.append('image', file);
+          }
         }
 
             //formData.append('image', selectedImage);
@@ -263,6 +283,7 @@ export default function FormCreateProduct() {
             formData.append('stock', input.stock);
             formData.append('category', input.category);
             formData.append('discount', input.discount);
+            formData.append('brand', input.brand)
 
         await axios.post(`${VITE_VERCEL_API_URL_BASE}/api/products/create`, formData);
         //dispatch(addProduct(input));
@@ -389,6 +410,8 @@ export default function FormCreateProduct() {
   };
 
   const categoriasUnicas = [...new Set(productsNormales.map(producto => producto.category))];
+  const brandsUnicas = [...new Set(brands.brands.map(b => b.name))]
+  console.log(brandsUnicas, "unicooos")
   //console.log("categoriii",categoriasUnicas)
 
   return (
@@ -480,6 +503,22 @@ export default function FormCreateProduct() {
                   {errors.marca && (
                     <div className={styles.error}>{errors.marca}</div>
                   )}
+                </div>
+
+                <div className="mb-2">
+                  <div className="font-semibold text-left mb-2 mt-2">Brand:</div>
+                  <Select
+                    name="brand"
+                    options={brandsUnicas.map((p) =>({
+                      value: p,
+                      label: p,
+                    }))}
+                    isMulti={false}
+                    onChange={(selectedOption) => {
+                      const categoriaSeleccionada = selectedOption.value;
+                      brand(categoriaSeleccionada)
+                    }}
+                  />
                 </div>
 
                 <div className="mb-4">

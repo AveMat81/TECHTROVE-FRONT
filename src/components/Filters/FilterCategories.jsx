@@ -11,13 +11,14 @@ import Loading from "../../views/Loading";
 
 
 
-const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFilter,selectedCategory, setSelectedCategory, handlerAllCategories, handlerCategoriesSort  }) => {
+const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFilter,selectedCategory, setSelectedCategory, handlerAllCategories, handlerCategoriesSort, elminiarHandlerMarca  }) => {
     const dispatch = useDispatch();
     const [selectCategory, setSelectCategory] = useState("Categories");
     const [isLoading, setIsLoading] = useState(false);
 
 
   const selecAllCategories = async (category)=>{
+    elminiarHandlerMarca()
     setCurrentCategory()
     handlerAllCategories()
     setIsLoading(true);
@@ -35,6 +36,7 @@ const CategoriesFilter = ({handlerSearch, setCurrentCategory, funcion, funcionFi
 
   }
   const handleSelection = async (category) => {
+    elminiarHandlerMarca()
     handlerCategoriesSort()
     setCurrentCategory()  
     setIsLoading(true);

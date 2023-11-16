@@ -13,6 +13,7 @@ const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE
 import uploadImage from "../utils/images/Logo/UPLOAD.png"
 import backIcon from "../utils/images/BasicIcons/backIcon.png"
 import closeImage from "../utils/images/Logo/CLOSE.png"
+import imageee from "../utils/images/incog.jpg"
 
 export default function FormEditProduct() {
   const { id } = useParams();
@@ -155,7 +156,7 @@ const [input, setInput] = useState({
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Producto editado con exito!",
+          title: "User editado con exito!",
           showConfirmButton: false,
           timer: 2000,
         })
@@ -403,7 +404,7 @@ const [input, setInput] = useState({
       ) : (
         <div className="flex justify-between px-0 md:px-8 lg:px-12 xl:px-16" >
         <img
-          src={imageUrl ? imageUrl : input.image}
+          src={imageUrl ? imageUrl : input.image === null ? imageee : input.image}
           alt="Uploaded Image"
           className="w-40 h-40 object-contain" 
         />

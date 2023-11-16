@@ -11,6 +11,7 @@ import fetchProducts from "../../redux/actions/getProducts";
 import closeImage from "../../utils/images/Logo/CLOSE.png"
 import fetchProductById  from '../../redux/actions/fetchProductById';
 import backIcon from "../../utils/images/BasicIcons/backIcon.png"
+import fetchBrands from "../../redux/actions/getBrand"
 const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 
@@ -21,6 +22,7 @@ export default function FormEditProduct() {
 //   const marca = useSelector((state) => state.marca);
   const navigate = useNavigate();
   console.log(productDetail)
+  const brands = useSelector((state) => state.brands)
 
   const [file, setFile] = useState(null)
   const [categorias, setCategorias] = useState([])
@@ -37,6 +39,7 @@ export default function FormEditProduct() {
     stock: productDetail.stock,
     category: productDetail.category,
     discount: productDetail.discount,
+    brand: productDetail.brand,
   });
 
 ////////////////////////////////////////////////////
@@ -138,6 +141,7 @@ export default function FormEditProduct() {
     const fetchData = async () => {
       dispatch(fetchProductById(id))
       await dispatch(fetchProducts());
+      await dispatch(fetchBrands());
     };
 
     fetchData();
@@ -153,6 +157,7 @@ export default function FormEditProduct() {
       stock: productDetail.stock,
       category: productDetail.category,
       discount: productDetail.discount,
+      brand: productDetail.brand,
     });
   }, [productDetail]);
 
@@ -223,9 +228,16 @@ export default function FormEditProduct() {
 
         const formData = new FormData();
             // formData.append('image', file);
-            for (const file of selectedImage) {
-              formData.append('image', file);
-            }    
+            if(selectedImage.length === 1){
+              console.log("una imagen")
+              formData.append('Unaimage', selectedImage);
+            }
+            if(selectedImage.length > 1){
+              console.log("varias imagenes")
+              for (const file of selectedImage) {
+                formData.append('image', file);
+              }
+            }   
             formData.append('name', input.name);
             formData.append('isAvailible', input.isAvailible);
             formData.append('description', input.description);
@@ -233,6 +245,7 @@ export default function FormEditProduct() {
             formData.append('stock', input.stock);
             formData.append('category', input.category);
             formData.append('discount', input.discount);
+            formData.append('brand', input.brand)
 
         await axios.put(`${VITE_VERCEL_API_URL_BASE}/api/products/update/${id}`, formData);
         //dispatch(addProduct(input));
@@ -348,7 +361,20 @@ export default function FormEditProduct() {
     setRadioCheck(opcion)
   }
 
+  const brand = (e) =>{
+    //console.log(e)
+    setInput({
+      ...input,
+      brand: e,
+    });
+  }
+
   const categoriasUnicas = [...new Set(productsNormales.map(producto => producto.category))];
+  const brandsUnicas = [...new Set(brands.brands.map(b => b.name))]
+
+  const brandsOptions = [
+    { value: input.brand, label: input.brand },
+  ] 
 
   const categoria = [
     { value: input.category, label: input.category },
@@ -420,6 +446,23 @@ export default function FormEditProduct() {
                   {errors.marca && (
                     <div className={styles.error}>{errors.marca}</div>
                   )}
+                </div>
+
+                <div className="mb-2">
+                  <div className="font-semibold text-left mb-2 mt-2">Brand:</div>
+                  <Select
+                    name="brand"
+                    options={brandsUnicas.map((p) =>({
+                      value: p,
+                      label: p,
+                    }))}
+                    isMulti={false}
+                    onChange={(selectedOption) => {
+                      const categoriaSeleccionada = selectedOption.value;
+                      brand(categoriaSeleccionada)
+                    }}
+                    value={brandsOptions}
+                  />
                 </div>
 
                 <div className="mb-4">

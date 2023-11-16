@@ -12,6 +12,8 @@ import searchUsers from "./slices/searchUsers";
 import changeUsersSlice from "./slices/changeUsersSlice";
 import orderReducer from "./slices/orderUserSlice"
 import cartReducer from "./slices/cartSlice"
+import brands from "./slices/brandSlice"
+import allOrders from "./slices/allOrdersSlice"
 
 
   const rootReducer = combineReducers({
@@ -27,7 +29,9 @@ import cartReducer from "./slices/cartSlice"
     allUsers: allUsersSlice,
     idUser: searchUsers,
     putuser: changeUsersSlice,
-    orderR: orderReducer
+    orderR: orderReducer,
+    brands: brands,
+    allOrders: allOrders,
   });
   
   export default rootReducer;

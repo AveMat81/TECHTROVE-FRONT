@@ -116,7 +116,7 @@ function Home() {
       </div>
       <div className="w-auto h-auto grid grid-cols-2 gap-4 ">
           {filtradolo.map((product, i) => (
-            <HomeCard key={i} image={product.image} id={product.id} price={product.price} name={product.name} product={product} favorite={finallaDos(product.id)} funcion={funcion} finalla={finalla} favoriteNumFilter={product.favoriteFilter} favoriteDesFilter={product.favoriteFilterDesactivado} filtrosProps={product.filtrosProps} />
+            <HomeCard key={i} image={product.image} id={product.id} price={product.price} name={product.name} product={product} favorite={finallaDos(product.id)} funcion={funcion} finalla={finalla} favoriteNumFilter={product.favoriteFilter} favoriteDesFilter={product.favoriteFilterDesactivado} filtrosProps={product.filtrosProps} isAvailible={product.isAvailible} />
             ))}
       </div>
       <div className="font-jakarta-sans w-auto flex justify-between items-center mt-10 mr-4 my-6">
@@ -130,7 +130,7 @@ function Home() {
       <div className="w-auto h-auto grid grid-cols-2 gap-4 ">
           {
             products.map((product, i) => (
-            <HomeCard key={i} image={product.image} id={product.id} price={product.price} name={product.name} category={product.category} product={product} favorite={finalla(product.id)} funcion={funcion} finalla={finalla} favoriteNum={product.favorite} favoriteDes={product.favoriteDesactivado} />
+            <HomeCard key={i} image={product.image} id={product.id} price={product.price} name={product.name} category={product.category} product={product} favorite={finalla(product.id)} funcion={funcion} finalla={finalla} favoriteNum={product.favorite} favoriteDes={product.favoriteDesactivado} isAvailible={product.isAvailible} />
             ))}
       </div>
 

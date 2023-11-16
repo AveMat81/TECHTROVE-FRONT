@@ -2,13 +2,17 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getFilter from "../../redux/actions/getFilter"
+import Select from "react-select";
 
-export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,setSelectedCategory, sort }) => {
+export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,setSelectedCategory, sort,  handlerMarca, handlerSearch2, handlerMarcaCategories, setCurrentSearch }) => {
   const dispatch = useDispatch();
   const categoryState = useSelector((state) => state.category);
   const [sortOrder, setSortOrder] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
+  const productFiltered = useSelector((state) => state.filter);
+
+  const [marca, setMarca] = useState("")
 
 
   const handleSortOrderChange = (order) => {
@@ -61,6 +65,19 @@ export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,se
     }
   };
   console.log(applyFilter);
+
+  const brandsUnicas = [...new Set(productFiltered.filterResult.map(p => p.brand))]
+  const marcasSinNull = brandsUnicas.filter(brand => brand !== null);
+
+  const brand = (e) =>{
+    setCurrentSearch()
+    handlerMarcaCategories()
+    handlerSearch2()
+    //console.log(e)
+    setMarca(e);
+    handlerMarca(e)
+  }
+
   return (
 
     <div className={`fixed inset-0 z-50 ${showFilters ? "block" : "hidden"}`}>
@@ -152,6 +169,22 @@ export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,se
         </div>
       </div>
             <div className="mt-4" />
+
+            <div className="mb-6">
+                  <div className="font-semibold text-left mb-2 mt-2">Brand:</div>
+                  <Select
+                    name="brand"
+                    options={marcasSinNull.map((p) =>({
+                      value: p,
+                      label: p,
+                    }))}
+                    isMulti={false}
+                  onChange={(selectedOption) => {
+                      const categoriaSeleccionada = selectedOption.value;
+                      brand(categoriaSeleccionada)
+                    }}
+                  />
+                </div>
 
       <button
         className="flex w-[273px] h-[50px] px-[10px] py-[20px] flex-col items-center justify-center gap-[10px] relative bg-blue-500 rounded-[10px]"

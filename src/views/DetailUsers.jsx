@@ -31,7 +31,7 @@ const DetailUsers=()=>{
         </div>
         <div className="bg-blue-400 rounded-t-lg p-2 flex flex-col items-center ">
           <img
-            src={imageUrl || imageee}
+            src={imageUrl ? imageUrl : usersId.idUsers.image === null ? imageee : usersId.idUsers.image}
             className="w-36 h-36 rounded-full border-4 border-white object-cover mt-2 mb-0"
           />
           <h1 className="text-[22px] font-semibold text-white">{usersId.idUsers.name}</h1>
