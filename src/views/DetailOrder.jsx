@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Rating from '@material-ui/lab/Rating';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+
 import toast, { Toaster } from "react-hot-toast";
 
 import { useSelector, useDispatch } from "react-redux";
 import fetchProductById from "../redux/actions/fetchProductById";
 import { updateRating } from "../redux/actions/getProducts";
 import { useParams, useLocation } from "react-router-dom";
-import SimpleRating from "../components/SimpleRating";
+//import SimpleRating from "../components/SimpleRating";
+import StarRating from "../components/StarRating"
 const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 import axios from "axios";
@@ -30,7 +29,8 @@ const DetailOrder = () => {
   })
 
   const handlerraitingBack = (e) =>{
-    setRaitingBack({rating: e.target.value})
+    console.log(e, "a dormiiiiiitr")
+    setRaitingBack({rating: e})
   }
 
   const handlerSubmmitRating = async (idProduct) =>{
@@ -61,8 +61,8 @@ const DetailOrder = () => {
           />
 
             <div className="flex items-center mb-2">
-              <SimpleRating setValue={setValue} setRaitingBack={setRaitingBack} />
-   
+              {/* Utiliza el componente SimpleRating */}
+              <StarRating totalStars={5} value={value} setValue={setValue} handlerraitingBack={handlerraitingBack} />
             <button
               className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
               onClick={() => handlerSubmmitRating(product.id)}
