@@ -67,7 +67,8 @@ export const FilterSortRange = ({ showFilters, setShowFilters, showCategories,se
   console.log(applyFilter);
 
   const brandsUnicas = [...new Set(productFiltered.filterResult.map(p => p.brand))]
-  const marcasSinNull = brandsUnicas.filter(brand => brand !== null);
+  const marcasSinNull = brandsUnicas.filter(brand => brand !== null && brand !== "null");
+  console.log(marcasSinNull, "sin nulll")
 
   const brand = (e) =>{
     setCurrentSearch()

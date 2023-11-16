@@ -3,11 +3,10 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { getBrands } from '../redux/slices/brandSlice';
 import fetchBrands from '../redux/actions/getBrand';
-// import editBrand from '../redux/actions/editBrand';
-// import deleteBrands from '../redux/actions/deleteBrands';
 import { deleteBrand } from '../redux/slices/brandSlice';
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
+
 
 
 
@@ -22,7 +21,7 @@ const Brand = () => {
   const handleDeleteBrand = async (e) => {
   
     // dispatch(deleteBrand(id));
-    await axios.delete(`http://localhost:3001/api/brands/delete/${e}`);
+    await axios.delete(`${VITE_VERCEL_API_URL_BASE}/api/brands/delete/${e}`);
     console.log("id:" + e);
 
   };
@@ -68,12 +67,9 @@ const Brand = () => {
         )}
     </div>  
     <div>
-      <li/>
     <Link to="/createBrand">
-    <button  class="inline-flex items-left px-4 py-4 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
-	<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="black">
-	  
-	</svg>
+    <button  class="inline-flex items-left px-4 py-4 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md mt-4">
+	
 CREATE BRAND
   </button>
     </Link>

@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const totalCount = (price1, price2, taxes) => price1 + price2 + taxes;
+export const totalCount = (price1, price2, ) => price1 + price2 ;
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: JSON.parse(window?.localStorage?.getItem("cart")) || {
     items: [],
     subtotal: 0,
-    shippingPrice: 15,
-    tax: 5,
     quantity: 0,
     totalPrice: 0,
   },
@@ -30,8 +28,7 @@ const cartSlice = createSlice({
 
       state.totalPrice = totalCount(
         state.subtotal,
-        state.shippingPrice,
-        state.tax
+       
       );
 
       state.quantity = state.items.reduce(
@@ -52,8 +49,7 @@ const cartSlice = createSlice({
       );
       state.totalPrice = totalCount(
         state.subtotal,
-        state.shippingPrice,
-        state.tax
+        
       );
     },
 
@@ -83,8 +79,7 @@ const cartSlice = createSlice({
         );
         state.totalPrice = totalCount(
           state.subtotal,
-          state.shippingPrice,
-          state.tax
+          
         );
       }
     },

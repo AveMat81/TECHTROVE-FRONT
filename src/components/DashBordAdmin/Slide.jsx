@@ -5,6 +5,8 @@ import boxImage from "../../utils/images/DashBordBar/Dashbordiconbox.png"
 import cartImage from "../../utils/images/DashBordBar/Dashbordicon cart.png"
 import personImage from "../../utils/images/DashBordBar/Dashbordperson.png"
 import dashbordImage from "../../utils/images/DashBordBar/Dashbordbar chart.png"
+import { SiBrandfolder } from "react-icons/si";
+
 
 function Sidebar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -147,6 +149,16 @@ function Sidebar() {
               >
                 <img src={cartImage} alt="back" className="w-6 h-6 mr-3" />
                 Orders
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/brands"
+                className="text-black text-xl font-semibold font-jakarta-sans block mb-8 flex items-center"
+                onClick={toggleSidebar}
+              >
+                 <SiBrandfolder className={`text-black-500 text-[35px] font-semibold`} />
+                Brands
               </Link>
             </li>
           </ul>

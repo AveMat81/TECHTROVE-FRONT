@@ -143,18 +143,17 @@ const DshbordAdmin = () => {
        page={currentPage}
        onChange={(event, page) => setCurrentPage(page)}
        size="large"       
-       sx={{
-        "& .Mui-selected": {
-         backgroundColor: "#50a050",
-         fontSize: "20px",
-       },
-       "& .MuiPaginationItem-root": {
-         fontSize: "15px",
-        },
-        "& .paginationButton": {
-         backgroundColor: "#50a100",
-        },
-      }}
+       style={{ justifyContent: 'center', padding: '1px', marginLeft: '-23px' }}
+    sx={{
+      "& .Mui-selected": {
+        backgroundColor: "#DAE2DA",
+        fontSize: "20px",
+      },
+      "& .MuiPaginationItem-root": {
+        fontSize: "17px",
+        marginRight: "-11px",
+      },
+    }}
      />
     </div>
     </div>

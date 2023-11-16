@@ -111,14 +111,14 @@ const AdminUsers=()=>{
      size="large"       
      sx={{
       "& .Mui-selected": {
-       backgroundColor: "#50a050",
+       backgroundColor: "#D9D9D9",
        fontSize: "20px",
      },
      "& .MuiPaginationItem-root": {
        fontSize: "15px",
       },
       "& .paginationButton": {
-       backgroundColor: "#50a100",
+       backgroundColor: "#D9D9D9",
       },
     }}
    />

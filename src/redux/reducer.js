@@ -12,7 +12,7 @@ import searchUsers from "./slices/searchUsers";
 import changeUsersSlice from "./slices/changeUsersSlice";
 import orderReducer from "./slices/orderUserSlice"
 import cartReducer from "./slices/cartSlice"
-import brands from "./slices/brandSlice"
+import BrandReducer from "./slices/brandSlice";
 import allOrders from "./slices/allOrdersSlice"
 
 
@@ -29,9 +29,10 @@ import allOrders from "./slices/allOrdersSlice"
     allUsers: allUsersSlice,
     idUser: searchUsers,
     putuser: changeUsersSlice,
+    brands: BrandReducer,
     orderR: orderReducer,
-    brands: brands,
     allOrders: allOrders,
+    
   });
   
   export default rootReducer;

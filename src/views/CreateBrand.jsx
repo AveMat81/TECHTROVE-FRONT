@@ -1,6 +1,7 @@
 import createBrands from '../redux/actions/createBrands'
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
 
 
 const CreateBrand = () => {
@@ -39,12 +40,19 @@ const CreateBrand = () => {
   
     return (
       <div>
-        
-        <h1>Create a Brand</h1>
+        <div className='inline-flex'>
+            <Link className='mt-4 mb-8' to="/brands">  <button  className="inline-flex items-left px-4 py-3 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
+        BACK
+  </button>
+        </Link>
+           
+        </div>
+        <h1 className="text-[30px] mb-[10px] mt-[-27px]">Create a Brand</h1>
         <form onSubmit={handleSubmit}>
-          <label>
+          <label className="text-[20px] mb-[10px] mt-[-27px]">
              Name:
             <input
+              className="w-4/3 p-2 rounded border border-gray-300"
               type="text"
               name="name"
               value={brandData.name}
@@ -52,10 +60,10 @@ const CreateBrand = () => {
               placeholder='brand'
             />
           </label> 
-          <div> <li/><li/>
-             <button type="submit" class="inline-flex items-left px-6 py-5 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
-	<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="black">
-	  	</svg>
+          <div> 
+             <button type="submit" class="mt-8 inline-flex items-left px-6 py-5 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
+	{/* <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="black">
+	  	</svg> */}
 CREATE 
   </button>
           </div>

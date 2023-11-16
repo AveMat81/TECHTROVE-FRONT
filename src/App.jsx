@@ -32,7 +32,9 @@ import NotVerified from "./components/NotVerified/NotVerified";
 import NotFoundPage from "./views/NotFound";
 import MyOrders from "../src/components/MyOrders/MyOrders"
 import PrivateRoute from "./PrivateRoute"
-
+import CreateBrand from './views/CreateBrand';
+import BrandEdit from './views/BrandEdit';
+import Brand from './views/Brand';
 
 
 import About from "./views/About";
@@ -65,13 +67,15 @@ function App() {
   const top = location.pathname === '/top'
   const fakeUno = location.pathname === '/adminusers' // ruta prote
   const fakeDos = location.pathname === '/orders' // ruta prote
+  const brand = location.pathname === '/brands' 
+  const createBrand = location.pathname === '/createBrand' 
 
   const usersAdmin = location.pathname.startsWith('/users');
   const editUser = location.pathname.startsWith('/update');
 
   return (
     <div>
-      {isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true || editUser || usersAdmin ? <TopBarDos/> : <TopBar />}
+      {isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true || editUser || usersAdmin || brand || createBrand ? <TopBarDos/> : <TopBar />}
       
       <NavBar/>
       <Routes>
@@ -115,11 +119,14 @@ function App() {
 
         <Route path="/adminUsers" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <AdminUsers /> : <AdminUsers />}/>
         <Route path="/users/:id" element={<DetailUsers/>}/>
-        <Route path="/order/:id" element={<DetailOrder/>}/>
+        <Route path="/order/detail/:id" element={<DetailOrder/>}/>
         <Route path="/update/:id" element={<FormEdit/>}/>
+        <Route path="/brands" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <Brand /> : <Brand/>}/>
+        <Route path="/editBrand/:id" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <BrandEdit /> : <BrandEdit/>}/>
+        <Route path="/createBrand" element={currentUser.user === null  || !isAuthenticated ||  currentUser.user === null && !currentUser.user.isAdmin ? <Navigate to="/" /> : currentUser.user.isAdmin ? <CreateBrand /> : <CreateBrand/>}/>
       </Routes>
       <div
-          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true || editUser || usersAdmin ? " hidden" : " "}`}
+          className={` fixed bottom-0 left-0 w-full z-[1000]${Desktop === true ? " hidden" : isNotAdminPath === true || createPath === true || editPath === true || analaiticas === true || top === true || fakeUno === true || fakeDos === true || editUser || usersAdmin || createBrand || brand ? " hidden" : " "}`}
         >
 
         <AppBar/>

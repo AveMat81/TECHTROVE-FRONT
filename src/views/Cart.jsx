@@ -5,6 +5,8 @@ import { setQuantity, removeItem, replaceCart} from "../redux/slices/cartSlice";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import Back from "../utils/images/BasicIcons/backIcon.png";
+import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
@@ -95,8 +97,10 @@ useEffect(() => {
       
 
         <body className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md">
-          <h1>MY SHOPPING CART</h1>
         <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md">
+         
+              
+         <h1 className="text-[30px] mb-[10px] mt-[-27px]">My shopping Card</h1>
           {cart.items.map((item, i) => (
             <div key={i} className="mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start items-center">
                     <svg onClick={() => handleRemoveItem(item.id)} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -108,9 +112,11 @@ useEffect(() => {
                 <div >
                   <button onClick={() => handleAddOne(item.id)}>+</button>
                   <span>{item.quantity}</span>
+                
+
                   <button onClick={() => handleRemoveOne(item.id)}>-</button>
                   <p>${item.price} </p>
-          
+              
            </div>
           
         </div>
@@ -120,9 +126,7 @@ useEffect(() => {
               <div className="flex justify-between">
                 <p className="text-lg font-bold"></p>
                 <div className="">
-                <p className="mb-1 text-lg font-bold"> Shipping Price ${cart.shippingPrice} </p>
-                <p className="mb-1 text-lg font-bold"> Tax ${cart.tax} </p>
-                  <p className="mb-1 text-lg font-bold"> Total ${cart.totalPrice} </p>
+                  <p className="mb-1 text-lg font-bold"> Total ${cart.subtotal.toFixed(2)} </p>
                   <button onClick={handleCheckout}
                   className="mt-6 w-full rounded-md bg-black py-1.5 font-medium text-blue-50 hover:bg-black-600"
                   >Checkout with mercado pago</button>
