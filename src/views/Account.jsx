@@ -51,32 +51,34 @@ export const Account = () => {
           }
         })
       ) : (
-        <div className="flex flex-col items-center mt-8">
+        <div className="flex flex-col items-center mt-2 mr-2">
           
-          <div className="border border-gray-300 shadow-lg p-4 rounded-lg w-80 ml-8">
+          <div className="border border-gray-300 shadow-lg p-4 rounded-lg w-80 ml-2 text-md">
             <Link to={"/"}>
               <img src={Back} className="w-[30px] h-[30px]" alt="Back" />
             </Link>
             <h1 className="text-2xl mb-4">User Account</h1>
             {currentUser.user && renderUserProfile()}
-          <div className="mt-2 space-y-2">
-            <button className="w-full px-4 py-4 bg-purple-500 text-white rounded-lg">
+            <div className="mt-2 space-y-2">
+            <button className="w-full px-2 py-2 bg-purple-500 text-white rounded-full border-2 border-purple-700 text-lg">
               <Link to="/profile-edit">Edit profile</Link>
             </button>
-            <button className="w-full px-4 py-4 bg-purple-500 text-white rounded-lg">
+            <button className="w-full px-2 py-2 bg-purple-500 text-white rounded-full border-2 border-purple-700 text-lg">
               <Link to="/Favorite">Favorite</Link>
             </button>
-            <button className="w-full px-4 py-4 bg-purple-500 text-white rounded-lg">
+            <button className="w-full px-2 py-2 bg-purple-500 text-white rounded-full border-2 border-purple-700 text-lg">
               <Link to={`/myorders/${currentUser.user.id}`}>My Orders</Link>
             </button>
+            <div>
             {currentUser?.user?.isAdmin && (
               <Link to="/estadistica">
-                <button className="w-full px-4 py-4 bg-purple-500 text-white rounded-lg">
+                <button className="w-full px-2 py-2 bg-purple-500 text-white rounded-full border-2 border-purple-700 text-lg">
                   Dashboard Admin
                 </button>
               </Link>
             )}
-            <LogoutButton onClick={logout} className="w-full rounded-lg">
+            </div>
+            <LogoutButton onClick={logout} className="w-full rounded-lg border-2 border-purple-700">
               Logout
             </LogoutButton>
           </div>

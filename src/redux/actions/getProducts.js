@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getProducts,updateRatingSuccess } from "../slices/productsSlice";
+import { getProducts,updateRatingSuccess, } from "../slices/productsSlice";
 const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 const fetchProducts = () => {
@@ -14,7 +14,7 @@ const fetchProducts = () => {
       dispatch(getProducts(products));
 
       products.forEach((product) => {
-        dispatch(addRatingToProduct({ productId: product.id, rating: product.rating }));
+        dispatch(updateRatingSuccess({ productId: product.id, rating: product.rating }));
       });
     } catch (error) {
       console.error("Error fetching products:", error);

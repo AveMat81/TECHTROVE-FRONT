@@ -145,14 +145,14 @@ const DshbordAdmin = () => {
        size="large"       
        sx={{
         "& .Mui-selected": {
-         backgroundColor: "#50a050",
+         backgroundColor: "#DAE2DA",
          fontSize: "20px",
        },
        "& .MuiPaginationItem-root": {
          fontSize: "15px",
         },
         "& .paginationButton": {
-         backgroundColor: "#50a100",
+         backgroundColor: "#DAE2DA",
         },
       }}
      />

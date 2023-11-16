@@ -5,6 +5,7 @@ import fetchOrderById from "../../redux/actions/fetchOrderById";
 import OrderCard from "../Cards/OrderCard";
 import { Link } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
+import DetailOrder from "../../views/DetailOrder";
 
 const MyOrders = () => {
   const { id } = useParams();
@@ -12,7 +13,9 @@ const MyOrders = () => {
   const order = useSelector((state) => state.orderR);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(6);
+  //const [order, setOrder] = useState(initialOrderState);
 
+  console.log("order en my order ", order.orderId);
 
   useEffect(() => {
     if (dispatch) {
@@ -23,9 +26,9 @@ const MyOrders = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentOrders = order.orderId.slice(indexOfFirstItem, indexOfLastItem);
-
+  console.log("currentOrders",currentOrders.paymentId);
   const handlePageChange = (event, page) => {
-    setCurrentPage(page);
+    setCurrentPage(page); 
   };
 
   return (
@@ -33,14 +36,17 @@ const MyOrders = () => {
       <div>
         <h2 className="text-[34px] text-black mt-[22px] mb-[21px] "> Order Details</h2>
         {currentOrders.map((order, i) => (
+          <div key={i}>
           <OrderCard
             key={i}
             paymentId={order.paymentId}
             status={order.status}
             total={order.total}
             paymentMethod={order.paymentMethod}
-            product={order.products[0]}
+            products={order.products}
           />
+           
+          </div>
         ))}
       </div>
 
@@ -53,7 +59,7 @@ const MyOrders = () => {
           size="large"
           sx={{
             "& .Mui-selected": {
-              backgroundColor: "#50a050",
+              backgroundColor: "#DAE2DA",
               fontSize: "20px",
             },
             "& .MuiPaginationItem-root": {

@@ -2,9 +2,11 @@
 
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import editBrand from '../redux/actions/editBrand';
+import axios from "axios"
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 
 const BrandEdit = () => {
@@ -20,7 +22,7 @@ const BrandEdit = () => {
   useEffect(() => {
     const fetchBrandDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/api/brands/${id}`);
+        const response = await axios.get(`${VITE_VERCEL_API_URL_BASE}/api/brands/${id}`);
         const brandDetails = response.data;
         setBrandData(brandDetails);
       } catch (error) {
@@ -50,78 +52,43 @@ const BrandEdit = () => {
   };
 
   return (
-    <div>
-      <h1>Edit Brand</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Brand Name:
-          <input
-            type="text"
-            name="name"
-            value={brandData.name}
-            onChange={handleInputChange}
-          />
-        </label>
-        {/* Agrega otros campos del formulario según sea necesario */}
-        <button type="submit">Save Changes</button>
-      </form>
-    </div>
+    <div ><li/>
+    <div className='inline-flex'>
+        <Link to="/brands">  <button  className="inline-flex items-left px-1 py-3 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
+<svg xmlns="http://www.w3.org/2000/svg" class="h-1 w-2 mr-1" fill="none" viewBox="0 0 24 24" stroke="black">
+
+</svg>
+    BACK
+</button>
+    </Link>
+       
+    </div><li/><li/>
+  <h1>EDIT BRAND</h1>
+  <form onSubmit={handleSubmit}>
+    <label>
+      NAME:
+      <input className='bg-gray-500 py-4 '
+        type="text"
+        name="name"
+        value={brandData.name}
+        onChange={handleInputChange}
+        placeholder="brand"
+      />
+    </label><li/>
+    {/* Agrega otros campos del formulario según sea necesario */}
+   
+    <button type="submit" className="inline-flex items-left px-1 py-3 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
+<svg xmlns="http://www.w3.org/2000/svg" class="items-center h-6 w-9 mr-1" fill="none" viewBox="0 0 24 24" stroke="black">
+
+</svg>
+    SAVE
+</button>
+  </form>
+    </div>
   );
 };
 
 export default BrandEdit;
 
 
-// const BrandEdit = () => {
-//   const brand = useSelector((state) => state.brands.brands);
-//   const { id } = useParams();
-//   const dispatch = useDispatch();
 
-//   // Estado local para los campos editables
-//   const [editableFields, setEditableFields] = useState({
-//     name: brand.name || '',
-//     // Ajusta según los campos necesarios
-//   });
-
-//   useEffect(() => {
-//     // Actualiza el estado local cuando cambia la marca en el estado global
-//     setEditableFields({
-//       name: brand.name || '',
-//       // Actualiza otros campos según sea necesario
-//     });
-//   }, [brand]);
-
-//   const handleFieldChange = (fieldName, value) => {
-//     // Maneja cambios en los campos editables
-//     setEditableFields({
-//       ...editableFields,
-//       [fieldName]: value,
-//     });
-//   };
-
-//   const handleUpdateBrand = async(e) => {
-    
-//     // Envia la solicitud de actualización cuando el usuario hace clic en el botón de actualización
-//    await axios.put(`http://localhost:3001/api/brands/edit/${e}`)
-//  console.log("despues del handle");
-//   };
-
- 
-//   return (
-//     <div>
-//       <h1>Edit Brand</h1>
-//       <label>
-//         Name:
-//         <input
-//           type="text"
-//           value={editableFields.name}
-//           onChange={(e) => handleFieldChange('name', e.target.value)}
-//         />
-//       </label>
-//       {/* Agrega más campos de edición aquí según tus necesidades */}
-//       <button onClick={handleUpdateBrand}>Update Brand</button>
-//     </div>
-//   );
-// };
-
-// export default BrandEdit;

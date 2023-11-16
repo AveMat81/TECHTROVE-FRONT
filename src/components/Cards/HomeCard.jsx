@@ -28,7 +28,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
 
   const handleAddToCart = () => {
     dispatch(addToCart({ id, name, price, image }));
-    toast.success("Added to cart successfully ");
+    toast.success("Added to cart successfully ",);
   };
   
   

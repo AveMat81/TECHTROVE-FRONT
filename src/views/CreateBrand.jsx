@@ -1,6 +1,7 @@
 import createBrands from '../redux/actions/createBrands'
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from 'react-router-dom';
 
 
 const CreateBrand = () => {
@@ -39,7 +40,16 @@ const CreateBrand = () => {
   
     return (
       <div>
-        
+        <div className='inline-flex'>
+            <Link to="/brands">  <button  className="inline-flex items-left px-1 py-3 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
+	<svg xmlns="http://www.w3.org/2000/svg" class="h-1 w-2 mr-1" fill="none" viewBox="0 0 24 24" stroke="black">
+	  
+	</svg>
+        BACK
+  </button>
+        </Link>
+           
+        </div><li/>
         <h1>Create a Brand</h1>
         <form onSubmit={handleSubmit}>
           <label>

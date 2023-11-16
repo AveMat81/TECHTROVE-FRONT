@@ -1,12 +1,13 @@
 import axios from "axios";
 import { updateBrand } from "../slices/brandSlice";
+const VITE_VERCEL_API_URL_BASE = import.meta.env.VITE_VERCEL_API_URL_BASE 
 
 
 const editBrand = (id, updatedBrandData) => {
   return async (dispatch) => {
     try {
       const response = await axios.put(
-        `http://localhost:3001/api/brands/${id}`,
+        `${VITE_VERCEL_API_URL_BASE}/api/brands/${id}`,
         updatedBrandData,
         {
           headers: {

@@ -26,7 +26,7 @@ const Favorite = () => {
               </Link>
               <p className="text-[22px] font-general-sans absolute left-[51px] top-[116px]">Back</p>
             </div>
-            <h1 className="text-[36px] mb-[10px] mt-[-27px]">Favorites</h1>
+            <h1 className="text-[30px] mb-[10px] mt-[-27px]">Favorites</h1>
             <div className="w-auto flex justify-center items-center pb-32">
               <div className="grid grid-cols-1 gap-1 justify-center mx-3 font-bold">
                 {wishlist.length > 0 ? (

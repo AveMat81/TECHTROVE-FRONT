@@ -340,7 +340,7 @@ const Search = () => {
     style={{ justifyContent: 'center', padding: '1px', marginLeft: '-23px' }}
     sx={{
       "& .Mui-selected": {
-        backgroundColor: "#50a050",
+        backgroundColor: "#DAE2DA",
         fontSize: "20px",
       },
       "& .MuiPaginationItem-root": {
