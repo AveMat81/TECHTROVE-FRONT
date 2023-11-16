@@ -258,7 +258,7 @@ export default function FormCreateProduct() {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Producto creado con exito!",
+          title: "Product created successfully!",
           showConfirmButton: false,
           timer: 2000,
         }).then(() => {

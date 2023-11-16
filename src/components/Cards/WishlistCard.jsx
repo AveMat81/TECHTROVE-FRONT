@@ -65,7 +65,7 @@ const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggl
           <div className="flex justify-between items-start mb-2">
             <div className="text-gray-800 text-lg font-semibold text-left" style={{ marginLeft: "22px" }} >{name}</div>
           </div>
-          <Link to={`/${id}`} >
+          <Link to={`/detail/${id}`} >
           <div className="text-gray-600 text-sm mt-2 text-left mb-4" style={{ fontFamily: "Roboto", marginLeft: "22px" }}>{descriptionText}</div>
           {description.length > 31 && (
             <div className="flex items-center justify-center">

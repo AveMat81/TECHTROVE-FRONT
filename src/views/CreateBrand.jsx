@@ -64,11 +64,12 @@ const CreateBrand = () => {
              <button type="submit" class="mt-8 inline-flex items-left px-6 py-5 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
 	
 CREATE 
-  </button>
-          </div>
-         
-        </form>
-      </div>
+</button>
+        </div>
+       
+      </form>
+    </div>
+
     );
   };
 export default CreateBrand;
