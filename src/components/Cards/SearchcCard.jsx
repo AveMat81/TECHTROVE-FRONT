@@ -13,7 +13,6 @@ import Swal from 'sweetalert2';
 
 const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilter, favoriteDesFilter, favoriteDos, imageCloudinary, isAvailible  }) => {
   const dispatch = useDispatch();
-  console.log( isAvailible,"eliminadoooooooooooooooooooooo")
   
   
 
@@ -30,10 +29,10 @@ const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilte
   
   
   const favoritesFilter = (e) =>{
-    console.log("estadooooooo")
+    
 
     if (!isAuthenticated){
-      console.log("isAuthenticated en search card",isAuthenticated);
+     
       Swal.fire({
         title: 'Error',
         text: 'You need to login first!',
@@ -51,14 +50,12 @@ const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilte
     return
   }
     if( favoriteNumFilter === 1 || favoriteDesFilter === 2){
-      // console.log("filter")
       toast.success("Delete to favorite succesfully");
       dispatch(noFavoriteFilterActivo(id))
       dispatch(favoriteFilterDesactivo(id))
       return dispatch(removeFromWishlist(product));
     }
     if (favoriteDesFilter === 1){
-      // console.log("filter")
       dispatch(favoriteFilterActivo(id))
       dispatch(noFavoriteFilterDesactivo(id))
 
@@ -67,7 +64,6 @@ const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilte
       return setFavorito(1)
     }
     if(favorite === true || favoriteDos=== true){
-      // console.log("filter")
       dispatch(noFavoriteFilterActivo(id))
       dispatch(favoriteFilterDesactivo(id))
 
@@ -75,7 +71,6 @@ const SearchCard = ({ image,id, name, price, product, favorite, favoriteNumFilte
       toast.success("Delete to favorite succesfully");
       return dispatch(removeFromWishlist(product));
     }
-    // console.log(product)
     dispatch(favoriteFilterActivo(product))
 
     dispatch(addToWishlist(product));
@@ -99,24 +94,12 @@ const getFavoriteIcon = () => {
 };
 
 
-  // const favorite = (id) =>{ 
-  //     if(favorito === 1){
-  //       const favorito2 = favorito - 1;
-  //       setFavorito(favorito2)
-  //       return dispatch(removeFromWishlist(product));
-  //     }
-  //     dispatch(addToWishlist(product));
-  //     toast.success("Added to favorite successfully ");
-  //     return setFavorito(1)
-  //   }
-
 
   return (
     <>
     {isAvailible === false ? null : 
   <div className="inline-flex flex-col items-start gap-[10px] relative my-5">
     
-      {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
       <div className="relative bg-blue-100 rounded-3xl flex justify-center items-center">
         <Link to={`/detail/${id}`}>
         <img
@@ -124,15 +107,11 @@ const getFavoriteIcon = () => {
           alt="Rectangle"
           src={imageCloudinary ? imageCloudinary[0].url : image}
         />
-      {/* <button class="absolute top-0 right-0 bg-blue-500 text-white px-2 py-1">Botón</button> */}
       </Link>
       <img onClick={favoritesFilter}
             alt="Home"
             src={getFavoriteIcon()
-              // favorito === 0 
-              // ? imagePaths.Favorite.inactive
-              // : productWishlist ? imagePaths.Favorite.active
-              // : imagePaths.Favorite.active
+            
             }
             className="w-8 h-8 opacity-80 absolute top-1 right-1"
             />

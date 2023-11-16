@@ -5,10 +5,10 @@ import axios from "axios";
 const deleteBrands = (id) => {
     return async (dispatch) => {
       try {
-        console.log('Deleting brand with ID:', id);
+        
         await axios.delete(`${VITE_VERCEL_API_URL_BASE}/api/brands/delete/${id}`);
         dispatch(deleteBrand(id));
-        console.log('Brand deleted successfully.');
+        
       } catch (error) {
         console.error("Error deleting brand by ID:", error);
       }

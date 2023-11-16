@@ -17,7 +17,6 @@ const SearchCardName = ({ image,id, name, price  }) => {
   
   return (
     <div className="inline-flex flex-col items-start gap-[10px] relative my-5">
-        {/* <div className="w-[160px] h-[160px] relative bg-violet-50 rounded-3xl"> */}
         <div className="relative bg-blue-200 rounded-3xl flex justify-center items-center">
           <Link to={`/detail/${id}`}>
           <img
@@ -25,7 +24,6 @@ const SearchCardName = ({ image,id, name, price  }) => {
             alt="Rectangle"
             src={image}
           />
-        {/* <button class="absolute top-0 right-0 bg-blue-500 text-white px-2 py-1">Botón</button> */}
         </Link>
         <img onClick={favorite}
               alt="Home"

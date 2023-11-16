@@ -16,7 +16,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from 'sweetalert2';
 const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, favoriteNum, favoriteDes, filtrosProps, favoriteNumFilter, favoriteDesFilter, isAvailible  }) => {
-  console.log(isAvailible, "eliminado hommeeee")
   const wishlist = useSelector((state) => state.wishlist);
   const favoritoo = useSelector((state) => state.favorite)
   const dispatch = useDispatch();
@@ -79,17 +78,17 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
       return
     }
     if(filtrosProps !== 1){
-      console.log("normal")
+      
       return favorites()
     }
     if(filtrosProps === 1){
-      console.log("filter")
+      
       return favoritesFilter()
     }
 
   }
   
-  // console.log(favoritoo)
+  
   const favorites = (e) =>{
     if( favoriteNum === 1 || favoriteDes === 2){
       toast.success("Delete to favorite succesfully");
@@ -98,7 +97,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
       return dispatch(removeFromWishlist(product));
     }
     if (favoriteDes === 1){
-      console.log("normal")
+      
       dispatch(favoriteActivo(id))
       dispatch(noFavoriteDesactivo(id))
       dispatch(addToWishlist(product));
@@ -106,7 +105,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
       return setFavorito(1)
     }
     if(favorite === true){
-      console.log("normal")
+      
       toast.success("Delete to favorite succesfully");
       dispatch(noFavoriteActivo(id))
       dispatch(favoriteDesactivo(id))
@@ -128,7 +127,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
         return dispatch(removeFromWishlist(product));
       }
       if (favoriteDesFilter === 1){
-        console.log("filter")
+        
         dispatch(favoriteFilterActivo(id))
         dispatch(noFavoriteFilterDesactivo(id))
         dispatch(addToWishlist(product));
@@ -136,7 +135,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
         return setFavorito(1)
       }
       if(favorite === true){
-        console.log("filter")
+        
         dispatch(noFavoriteFilterActivo(id))
         dispatch(favoriteFilterDesactivo(id))
   
@@ -144,7 +143,7 @@ const HomeCard = ({ image,id, name, price, product, favorite, funcion, finalla, 
 
         return dispatch(removeFromWishlist(product));
       }
-      console.log("filter")
+      
 
       dispatch(favoriteFilterActivo(id))
       dispatch(addToWishlist(product));

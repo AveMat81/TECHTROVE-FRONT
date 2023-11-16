@@ -10,7 +10,6 @@ const fetchBrands = () => {
       const brands = json.data.map((brand) => ({
         ...brand,
               }));  
-     console.log(json);
       return dispatch(getBrands(brands));
    
     } catch (error) {

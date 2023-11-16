@@ -37,10 +37,10 @@ const OrdersFake = () => {
 
   const handlerAllOrders = () =>{
     setFiltering("")
-    console.log("hola")
+    
   }
 
-  console.log(data, "ooordeerrrs")
+  
 
   return (
     <div className="overflow-x-auto">

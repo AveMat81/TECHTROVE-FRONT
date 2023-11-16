@@ -22,7 +22,6 @@ const Brand = () => {
   
     // dispatch(deleteBrand(id));
     await axios.delete(`${VITE_VERCEL_API_URL_BASE}/api/brands/delete/${e}`);
-    console.log("id:" + e);
 
   };
 

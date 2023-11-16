@@ -22,7 +22,6 @@ const Search = () => {
 
   const [marcaSort, setMarcaSort] = useState("")
 
-  //console.log(showFilters, "aveeeer")
   const productsNormales = useSelector((state) => state.products.products);
   const [producWish, setproducWish] = useState([])
   const [producWishFilter, setproducWishFilter] = useState([])
@@ -30,7 +29,6 @@ const Search = () => {
   const [valueOrdenamiento, setValueOrdenamiento] = useState("");
   const [showCategories, setShowCategories] = useState(true);
   const [showCategoriesMarca, setShowCategoriesMarca] = useState(true)
-  console.log(productFiltered)
   //resultado de toda la busqueda
   const productSearch = useSelector((state)=>state.filterName)
   const [searchMarca, setSearchMarca] = useState("")
@@ -38,7 +36,6 @@ const Search = () => {
   const userA = useSelector((state) =>state.user)
  
   const [sort, setSort] = useState("")
-  //console.log(sort, "lissttooooo")
 
 
   const category = useSelector((state) => state.category)
@@ -47,7 +44,6 @@ const Search = () => {
   const [newSearch, setNewSearch] = useState([])
   const [searchGlobal, setSearchGlobal] = useState([])
   const [input, setInput] = useState("");
-  //console.log(input, "vamooooos")
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -225,7 +221,6 @@ const Search = () => {
   const currentItemsName = productSearch.filterbyname.slice(indexOfFirstItem, indexOfLastItem);
   const currentNewSearch = newSearch.slice(indexOfFirstItem, indexOfLastItem);
   const currentproductFilterMarca = productFilterMarca.slice(indexOfFirstItem, indexOfLastItem)
-  console.log(currentNewSearch,"eliminado search")
 
 
   return (

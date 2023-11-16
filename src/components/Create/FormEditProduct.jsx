@@ -19,9 +19,8 @@ export default function FormEditProduct() {
   const { id } = useParams();
   const productDetail = useSelector(state => state.detail.detail);
   const dispatch = useDispatch();
-//   const marca = useSelector((state) => state.marca);
   const navigate = useNavigate();
-  console.log(productDetail)
+  
   const brands = useSelector((state) => state.brands)
 
   const [file, setFile] = useState(null)
@@ -44,17 +43,7 @@ export default function FormEditProduct() {
 
 ////////////////////////////////////////////////////
 
-  // const [input, setInput] = useState({
-  //   name: productDetail.name,
-  //   description: productDetail.description,
-  //   image: null,
-  //   isAvailable: productDetail.isAvailable,
-  //   price: productDetail.price,
-  //   stock: productDetail.stock,
-  //   category: productDetail.category,
-  //   discount: productDetail.discount,
-  //   // marca: [], //falta realacion / modelo
-  // });
+
   const [errorsDos, setErrorsDos] = useState({
     name:"",
     difficulty: "",
@@ -98,8 +87,7 @@ export default function FormEditProduct() {
         // La entrada es un número entero válido.
         setErrorsDos({ ...errorsDos, stock: "Porfavor ingrese un stack valido" });
       } 
-      //else if(state.stock === 0){setErrorsDos({...errorsDos, stock:"Porfavor ingrese el numero de stock"})}
-      //else if(isNaN(parseInt(entero))) setErrorsDos({...errorsDos, stock:"Porfavor ingrese un numero valido"})
+      
       else if(isNaN(parseInt(state.stock))) setErrorsDos({...errorsDos, stock:"Porfavor ingrese un numero valido"})
       else if(!expre.test(entero)) setErrorsDos({...errorsDos, stock:"Porfavor ingrese un numero"})
       else if(/^\d+$/.test())setErrorsDos({...errorsDos, stock:"Porfavor ingrese un numero entero"})
@@ -115,7 +103,6 @@ export default function FormEditProduct() {
       else setErrorsDos({...errorsDos, description:""})
     }
     if(name === "image"){
-      //console.log("soy imagen" ,state.image)
       if(state.image !== null) setErrorsDos({...errorsDos, image:"La imagen es requerida"})
       else setErrorsDos({...errorsDos, image:""})
     }
@@ -224,16 +211,14 @@ export default function FormEditProduct() {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
       try {
-        //console.log(input)
 
         const formData = new FormData();
-            // formData.append('image', file);
             if(selectedImage.length === 1){
-              console.log("una imagen")
+              
               formData.append('Unaimage', selectedImage);
             }
             if(selectedImage.length > 1){
-              console.log("varias imagenes")
+              
               for (const file of selectedImage) {
                 formData.append('image', file);
               }
@@ -248,7 +233,6 @@ export default function FormEditProduct() {
             formData.append('brand', input.brand)
 
         await axios.put(`${VITE_VERCEL_API_URL_BASE}/api/products/update/${id}`, formData);
-        //dispatch(addProduct(input));
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -276,12 +260,11 @@ export default function FormEditProduct() {
   const [radioCheck, setRadioCheck] = useState(true)
   const [checkboxDos, setCheckboxDos] = useState(false)
 
-  console.log(selectedImage,"ooooooooooooooooooo")
+  
 
   const handleImageChange = (e) => {
     const files = e.target.files;
     const newImages = []; 
-    //console.log(newImages, "soy fileees")
     setFile(files)
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
@@ -331,9 +314,7 @@ export default function FormEditProduct() {
     setCheckbox(valuor)
     setCheckboxDos(valuor)
 
-    // if(input.discount === 0){
-    //   setCheckbox(false)
-    // }
+    
 
     if(valuor === true){
       setInput({
@@ -362,7 +343,6 @@ export default function FormEditProduct() {
   }
 
   const brand = (e) =>{
-    //console.log(e)
     setInput({
       ...input,
       brand: e,
@@ -583,11 +563,9 @@ export default function FormEditProduct() {
         <img onClick={() => eliminarImage(index)} src={closeImage} alt="close" className="w-6 h-6 absolute top-0 left-0" />
         </div>
       ))}
-        {/* <button onClick={eliminarImage}>x</button> */}
         
           <label htmlFor="image-upload" className="cursor-pointer ">
             <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg flex-col cursor-pointer">
-              {/* <span className="text-3xl">+</span> */}
               <img src={uploadImage} alt="upload" className="w-16 h-16 object-contain" />
               <div className="mt-2 font-semibold text-gray-400">Upload</div>
             </div>
@@ -605,11 +583,7 @@ export default function FormEditProduct() {
 
       ) : (
         <div className="grid grid-cols-2 gap-2" >
-        {/* <img
-          src={imageUrl ? imageUrl : input.image}
-          alt="Uploaded Image"
-          className="w-40 h-40 object-contain" 
-        /> */}
+      
         {productDetail.imageCloudinary ? productDetail.imageCloudinary.map((image, index) =>(
           <div>
           <img key={index} src={image.url} alt={`Image ${index}`} className="w-40 h-40 object-contain" />
@@ -622,7 +596,6 @@ export default function FormEditProduct() {
         
           <label htmlFor="image-upload" className="cursor-pointer ">
             <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg flex-col cursor-pointer">
-              {/* <span className="text-3xl">+</span> */}
               <img src={uploadImage} alt="upload" className="w-16 h-16 object-contain" />
               <div className="mt-2 font-semibold text-gray-400">Upload</div>
             </div>
@@ -649,7 +622,6 @@ export default function FormEditProduct() {
                   className={styles.button}
                   disabled={buttonDisabled()}
                   onClick={(e) => handleSubmit(e)}
-                  // disabled={Object.keys(errors).length > 0}
                 >
                   Update
                 </button>

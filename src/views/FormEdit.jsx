@@ -60,7 +60,6 @@ const FormEdit = () => {
         }
 
         if (!errors.name && !errors.username && !errors.address && !errors.admin) {
-                console.log("input",input);
             useDispatch(postGames(input))
         } else {
         alert("errors were found")
@@ -92,7 +91,6 @@ const FormEdit = () => {
                 <div className="mb-[12px]">
                     <label>Admin/not admin: </label>
                         <select name="admin" value={input.admin} onChange={handleChange}>
-                            {/* <option disabled selected>Admin/not admin</option> */}
                             <option value="Admin">Admin</option>
                             <option value="not admin">x Admin</option>
                         </select>

@@ -13,7 +13,6 @@ export const Profile = () => {
     }
 
     if (user && isAuthenticated) {
-        console.log("entro al if");
         dispatch(postUser(user));
     }
     

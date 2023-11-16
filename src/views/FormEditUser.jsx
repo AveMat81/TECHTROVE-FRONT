@@ -21,7 +21,6 @@ export default function FormEditProduct() {
   const userId = useSelector(state=>state.idUser.idUsers);
   const dispatch = useDispatch();
   
-//   const marca = useSelector((state) => state.marca);
   const navigate = useNavigate();
 
   const [file, setFile] = useState(null)
@@ -219,9 +218,7 @@ const [input, setInput] = useState({
     setCheckbox(valuor)
     setCheckboxDos(valuor)
 
-    // if(input.discount === 0){
-    //   setCheckbox(false)
-    // }
+   
 
     if(valuor === true){
       setInput({
@@ -382,11 +379,9 @@ const [input, setInput] = useState({
           className="w-40 h-40 object-contain absolute" 
         />
         <img onClick={eliminarImage} src={closeImage} alt="close" className="w-6 h-6 relative top-0 left-0" />
-        {/* <button onClick={eliminarImage}>x</button> */}
         
           <label htmlFor="image-upload" className="cursor-pointer ">
             <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg flex-col cursor-pointer">
-              {/* <span className="text-3xl">+</span> */}
               <img src={uploadImage} alt="upload" className="w-16 h-16 object-contain" />
               <div className="mt-2 font-semibold text-gray-400">Upload</div>
             </div>
@@ -411,7 +406,6 @@ const [input, setInput] = useState({
         
           <label htmlFor="image-upload" className="cursor-pointer ">
             <div className="w-40 h-40 bg-gray-100 flex items-center justify-center rounded-lg flex-col cursor-pointer">
-              {/* <span className="text-3xl">+</span> */}
               <img src={uploadImage} alt="upload" className="w-16 h-16 object-contain" />
               <div className="mt-2 font-semibold text-gray-400">Upload</div>
             </div>
@@ -437,7 +431,7 @@ const [input, setInput] = useState({
                   className={styles.button}
                   disabled={buttonDisabled()}
                   onClick={(e) => handleSubmit(e)}
-                  // disabled={Object.keys(errors).length > 0}
+                  
                 >
                   Update
                 </button>

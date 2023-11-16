@@ -6,11 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 const Slider = ({cloudinary}) => {
 
   const product = useSelector((state) => state.detail.detail);
-  //console.log(product, "soy iddd")
 
-  //console.log(cloudinary,"clooooooooo")
   const cloudinaryDos = cloudinary
-  console.log(cloudinary,"clooooooooo")
+ 
 
   const responsive = {
     desktop: {

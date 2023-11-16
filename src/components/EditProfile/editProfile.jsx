@@ -133,7 +133,7 @@ export default function EditProfile() {
     
   };
 
-  console.log(profileData);
+  
 
   return (
     <div>

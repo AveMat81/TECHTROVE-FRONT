@@ -10,7 +10,7 @@ const getFilter = (filterParams) => {
 
         params: filterParams,
       });
-      //Codigo nuevo
+      
 
       const products = response.data.map((product) => ({
         ...product,

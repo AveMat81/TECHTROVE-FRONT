@@ -24,10 +24,8 @@ const Searchbar = ({ onFocusChange, onClose, handlerSearch2, newSearchBar, funci
     funcion()
     const searchTerm = e.target.value;
     handlerSearch2()
-    //console.log(name);
     newSearchBar(searchTerm)
     //dispatch(getProductByName(searchTerm))
-    // console.log(searchTerm);
     // setSearch(searchTerm);
     // setShowSearch(searchTerm !== "")
   };

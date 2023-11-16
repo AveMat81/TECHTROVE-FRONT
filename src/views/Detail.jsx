@@ -40,7 +40,6 @@ const Detail = () => {
   const productDetail = useSelector(state => state.detail.detail);
   const promedioEstrella= Math.floor(productDetail.averageRating)
   
-  //const [value, setValue] = React.useState(productDetail.averageRating);
 
   const imageUrl = productDetail && productDetail.image && productDetail.image.url;
 

@@ -34,19 +34,7 @@ const WishlistCard = ({ id, name, image, price, description, isInWishlist, toggl
     setShowFullDescription(!showFullDescription);
   };
 
-  // const handleAddToCart = () => {
-  //   const productData = {
-  //     id,
-  //     name,
-  //     price,
-  //     image,
-  //     description,
-  //   };
-  //   toast.success("Added to cart successfully ");
 
-  //   console.log(productData);
-  //   dispatch(addToCart(productData));
-  // };
 
   const descriptionText = description.length > 86 ? (
     showFullDescription ? description : `${description.slice(0, 86)} ...`

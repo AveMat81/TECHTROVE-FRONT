@@ -31,7 +31,7 @@ const DshbordAdmin = () => {
   const currentItems = productsNormales.slice(indexOfFirstItem, indexOfLastItem);
   const currentNewSearch = newSearch.slice(indexOfFirstItem, indexOfLastItem);
   const currentFilter = filter.slice(indexOfFirstItem, indexOfLastItem)
-  console.log(productsNormales, "aososossososo")
+  
 
   const newSearchBar = (e) =>{
     const value = e.target.value
@@ -68,27 +68,27 @@ const DshbordAdmin = () => {
       objeto.name.toLowerCase().includes(value.toLowerCase()))
 
       if (productName.length===0) {
-        //console.log("algoooo");
+      
         return setError("Product no found");
       }
       setError("")
-      //console.log(productName)
+      
       return setNewSearch(productName);
   }
 
   const categoriasUnicas = [...new Set(productsNormales.map(producto => producto.category))];
-  console.log(categoriasUnicas)
+  
 
-  console.log(filter, "fiiiiiiii")
+  
   const handlerCategory = (e) =>{
-    console.log(e.target.value)
+    
     if(e.target.value === "Categories"){
       setCurrentPage(1)
       return setFilter([])
     }
     setCurrentPage(1)
     const productsNormalesDos = productsNormales.filter((product) => product.category === e.target.value);
-    //console.log(productsNormalesDos, "doooos")
+    
     return setFilter(productsNormalesDos)
   }
 

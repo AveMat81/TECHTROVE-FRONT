@@ -31,7 +31,6 @@ const AdminUsers=()=>{
     }
 
     const handlerAdmin = (e) =>{
-      //console.log(e.target.value)
       if(e.target.value === "isAdmin"){
         const usersAdmin = usersList.allUsers.filter((u) => u.isAdmin === true)
         setCurrentPage(1);
@@ -42,7 +41,6 @@ const AdminUsers=()=>{
         setCurrentPage(1);
         return setUsersAdmin(usersNotAdmin)
       }
-      //console.log(usersAdmin)
     }
 
     

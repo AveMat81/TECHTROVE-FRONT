@@ -16,7 +16,6 @@ const Cart = () => {
   const currentUser = useSelector((state)=> state.user);
   const [preferenceData, setPreferenceData] = useState(null);
   const { user, isAuthenticated, isLoading } = useAuth0();
-  console.log(cart ,"cart en front ");
 
 
 

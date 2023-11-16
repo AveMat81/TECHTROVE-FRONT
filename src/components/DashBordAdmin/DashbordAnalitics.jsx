@@ -39,7 +39,6 @@ const SimpleBarCharts = () => {
   const navigate = useNavigate();
   return (
     <>
-    {/* <img src={backIcon} onClick={goBackHandler} alt="back" className="w-8 h-8 top-28 absolute ml-2"/> */}
     <div class="text-2xl sm:text-5xl font-semibold text-gray-900 mt-6 mb-2">Statistics</div>
    <div class="flex flex-col">
 
@@ -154,7 +153,6 @@ const SimpleBarCharts = () => {
 
 
 
-  {/* <div class="w-full h-40 bg-purple-500">Div 5</div> */}
 </div>
 <div class="text-2xl sm:text-5xl font-semibold text-gray-900 mt-8">Better rating</div>
 <div>

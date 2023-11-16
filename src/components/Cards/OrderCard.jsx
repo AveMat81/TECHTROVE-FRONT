@@ -9,13 +9,13 @@ import logoproduct from "../../utils/images/Logo/logoproduct.png"
 
 const OrderCard = ({paymentId, status,total,paymentMethod, products}) => {
 
-    console.log("product en order card", products);
+    
     const dispatch = useDispatch();
     
          return (
            <Link to={{
-            pathname: `/order/detail/${paymentId}`, // Utiliza una ruta única para cada detalle de pedido
-            state: { products } // Pasa los productos como parte del estado de la ubicación
+            pathname: `/order/detail/${paymentId}`,
+            state: { products } 
           }}>
     <div className="bg-white rounded-lg p-4 pl-1 ml-4 mr-4 mb-4 shadow-xl flex items-center">
 x

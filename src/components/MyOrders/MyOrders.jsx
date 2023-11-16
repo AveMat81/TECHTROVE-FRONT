@@ -15,7 +15,7 @@ const MyOrders = () => {
   const [itemsPerPage, setItemsPerPage] = useState(6);
   //const [order, setOrder] = useState(initialOrderState);
 
-  console.log("order en my order ", order.orderId);
+  
 
   useEffect(() => {
     if (dispatch) {
@@ -26,7 +26,7 @@ const MyOrders = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentOrders = order.orderId.slice(indexOfFirstItem, indexOfLastItem);
-  console.log("currentOrders",currentOrders.paymentId);
+  
   const handlePageChange = (event, page) => {
     setCurrentPage(page); 
   };
