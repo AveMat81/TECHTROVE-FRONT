@@ -11,9 +11,13 @@ import toast, { Toaster } from "react-hot-toast";
 import Loading from './Loading';
 import Slider from "../components/Cards/Home/SliderDetail"
 
-import Rating from '@material-ui/lab/Rating';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import Rating from '@mui/material/Rating';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+
+///import Rating from '@material-ui/lab/Rating';
+//import Typography from '@material-ui/core/Typography';
+//import Box from '@material-ui/core/Box';
 
 const Detail = () => {
   
@@ -39,7 +43,7 @@ const Detail = () => {
   const productDetail = useSelector(state => state.detail.detail);
   const promedioEstrella= Math.floor(productDetail.averageRating)
   
-  //const [value, setValue] = React.useState(productDetail.averageRating);
+  //const [value, setValue] = useState(promedioEstrella);
 
   const imageUrl = productDetail && productDetail.image && productDetail.image.url;
 
@@ -102,11 +106,16 @@ const Detail = () => {
         <div className="px-5 pb-5">
         <a href="#">
           
-          
-      <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Rating</Typography>
-        <Rating name="read-only" value={promedioEstrella} readOnly />
-      </Box>
+        <Rating
+      name="simple-controlled"
+      value={promedioEstrella}
+      // onChange={(event, newValue) => , handlerraitingBack(newValue)}
+      //onChange={(event, newValue) => handlerRaiting(newValue)}
+      //max={totalStars}
+      icon={<StarIcon style={{ color: 'yellow' }} />}
+      emptyIcon={<StarBorderIcon style={{ color: 'orange' }} />}
+    />
+ 
                 <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-black">{productDetail.name} </h5>
             </a>
                <span class="text-1px font-bold text-gray-900 dark:text-black">{productDetail.description} </span>

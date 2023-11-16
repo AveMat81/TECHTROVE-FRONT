@@ -31,7 +31,7 @@ const DshbordAdmin = () => {
   const currentItems = productsNormales.slice(indexOfFirstItem, indexOfLastItem);
   const currentNewSearch = newSearch.slice(indexOfFirstItem, indexOfLastItem);
   const currentFilter = filter.slice(indexOfFirstItem, indexOfLastItem)
-  console.log(productsNormales, "aososossososo")
+  
 
   const newSearchBar = (e) =>{
     const value = e.target.value

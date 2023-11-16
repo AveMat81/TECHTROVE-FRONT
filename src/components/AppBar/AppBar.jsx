@@ -12,7 +12,6 @@ const AppBar = ({ theme }) => {
   const { loginWithRedirect, user, isAuthenticated, isLoading } = useAuth0();
   
   const dispatch = useDispatch();
-  console.log("log de Linea 14 AppBar", user)
   
   
 

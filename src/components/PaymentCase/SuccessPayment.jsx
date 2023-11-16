@@ -34,7 +34,7 @@ const SuccessPayment  =  ()=>{
             email: user.email,
             products: cart.items,
             status: infoJson.status,
-            total: cart.totalPrice,
+            total: cart.subtotal,
             preferenceId: infoJson.preference_id,
             userId: user.id            
         }

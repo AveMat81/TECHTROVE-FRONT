@@ -14,6 +14,7 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true); 
   const productsNormales = useSelector((state) => state.products.products);
   let products = useSelector((state) => state.products.products);
+  console.log("products en home", products)
 
   let productFiltered = useSelector((state) => state.filter);
   products = products.slice(0, 4);

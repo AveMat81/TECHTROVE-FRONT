@@ -52,39 +52,35 @@ const BrandEdit = () => {
   };
 
   return (
-    <div ><li/>
+    <div >
     <div className='inline-flex'>
-        <Link to="/brands">  <button  className="inline-flex items-left px-1 py-3 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
-<svg xmlns="http://www.w3.org/2000/svg" class="h-1 w-2 mr-1" fill="none" viewBox="0 0 24 24" stroke="black">
-
-</svg>
+        <Link to="/brands">  <button  className="inline-flex items-left px-4 py-3 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md mt-4 mb-4">
     BACK
 </button>
+<div className='mt-4'></div>
     </Link>
        
-    </div><li/><li/>
-  <h1>EDIT BRAND</h1>
+    </div>
+  <h1 className="text-[30px] mb-[10px] mt-[-27px]">EDIT BRAND</h1>
   <form onSubmit={handleSubmit}>
     <label>
       NAME:
-      <input className='bg-gray-500 py-4 '
+      <input className="w-4/3 p-2 rounded border border-gray-300"
         type="text"
         name="name"
         value={brandData.name}
         onChange={handleInputChange}
         placeholder="brand"
       />
-    </label><li/>
+    </label><div></div>
     {/* Agrega otros campos del formulario según sea necesario */}
    
-    <button type="submit" className="inline-flex items-left px-1 py-3 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
-<svg xmlns="http://www.w3.org/2000/svg" class="items-center h-6 w-9 mr-1" fill="none" viewBox="0 0 24 24" stroke="black">
-
-</svg>
+    <button type="submit" className="mt-4 inline-flex items-left px-6 py-5 bg-black hover:bg-purple-700 text-white text-sm font-medium rounded-md">
     SAVE
 </button>
   </form>
     </div>
+
   );
 };
 
